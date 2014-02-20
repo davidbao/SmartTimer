@@ -90,10 +90,10 @@
             </objects>
             <point key="canvasLocation" x="198" y="828"/>
         </scene>
-        <!--Table View Controller - 添加-->
+        <!--Add Plan View Controller - 添加-->
         <scene sceneID="D0p-CB-Heo">
             <objects>
-                <tableViewController id="Y8v-se-eTU" sceneMemberID="viewController">
+                <tableViewController id="Y8v-se-eTU" customClass="AddPlanViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zKo-xO-MdL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,6 +216,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rTJ-KV-N1B"/>
+        <segue reference="dGd-0a-QvX"/>
     </inferredMetricsTieBreakers>
 </document>

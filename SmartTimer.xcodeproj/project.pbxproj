@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62991AEF18B63F3400050A04 /* AddPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62991AEE18B63F3400050A04 /* AddPlanViewController.m */; };
+		62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF118B6415600050A04 /* BCDUtilities.cpp */; };
+		62991AF918B6415600050A04 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF518B6415600050A04 /* Exception.cpp */; };
+		62991B0118B6421800050A04 /* BlueShield.m in Sources */ = {isa = PBXBuildFile; fileRef = 62991AFD18B6421800050A04 /* BlueShield.m */; };
+		62991B0218B6421800050A04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 62991B0018B6421800050A04 /* MBProgressHUD.m */; };
+		62991B0418B6426600050A04 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62991B0318B6426600050A04 /* CoreBluetooth.framework */; };
 		629CD92118B4343D00D24686 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92018B4343D00D24686 /* Foundation.framework */; };
 		629CD92318B4343D00D24686 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92218B4343D00D24686 /* CoreGraphics.framework */; };
 		629CD92518B4343D00D24686 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92418B4343D00D24686 /* UIKit.framework */; };
@@ -41,6 +47,22 @@
 		623840A218B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.storyboard"; sourceTree = "<group>"; };
 		623840A318B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		623840A418B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		62991AED18B63F3400050A04 /* AddPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPlanViewController.h; sourceTree = "<group>"; };
+		62991AEE18B63F3400050A04 /* AddPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPlanViewController.m; sourceTree = "<group>"; };
+		62991AF018B6415600050A04 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Array.h; path = common/Array.h; sourceTree = "<group>"; };
+		62991AF118B6415600050A04 /* BCDUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BCDUtilities.cpp; path = common/BCDUtilities.cpp; sourceTree = "<group>"; };
+		62991AF218B6415600050A04 /* BCDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCDUtilities.h; path = common/BCDUtilities.h; sourceTree = "<group>"; };
+		62991AF318B6415600050A04 /* ByteArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ByteArray.h; path = common/ByteArray.h; sourceTree = "<group>"; };
+		62991AF418B6415600050A04 /* Crc16Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crc16Utilities.h; path = common/Crc16Utilities.h; sourceTree = "<group>"; };
+		62991AF518B6415600050A04 /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Exception.cpp; path = common/Exception.cpp; sourceTree = "<group>"; };
+		62991AF618B6415600050A04 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = common/Exception.h; sourceTree = "<group>"; };
+		62991AF718B6415600050A04 /* MemoryStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryStream.h; path = common/MemoryStream.h; sourceTree = "<group>"; };
+		62991AFC18B6421800050A04 /* BlueShield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlueShield.h; path = BlueShield/BlueShield.h; sourceTree = "<group>"; };
+		62991AFD18B6421800050A04 /* BlueShield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlueShield.m; path = BlueShield/BlueShield.m; sourceTree = "<group>"; };
+		62991AFE18B6421800050A04 /* BSDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSDefines.h; path = BlueShield/BSDefines.h; sourceTree = "<group>"; };
+		62991AFF18B6421800050A04 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = BlueShield/MBProgressHUD.h; sourceTree = "<group>"; };
+		62991B0018B6421800050A04 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = BlueShield/MBProgressHUD.m; sourceTree = "<group>"; };
+		62991B0318B6426600050A04 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		629CD91D18B4343D00D24686 /* SmartTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		629CD92018B4343D00D24686 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		629CD92218B4343D00D24686 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62991B0418B6426600050A04 /* CoreBluetooth.framework in Frameworks */,
 				629CD92318B4343D00D24686 /* CoreGraphics.framework in Frameworks */,
 				629CD92518B4343D00D24686 /* UIKit.framework in Frameworks */,
 				629CD92118B4343D00D24686 /* Foundation.framework in Frameworks */,
@@ -85,6 +108,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62991AFA18B6416500050A04 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				62991AF018B6415600050A04 /* Array.h */,
+				62991AF118B6415600050A04 /* BCDUtilities.cpp */,
+				62991AF218B6415600050A04 /* BCDUtilities.h */,
+				62991AF318B6415600050A04 /* ByteArray.h */,
+				62991AF418B6415600050A04 /* Crc16Utilities.h */,
+				62991AF518B6415600050A04 /* Exception.cpp */,
+				62991AF618B6415600050A04 /* Exception.h */,
+				62991AF718B6415600050A04 /* MemoryStream.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		62991AFB18B641B400050A04 /* BlueShield */ = {
+			isa = PBXGroup;
+			children = (
+				62991AFC18B6421800050A04 /* BlueShield.h */,
+				62991AFD18B6421800050A04 /* BlueShield.m */,
+				62991AFE18B6421800050A04 /* BSDefines.h */,
+				62991AFF18B6421800050A04 /* MBProgressHUD.h */,
+				62991B0018B6421800050A04 /* MBProgressHUD.m */,
+			);
+			name = BlueShield;
+			sourceTree = "<group>";
+		};
 		629CD91418B4343D00D24686 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +157,7 @@
 		629CD91F18B4343D00D24686 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62991B0318B6426600050A04 /* CoreBluetooth.framework */,
 				629CD92018B4343D00D24686 /* Foundation.framework */,
 				629CD92218B4343D00D24686 /* CoreGraphics.framework */,
 				629CD92418B4343D00D24686 /* UIKit.framework */,
@@ -118,6 +169,8 @@
 		629CD92618B4343D00D24686 /* SmartTimer */ = {
 			isa = PBXGroup;
 			children = (
+				62991AFB18B641B400050A04 /* BlueShield */,
+				62991AFA18B6416500050A04 /* common */,
 				629CD92F18B4343D00D24686 /* AppDelegate.h */,
 				629CD93018B4343D00D24686 /* AppDelegate.m */,
 				629CD93218B4343D00D24686 /* Main_iPhone.storyboard */,
@@ -126,6 +179,8 @@
 				629CD93918B4343D00D24686 /* PlanViewController.m */,
 				629CD93B18B4343D00D24686 /* Images.xcassets */,
 				629CD92718B4343D00D24686 /* Supporting Files */,
+				62991AED18B63F3400050A04 /* AddPlanViewController.h */,
+				62991AEE18B63F3400050A04 /* AddPlanViewController.m */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -261,9 +316,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */,
+				62991AF918B6415600050A04 /* Exception.cpp in Sources */,
 				629CD93A18B4343D00D24686 /* PlanViewController.m in Sources */,
+				62991AEF18B63F3400050A04 /* AddPlanViewController.m in Sources */,
 				629CD93118B4343D00D24686 /* AppDelegate.m in Sources */,
+				62991B0118B6421800050A04 /* BlueShield.m in Sources */,
 				629CD92D18B4343D00D24686 /* main.m in Sources */,
+				62991B0218B6421800050A04 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
