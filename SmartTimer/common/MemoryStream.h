@@ -46,10 +46,10 @@ namespace Common
 		}
 		inline void writeStr(const string& str)
 		{
-#if _DEBUG
+#if DEBUG
 			if(str.length()>0xFFFF)
 			{
-				Q_ASSERT(false);
+				assert(false);
 			}
 #endif //DEBUG
 			ushort len = (ushort)str.length();

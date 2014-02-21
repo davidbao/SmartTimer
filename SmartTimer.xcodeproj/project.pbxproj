@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62991AEF18B63F3400050A04 /* AddPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62991AEE18B63F3400050A04 /* AddPlanViewController.m */; };
+		6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93218B6EFB700F3141A /* SqliteClient.cpp */; };
+		6285E93B18B6F25800F3141A /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93918B6F25800F3141A /* Trace.cpp */; };
+		6285E94118B6F39400F3141A /* Convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93F18B6F39400F3141A /* Convert.cpp */; };
+		6285E94318B702AB00F3141A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6285E94218B702AB00F3141A /* libsqlite3.dylib */; };
+		6285E94F18B71DA200F3141A /* PlanService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E94D18B71DA200F3141A /* PlanService.cpp */; };
+		62991AEF18B63F3400050A04 /* AddPlanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62991AEE18B63F3400050A04 /* AddPlanViewController.mm */; };
 		62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF118B6415600050A04 /* BCDUtilities.cpp */; };
 		62991AF918B6415600050A04 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF518B6415600050A04 /* Exception.cpp */; };
 		62991B0118B6421800050A04 /* BlueShield.m in Sources */ = {isa = PBXBuildFile; fileRef = 62991AFD18B6421800050A04 /* BlueShield.m */; };
@@ -17,11 +22,11 @@
 		629CD92318B4343D00D24686 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92218B4343D00D24686 /* CoreGraphics.framework */; };
 		629CD92518B4343D00D24686 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92418B4343D00D24686 /* UIKit.framework */; };
 		629CD92B18B4343D00D24686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 629CD92918B4343D00D24686 /* InfoPlist.strings */; };
-		629CD92D18B4343D00D24686 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD92C18B4343D00D24686 /* main.m */; };
+		629CD92D18B4343D00D24686 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 629CD92C18B4343D00D24686 /* main.mm */; };
 		629CD93118B4343D00D24686 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD93018B4343D00D24686 /* AppDelegate.m */; };
 		629CD93418B4343D00D24686 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 629CD93218B4343D00D24686 /* Main_iPhone.storyboard */; };
 		629CD93718B4343D00D24686 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 629CD93518B4343D00D24686 /* Main_iPad.storyboard */; };
-		629CD93A18B4343D00D24686 /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD93918B4343D00D24686 /* PlanViewController.m */; };
+		629CD93A18B4343D00D24686 /* PlanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 629CD93918B4343D00D24686 /* PlanViewController.mm */; };
 		629CD93C18B4343D00D24686 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 629CD93B18B4343D00D24686 /* Images.xcassets */; };
 		629CD94318B4343D00D24686 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD94218B4343D00D24686 /* XCTest.framework */; };
 		629CD94418B4343D00D24686 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92018B4343D00D24686 /* Foundation.framework */; };
@@ -47,8 +52,26 @@
 		623840A218B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.storyboard"; sourceTree = "<group>"; };
 		623840A318B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		623840A418B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6285E92F18B6DEEE00F3141A /* Plan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Plan.h; path = Models/Plan.h; sourceTree = "<group>"; };
+		6285E93018B6E39900F3141A /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector.h; path = common/Vector.h; sourceTree = "<group>"; };
+		6285E93118B6EFB700F3141A /* DataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataTable.h; path = common/DataTable.h; sourceTree = "<group>"; };
+		6285E93218B6EFB700F3141A /* SqliteClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SqliteClient.cpp; path = common/SqliteClient.cpp; sourceTree = "<group>"; };
+		6285E93318B6EFB700F3141A /* SqliteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqliteClient.h; path = common/SqliteClient.h; sourceTree = "<group>"; };
+		6285E93518B6F16F00F3141A /* Stopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stopwatch.h; path = common/Stopwatch.h; sourceTree = "<group>"; };
+		6285E93618B6F25800F3141A /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = Common/Debug.h; sourceTree = "<group>"; };
+		6285E93718B6F25800F3141A /* Locker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Locker.h; path = Common/Locker.h; sourceTree = "<group>"; };
+		6285E93818B6F25800F3141A /* TickTimeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TickTimeout.h; path = Common/TickTimeout.h; sourceTree = "<group>"; };
+		6285E93918B6F25800F3141A /* Trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Trace.cpp; path = Common/Trace.cpp; sourceTree = "<group>"; };
+		6285E93A18B6F25800F3141A /* Trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trace.h; path = Common/Trace.h; sourceTree = "<group>"; };
+		6285E93F18B6F39400F3141A /* Convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Convert.cpp; path = Common/Convert.cpp; sourceTree = "<group>"; };
+		6285E94018B6F39400F3141A /* Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Convert.h; path = Common/Convert.h; sourceTree = "<group>"; };
+		6285E94218B702AB00F3141A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		6285E94A18B71A2900F3141A /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Thread.h; path = Common/Thread.h; sourceTree = "<group>"; };
+		6285E94B18B71CFC00F3141A /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = Common/Singleton.h; sourceTree = "<group>"; };
+		6285E94D18B71DA200F3141A /* PlanService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanService.cpp; sourceTree = "<group>"; };
+		6285E94E18B71DA200F3141A /* PlanService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanService.h; sourceTree = "<group>"; };
 		62991AED18B63F3400050A04 /* AddPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPlanViewController.h; sourceTree = "<group>"; };
-		62991AEE18B63F3400050A04 /* AddPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPlanViewController.m; sourceTree = "<group>"; };
+		62991AEE18B63F3400050A04 /* AddPlanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddPlanViewController.mm; sourceTree = "<group>"; };
 		62991AF018B6415600050A04 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Array.h; path = common/Array.h; sourceTree = "<group>"; };
 		62991AF118B6415600050A04 /* BCDUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BCDUtilities.cpp; path = common/BCDUtilities.cpp; sourceTree = "<group>"; };
 		62991AF218B6415600050A04 /* BCDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCDUtilities.h; path = common/BCDUtilities.h; sourceTree = "<group>"; };
@@ -68,12 +91,12 @@
 		629CD92218B4343D00D24686 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		629CD92418B4343D00D24686 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		629CD92A18B4343D00D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		629CD92C18B4343D00D24686 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		629CD92C18B4343D00D24686 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		629CD92E18B4343D00D24686 /* SmartTimer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartTimer-Prefix.pch"; sourceTree = "<group>"; };
 		629CD92F18B4343D00D24686 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		629CD93018B4343D00D24686 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		629CD93818B4343D00D24686 /* PlanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanViewController.h; sourceTree = "<group>"; };
-		629CD93918B4343D00D24686 /* PlanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanViewController.m; sourceTree = "<group>"; };
+		629CD93918B4343D00D24686 /* PlanViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlanViewController.mm; sourceTree = "<group>"; };
 		629CD93B18B4343D00D24686 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		629CD94118B4343D00D24686 /* SmartTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		629CD94218B4343D00D24686 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -88,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6285E94318B702AB00F3141A /* libsqlite3.dylib in Frameworks */,
 				62991B0418B6426600050A04 /* CoreBluetooth.framework in Frameworks */,
 				629CD92318B4343D00D24686 /* CoreGraphics.framework in Frameworks */,
 				629CD92518B4343D00D24686 /* UIKit.framework in Frameworks */,
@@ -108,9 +132,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		62991AFA18B6416500050A04 /* common */ = {
+		6285E92E18B6DE8700F3141A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6285E92F18B6DEEE00F3141A /* Plan.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6285E94C18B71D3D00F3141A /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				6285E94D18B71DA200F3141A /* PlanService.cpp */,
+				6285E94E18B71DA200F3141A /* PlanService.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		62991AFA18B6416500050A04 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6285E94B18B71CFC00F3141A /* Singleton.h */,
+				6285E94A18B71A2900F3141A /* Thread.h */,
+				6285E93F18B6F39400F3141A /* Convert.cpp */,
+				6285E94018B6F39400F3141A /* Convert.h */,
+				6285E93618B6F25800F3141A /* Debug.h */,
+				6285E93718B6F25800F3141A /* Locker.h */,
+				6285E93818B6F25800F3141A /* TickTimeout.h */,
+				6285E93918B6F25800F3141A /* Trace.cpp */,
+				6285E93A18B6F25800F3141A /* Trace.h */,
+				6285E93518B6F16F00F3141A /* Stopwatch.h */,
+				6285E93118B6EFB700F3141A /* DataTable.h */,
+				6285E93218B6EFB700F3141A /* SqliteClient.cpp */,
+				6285E93318B6EFB700F3141A /* SqliteClient.h */,
+				6285E93018B6E39900F3141A /* Vector.h */,
 				62991AF018B6415600050A04 /* Array.h */,
 				62991AF118B6415600050A04 /* BCDUtilities.cpp */,
 				62991AF218B6415600050A04 /* BCDUtilities.h */,
@@ -120,7 +175,7 @@
 				62991AF618B6415600050A04 /* Exception.h */,
 				62991AF718B6415600050A04 /* MemoryStream.h */,
 			);
-			name = common;
+			name = Common;
 			sourceTree = "<group>";
 		};
 		62991AFB18B641B400050A04 /* BlueShield */ = {
@@ -157,6 +212,7 @@
 		629CD91F18B4343D00D24686 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6285E94218B702AB00F3141A /* libsqlite3.dylib */,
 				62991B0318B6426600050A04 /* CoreBluetooth.framework */,
 				629CD92018B4343D00D24686 /* Foundation.framework */,
 				629CD92218B4343D00D24686 /* CoreGraphics.framework */,
@@ -169,18 +225,20 @@
 		629CD92618B4343D00D24686 /* SmartTimer */ = {
 			isa = PBXGroup;
 			children = (
+				6285E94C18B71D3D00F3141A /* Logic */,
+				6285E92E18B6DE8700F3141A /* Models */,
 				62991AFB18B641B400050A04 /* BlueShield */,
-				62991AFA18B6416500050A04 /* common */,
+				62991AFA18B6416500050A04 /* Common */,
 				629CD92F18B4343D00D24686 /* AppDelegate.h */,
 				629CD93018B4343D00D24686 /* AppDelegate.m */,
 				629CD93218B4343D00D24686 /* Main_iPhone.storyboard */,
 				629CD93518B4343D00D24686 /* Main_iPad.storyboard */,
 				629CD93818B4343D00D24686 /* PlanViewController.h */,
-				629CD93918B4343D00D24686 /* PlanViewController.m */,
+				629CD93918B4343D00D24686 /* PlanViewController.mm */,
 				629CD93B18B4343D00D24686 /* Images.xcassets */,
 				629CD92718B4343D00D24686 /* Supporting Files */,
 				62991AED18B63F3400050A04 /* AddPlanViewController.h */,
-				62991AEE18B63F3400050A04 /* AddPlanViewController.m */,
+				62991AEE18B63F3400050A04 /* AddPlanViewController.mm */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -190,7 +248,7 @@
 			children = (
 				6238409F18B437A200BFACC9 /* SmartTimer-Info.plist */,
 				629CD92918B4343D00D24686 /* InfoPlist.strings */,
-				629CD92C18B4343D00D24686 /* main.m */,
+				629CD92C18B4343D00D24686 /* main.mm */,
 				629CD92E18B4343D00D24686 /* SmartTimer-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -318,12 +376,16 @@
 			files = (
 				62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */,
 				62991AF918B6415600050A04 /* Exception.cpp in Sources */,
-				629CD93A18B4343D00D24686 /* PlanViewController.m in Sources */,
-				62991AEF18B63F3400050A04 /* AddPlanViewController.m in Sources */,
+				629CD93A18B4343D00D24686 /* PlanViewController.mm in Sources */,
+				62991AEF18B63F3400050A04 /* AddPlanViewController.mm in Sources */,
+				6285E94F18B71DA200F3141A /* PlanService.cpp in Sources */,
 				629CD93118B4343D00D24686 /* AppDelegate.m in Sources */,
+				6285E94118B6F39400F3141A /* Convert.cpp in Sources */,
 				62991B0118B6421800050A04 /* BlueShield.m in Sources */,
-				629CD92D18B4343D00D24686 /* main.m in Sources */,
+				629CD92D18B4343D00D24686 /* main.mm in Sources */,
+				6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */,
 				62991B0218B6421800050A04 /* MBProgressHUD.m in Sources */,
+				6285E93B18B6F25800F3141A /* Trace.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,10 +469,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -420,6 +479,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -446,6 +507,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -453,6 +515,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -470,6 +534,8 @@
 				GCC_PREFIX_HEADER = "SmartTimer/SmartTimer-Prefix.pch";
 				INFOPLIST_FILE = "SmartTimer/SmartTimer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "";
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -487,6 +553,8 @@
 				GCC_PREFIX_HEADER = "SmartTimer/SmartTimer-Prefix.pch";
 				INFOPLIST_FILE = "SmartTimer/SmartTimer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "";
+				PRELINK_LIBS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

@@ -171,8 +171,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <segue destination="Os8-ta-7cQ" kind="modal" identifier="cancelSegue" id="dGd-0a-QvX"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="存储" id="HzV-ge-Zl9"/>
+                        <barButtonItem key="rightBarButtonItem" title="存储" id="HzV-ge-Zl9">
+                            <connections>
+                                <action selector="AddPlan:" destination="Y8v-se-eTU" id="drm-Ql-Dqm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="planInterval" destination="xwi-Yx-RlE" id="NgH-84-LW6"/>
+                        <outlet property="planName" destination="PVu-M7-Fzd" id="1Ib-MV-N3a"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5p-9p-GUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

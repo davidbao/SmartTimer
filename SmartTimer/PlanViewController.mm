@@ -7,6 +7,8 @@
 //
 
 #import "PlanViewController.h"
+#include "Common/Singleton.h"
+#include "PlanService.h"
 
 @interface PlanViewController ()
 

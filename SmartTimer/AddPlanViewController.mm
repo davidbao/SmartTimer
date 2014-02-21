@@ -7,6 +7,8 @@
 //
 
 #import "AddPlanViewController.h"
+#include "Common/Singleton.h"
+#include "PlanService.h"
 
 @interface AddPlanViewController ()
 
@@ -115,4 +117,11 @@
 
  */
 
+- (IBAction)AddPlan:(UIBarButtonItem *)sender {
+    string name = [_planName.text UTF8String];
+    time_t interval = _planInterval.minuteInterval;
+    
+    PlanService* pservice = Singleton<PlanService>::instance();
+    pservice->addPlan(name, interval);
+}
 @end
