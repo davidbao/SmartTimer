@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *planName;
 @property (weak, nonatomic) IBOutlet UIDatePicker *planInterval;
 
+- (void) dismissCurrentView;
+
 @end

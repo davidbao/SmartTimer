@@ -19,6 +19,14 @@ struct Plan{
 public:
     string Name;
     time_t Interval;
+    time_t CurrentTime;
+    
+    Plan(const string& name, const time_t interval, time_t currentTime)
+    {
+        Name = name;
+        Interval = interval;
+        CurrentTime = currentTime;
+    }
 };
 
 typedef Vector<Plan> Plans;

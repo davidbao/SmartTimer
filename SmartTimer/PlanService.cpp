@@ -8,7 +8,7 @@
 
 #include "PlanService.h"
 
-void PlanService::addPlan(const string& name, const time_t interval)
+void PlanService::addPlan(const string& name, const time_t interval, const time_t currentTime)
 {
-    
+    _plans.add(new Plan(name, interval, currentTime));
 }

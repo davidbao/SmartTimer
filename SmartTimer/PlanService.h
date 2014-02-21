@@ -18,7 +18,7 @@ using namespace Common;
 class PlanService
 {
 public:
-    void addPlan(const string& name, const time_t interval);
+    void addPlan(const string& name, const time_t interval, const time_t currentTime);
     
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
