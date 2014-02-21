@@ -20,6 +20,11 @@ class PlanService
 public:
     void addPlan(const string& name, const time_t interval, const time_t currentTime);
     
+    inline const Plans* getPlans() const
+    {
+        return &_plans;
+    }
+    
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
     

@@ -33,5 +33,9 @@
     [super viewWillAppear:animated];
     
     PlanService* pservice = Singleton<PlanService>::instance();
+    const Plans* plans = pservice->getPlans();
+    for(int i=0;i<plans->count();i++)
+    {
+    }
 }
 @end

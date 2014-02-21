@@ -56,6 +56,10 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="labelPlanInterval" destination="ZbE-5T-ieh" id="XDZ-ad-AJN"/>
+                        <outlet property="lablePlanCreateTime" destination="xJV-xn-I3D" id="oC5-hF-7ws"/>
+                        <outlet property="lablePlanName" destination="cOt-Pg-Qth" id="LAV-SS-zOP"/>
+                        <outlet property="tablePlan" destination="C2n-JD-Wmp" id="h9K-87-evP"/>
                         <segue destination="IEQ-qe-j4e" kind="push" identifier="detailSegue" id="OO8-eB-kLs"/>
                     </connections>
                 </tableViewController>
