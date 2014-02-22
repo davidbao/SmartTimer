@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #include "Models/Plan.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#include "sqlite3.h"
+//#include "sqlite3.h"
 
 @class BlueShield;
 
@@ -23,8 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lablePlanCreateTime;
 @property (weak, nonatomic) IBOutlet UILabel *labelPlanInterval;
 
-@property (nonatomic) Plans _plans;
+//@property (nonatomic) sqlite3* _sqliteDb;
 
-@property (nonatomic) sqlite3* _sqliteDb;
+@property (nonatomic, strong) NSMutableArray *plans;
 
 @end

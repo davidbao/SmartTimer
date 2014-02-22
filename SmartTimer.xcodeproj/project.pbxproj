@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6271B1C718B8A5460021DC44 /* NSPlan.mm */; };
 		6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93218B6EFB700F3141A /* SqliteClient.cpp */; };
 		6285E93B18B6F25800F3141A /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93918B6F25800F3141A /* Trace.cpp */; };
 		6285E94118B6F39400F3141A /* Convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93F18B6F39400F3141A /* Convert.cpp */; };
@@ -52,6 +53,8 @@
 		623840A218B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.storyboard"; sourceTree = "<group>"; };
 		623840A318B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		623840A418B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6271B1C618B8A5460021DC44 /* NSPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPlan.h; sourceTree = "<group>"; };
+		6271B1C718B8A5460021DC44 /* NSPlan.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSPlan.mm; sourceTree = "<group>"; };
 		6285E92F18B6DEEE00F3141A /* Plan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Plan.h; path = Models/Plan.h; sourceTree = "<group>"; };
 		6285E93018B6E39900F3141A /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector.h; path = common/Vector.h; sourceTree = "<group>"; };
 		6285E93118B6EFB700F3141A /* DataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataTable.h; path = common/DataTable.h; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				629CD92718B4343D00D24686 /* Supporting Files */,
 				62991AED18B63F3400050A04 /* AddPlanViewController.h */,
 				62991AEE18B63F3400050A04 /* AddPlanViewController.mm */,
+				6271B1C618B8A5460021DC44 /* NSPlan.h */,
+				6271B1C718B8A5460021DC44 /* NSPlan.mm */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				62991B0118B6421800050A04 /* BlueShield.m in Sources */,
 				629CD92D18B4343D00D24686 /* main.mm in Sources */,
 				6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */,
+				6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */,
 				62991B0218B6421800050A04 /* MBProgressHUD.m in Sources */,
 				6285E93B18B6F25800F3141A /* Trace.cpp in Sources */,
 			);
