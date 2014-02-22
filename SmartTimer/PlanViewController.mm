@@ -50,8 +50,30 @@
     NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if(cell) {
-        cell.textLabel.text = currentPlan.name;
-        cell.detailTextLabel.text = [currentPlan getInternalStr];
+        NSArray* views = cell.subviews;
+        assert(views);
+        UIView* view = views[0];
+        assert(view);
+        NSArray* labels = view.subviews;
+        assert(labels);
+        for(int i=0;i<labels.count;i++){
+            UILabel* label = [labels objectAtIndex:i];
+            if(label){
+                switch(label.tag){
+                    case 1:
+                        label.text = currentPlan.name;
+                        break;
+                    case 2:
+                        label.text = [currentPlan getInternalStr];
+                        break;
+                    case 3:
+                        label.text = [currentPlan getCurrentTimeStr];
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
     
     return cell;

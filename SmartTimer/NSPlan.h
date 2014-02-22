@@ -19,5 +19,6 @@
 - (id)initWithName:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime;
 
 - (NSString*)getInternalStr;
+- (NSString*)getCurrentTimeStr;
 
 @end

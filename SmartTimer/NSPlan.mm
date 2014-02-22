@@ -38,4 +38,36 @@
     NSInteger minutes = (ti / 60) % 60;
     return [NSString stringWithFormat:@"%02i:%02i", hours, minutes];
 }
+
+- (NSString*)getCurrentTimeStr{
+    NSDate *now = [NSDate date];
+    NSDateComponents *nowComps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:now];
+    NSDateComponents *ctComps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:_currentTime];
+    NSDateFormatter *ft = [[NSDateFormatter alloc] init];
+    
+    if (nowComps.year == ctComps.year &&
+        nowComps.month == ctComps.month &&
+        nowComps.day == ctComps.day &&
+        nowComps.era == ctComps.era) {
+        [ft setDateFormat:@"HH:mm"];
+    }
+    else if (nowComps.year == ctComps.year &&
+        nowComps.month == ctComps.month &&
+        nowComps.day - 1 == ctComps.day &&
+        nowComps.era == ctComps.era) {
+        return NSLocalizedString(@"yesterday", @"");
+    }
+    else if (nowComps.year == ctComps.year &&
+         nowComps.month == ctComps.month &&
+         nowComps.week == ctComps.week &&
+         nowComps.era == ctComps.era) {
+        [ft setDateFormat:@"cccc"];
+    }
+    else{
+        [ft setDateFormat:@"yy-MM-dd"];
+    }
+    
+    return [ft stringFromDate:_currentTime];
+}
+
 @end
