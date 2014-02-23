@@ -54,11 +54,10 @@ static NSPlan* editPlan = nil;
         editPlan.interval = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
         editPlan.currentTime = [NSDate date];
         
-        string name = [self.planName.text UTF8String];
-        time_t interval = _planInterval.countDownDuration;  // unit: sec
-        time_t now = [editPlan.currentTime timeIntervalSince1970];
+        Plan plan;
+        [editPlan toPlan:plan];
         PlanService* pservice = Singleton<PlanService>::instance();
-        pservice->editPlan(editPlan.planId, name, interval, now);
+        pservice->updatePlan(plan);
     }
     [self dismissModalViewControllerAnimated:YES];
 }

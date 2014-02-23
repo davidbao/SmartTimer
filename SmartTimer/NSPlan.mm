@@ -75,4 +75,10 @@
     return [ft stringFromDate:_currentTime];
 }
 
+- (void)toPlan:(Plan&)plan{
+    plan.Name = [self.name UTF8String];
+    plan.Interval = [self.interval longValue];  // unit: sec
+    plan.CurrentTime = [self.currentTime timeIntervalSince1970];
+}
+
 @end

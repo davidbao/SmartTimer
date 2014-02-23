@@ -11,11 +11,10 @@
 
 using namespace Storage;
 
-void PlanService::addPlan(const string& name, const time_t interval, const time_t currentTime)
+void PlanService::addPlan(const Plan& plan)
 {
     StorageService* sservice = Singleton<StorageService>::instance();
     assert(sservice);
-    Plan plan(name, interval, currentTime);
     sservice->addPlan(plan);
 }
 
@@ -26,10 +25,9 @@ const Plans* PlanService::getPlans() const
     return sservice->getPlans();
 }
 
-void PlanService::editPlan(int planId, const string& name, const time_t interval, const time_t currentTime)
+void PlanService::updatePlan(const Plan& plan)
 {
     StorageService* sservice = Singleton<StorageService>::instance();
     assert(sservice);
-    Plan plan(planId, name, interval, currentTime);
     sservice->updatePlan(plan);
 }

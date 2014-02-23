@@ -22,4 +22,6 @@
 - (NSString*)getIntervalStr;
 - (NSString*)getCurrentTimeStr;
 
+- (void)toPlan:(Plan&)plan;
+
 @end

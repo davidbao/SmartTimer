@@ -31,9 +31,10 @@
     string name = [_planName.text UTF8String];
     time_t interval = _planInterval.countDownDuration;  // unit: sec
     time_t now = [[NSDate date] timeIntervalSince1970];
-    
+
+    Plan plan(name, interval, now);
     PlanService* pservice = Singleton<PlanService>::instance();
-    pservice->addPlan(name, interval, now);
+    pservice->addPlan(plan);
     
     [self dismissModalViewControllerAnimated:YES];
 }

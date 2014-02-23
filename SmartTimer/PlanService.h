@@ -18,11 +18,11 @@ using namespace Common;
 class PlanService
 {
 public:
-    void addPlan(const string& name, const time_t interval, const time_t currentTime);
+    void addPlan(const Plan& plan);
     
     const Plans* getPlans() const;
     
-    void editPlan(int planId, const string& name, const time_t interval, const time_t currentTime);
+    void updatePlan(const Plan& plan);
     
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
