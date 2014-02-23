@@ -11,17 +11,36 @@
 #import "AppDelegate.h"
 #include "Common/Singleton.h"
 #include "PlanService.h"
+#include "StorageService.h"
 
 using namespace Common;
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
+        Singleton<Storage::StorageService>::initialize();
+//        NSString* path = [[NSBundle mainBundle] executablePath];
+        NSString* resPath = [[NSBundle mainBundle] pathForResource:@"smartTimer"
+                                                         ofType:@"sql"];
+        NSString* content = [NSString stringWithContentsOfFile:resPath
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:NULL];
+        
+        // First, test for existence.
+//        BOOL success;
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        NSError *error;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        Singleton<Storage::StorageService>::instance()->openDb([documentsDirectory UTF8String], [content UTF8String]);
         Singleton<PlanService>::initialize();
         
         int result = UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
 
         Singleton<PlanService>::unInitialize();
+        Singleton<Storage::StorageService>::unInitialize();
+        
         return result;
     }
 }

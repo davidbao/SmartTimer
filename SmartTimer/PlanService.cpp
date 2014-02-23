@@ -7,22 +7,29 @@
 //
 
 #include "PlanService.h"
+#include "StorageService.h"
+
+using namespace Storage;
 
 void PlanService::addPlan(const string& name, const time_t interval, const time_t currentTime)
 {
-    _plans.add(new Plan(name, interval, currentTime));
+    StorageService* sservice = Singleton<StorageService>::instance();
+    assert(sservice);
+    Plan plan(name, interval, currentTime);
+    sservice->addPlan(plan);
+}
+
+const Plans* PlanService::getPlans() const
+{
+    StorageService* sservice = Singleton<StorageService>::instance();
+    assert(sservice);
+    return sservice->getPlans();
 }
 
 void PlanService::editPlan(int planId, const string& name, const time_t interval, const time_t currentTime)
 {
-    for (int i=0; i<_plans.count(); i++) {
-        Plan* plan = _plans.at(i);
-        if(plan->Id == planId)
-        {
-            plan->Name = name;
-            plan->Interval = interval;
-            plan->CurrentTime = currentTime;
-            return;
-        }
-    }
+    StorageService* sservice = Singleton<StorageService>::instance();
+    assert(sservice);
+    Plan plan(planId, name, interval, currentTime);
+    sservice->updatePlan(plan);
 }

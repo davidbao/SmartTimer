@@ -12,29 +12,29 @@
 
 - (id)initWithPlan:(const struct Plan*)plan{
     NSString* name = [NSString stringWithUTF8String:plan->Name.c_str()];
-    NSNumber* internal = [[NSNumber alloc] initWithLong:plan->Interval];
+    NSNumber* interval = [[NSNumber alloc] initWithLong:plan->Interval];
     NSDate *currentTime = [[NSDate alloc] initWithTimeIntervalSince1970:plan->CurrentTime];
     
-    NSPlan *nsplan = [[NSPlan alloc] initWithName:plan->Id name:name internal:internal currentTime:currentTime];
+    NSPlan *nsplan = [[NSPlan alloc] initWithName:plan->Id name:name interval:interval currentTime:currentTime];
     
     return nsplan;
 }
-- (id)initWithName:(NSInteger) planId name:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime{
+- (id)initWithName:(NSInteger) planId name:(NSString *)name interval:(NSNumber *)interval currentTime:(NSDate *)currentTime{
     self = [super init];
     
     if (self)
     {
         _planId = planId;
         _name = name;
-        _internal = internal;
+        _interval = interval;
         _currentTime = currentTime;
     }
     
     return self;
 }
 
-- (NSString*)getInternalStr{
-    NSInteger ti = [self.internal integerValue];
+- (NSString*)getIntervalStr{
+    NSInteger ti = [self.interval integerValue];
     NSInteger hours = (ti / 3600);
     NSInteger minutes = (ti / 60) % 60;
     return [NSString stringWithFormat:@"%02i:%02i", hours, minutes];
@@ -42,8 +42,12 @@
 
 - (NSString*)getCurrentTimeStr{
     NSDate *now = [NSDate date];
-    NSDateComponents *nowComps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:now];
-    NSDateComponents *ctComps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:_currentTime];
+    NSDateComponents *nowComps = [[NSCalendar currentCalendar]
+                                 components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
+                                 fromDate:now];
+    NSDateComponents *ctComps = [[NSCalendar currentCalendar]
+                                 components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
+                                 fromDate:_currentTime];
     NSDateFormatter *ft = [[NSDateFormatter alloc] init];
     
     if (nowComps.year == ctComps.year &&
@@ -60,7 +64,7 @@
     }
     else if (nowComps.year == ctComps.year &&
          nowComps.month == ctComps.month &&
-         nowComps.week == ctComps.week &&
+         nowComps.day - 7 <= ctComps.day &&
          nowComps.era == ctComps.era) {
         [ft setDateFormat:@"cccc"];
     }

@@ -22,11 +22,21 @@ public:
     time_t Interval;
     time_t CurrentTime;
     
+    Plan()
+    {
+    }
     Plan(const string& name, const time_t interval, time_t currentTime)
     {
         static int _currentId = 0;
         
         Id = _currentId;
+        Name = name;
+        Interval = interval;
+        CurrentTime = currentTime;
+    }
+    Plan(int planId, const string& name, const time_t interval, time_t currentTime)
+    {
+        Id = planId;
         Name = name;
         Interval = interval;
         CurrentTime = currentTime;

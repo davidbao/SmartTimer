@@ -64,7 +64,7 @@
                         label.text = currentPlan.name;
                         break;
                     case 2:
-                        label.text = [currentPlan getInternalStr];
+                        label.text = [currentPlan getIntervalStr];
                         break;
                     case 3:
                         label.text = [currentPlan getCurrentTimeStr];

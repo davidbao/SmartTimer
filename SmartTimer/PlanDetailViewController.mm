@@ -30,7 +30,7 @@ static NSPlan* editPlan = nil;
     if(editPlan != nil) {
         self.navigationItem.title = editPlan.name;
         self.planName.text = editPlan.name;
-        self.planInterval.countDownDuration = [editPlan.internal doubleValue];
+        self.planInterval.countDownDuration = [editPlan.interval doubleValue];
     }
 }
 
@@ -51,7 +51,7 @@ static NSPlan* editPlan = nil;
 - (IBAction)editPlan:(id)sender {
     if(editPlan != nil) {
         editPlan.name = self.planName.text;
-        editPlan.internal = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
+        editPlan.interval = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
         editPlan.currentTime = [NSDate date];
         
         string name = [self.planName.text UTF8String];

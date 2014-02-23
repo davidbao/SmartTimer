@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6201784918B9E72D00DE2914 /* TaskDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6201784818B9E72D00DE2914 /* TaskDetailViewController.mm */; };
+		6201784C18B9EA3C00DE2914 /* StorageService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6201784A18B9EA3C00DE2914 /* StorageService.cpp */; };
+		6201785318BA06DD00DE2914 /* smartTimer.sql in Resources */ = {isa = PBXBuildFile; fileRef = 6201785218BA06DD00DE2914 /* smartTimer.sql */; };
 		6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6271B1C718B8A5460021DC44 /* NSPlan.mm */; };
 		6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93218B6EFB700F3141A /* SqliteClient.cpp */; };
 		6285E93B18B6F25800F3141A /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93918B6F25800F3141A /* Trace.cpp */; };
@@ -49,8 +52,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6201784718B9E72D00DE2914 /* TaskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailViewController.h; sourceTree = "<group>"; };
+		6201784818B9E72D00DE2914 /* TaskDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TaskDetailViewController.mm; sourceTree = "<group>"; };
+		6201784A18B9EA3C00DE2914 /* StorageService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StorageService.cpp; sourceTree = "<group>"; };
+		6201784B18B9EA3C00DE2914 /* StorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		6201785018BA03CD00DE2914 /* SmartTimer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SmartTimer-Info.plist"; sourceTree = "<group>"; };
+		6201785218BA06DD00DE2914 /* smartTimer.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = smartTimer.sql; sourceTree = "<group>"; };
 		62119B6C18B4351E0046069B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		6238409F18B437A200BFACC9 /* SmartTimer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SmartTimer-Info.plist"; sourceTree = "<group>"; };
 		623840A118B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.storyboard"; sourceTree = "<group>"; };
 		623840A218B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.storyboard"; sourceTree = "<group>"; };
 		623840A318B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -154,6 +162,8 @@
 			children = (
 				6285E94D18B71DA200F3141A /* PlanService.cpp */,
 				6285E94E18B71DA200F3141A /* PlanService.h */,
+				6201784A18B9EA3C00DE2914 /* StorageService.cpp */,
+				6201784B18B9EA3C00DE2914 /* StorageService.h */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -254,6 +264,8 @@
 				62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */,
 				62C9485118B9DFB9003BE1CB /* StatPlanViewController.h */,
 				62C9485218B9DFB9003BE1CB /* StatPlanViewController.mm */,
+				6201784718B9E72D00DE2914 /* TaskDetailViewController.h */,
+				6201784818B9E72D00DE2914 /* TaskDetailViewController.mm */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -261,7 +273,8 @@
 		629CD92718B4343D00D24686 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6238409F18B437A200BFACC9 /* SmartTimer-Info.plist */,
+				6201785218BA06DD00DE2914 /* smartTimer.sql */,
+				6201785018BA03CD00DE2914 /* SmartTimer-Info.plist */,
 				629CD92918B4343D00D24686 /* InfoPlist.strings */,
 				629CD92C18B4343D00D24686 /* main.mm */,
 				629CD92E18B4343D00D24686 /* SmartTimer-Prefix.pch */,
@@ -370,6 +383,7 @@
 				629CD93718B4343D00D24686 /* Main_iPad.storyboard in Resources */,
 				629CD93C18B4343D00D24686 /* Images.xcassets in Resources */,
 				629CD93418B4343D00D24686 /* Main_iPhone.storyboard in Resources */,
+				6201785318BA06DD00DE2914 /* smartTimer.sql in Resources */,
 				629CD92B18B4343D00D24686 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +413,8 @@
 				629CD93118B4343D00D24686 /* AppDelegate.m in Sources */,
 				6285E94118B6F39400F3141A /* Convert.cpp in Sources */,
 				62991B0118B6421800050A04 /* BlueShield.m in Sources */,
+				6201784C18B9EA3C00DE2914 /* StorageService.cpp in Sources */,
+				6201784918B9E72D00DE2914 /* TaskDetailViewController.mm in Sources */,
 				629CD92D18B4343D00D24686 /* main.mm in Sources */,
 				6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */,
 				6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */,
