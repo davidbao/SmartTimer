@@ -10,7 +10,7 @@
 
 @implementation NSPlan
 
-- (id)initWithPlan:(const struct Plan*)plan{
+- (id)initWithPlan:(const Plan*)plan{
     NSString* name = [NSString stringWithUTF8String:plan->Name.c_str()];
     NSNumber* interval = [[NSNumber alloc] initWithLong:plan->Interval];
     NSDate *currentTime = [[NSDate alloc] initWithTimeIntervalSince1970:plan->CurrentTime];
@@ -76,9 +76,20 @@
 }
 
 - (void)toPlan:(Plan&)plan{
+    plan.Id = self.planId;
     plan.Name = [self.name UTF8String];
     plan.Interval = [self.interval longValue];  // unit: sec
     plan.CurrentTime = [self.currentTime timeIntervalSince1970];
+}
+- (void)fromPlan:(const Plan&)plan{
+    NSString* name = [NSString stringWithUTF8String:plan.Name.c_str()];
+    NSNumber* interval = [[NSNumber alloc] initWithLong:plan.Interval];
+    NSDate *currentTime = [[NSDate alloc] initWithTimeIntervalSince1970:plan.CurrentTime];
+    
+    self.planId = plan.Id;
+    self.name = name;
+    self.interval = interval;
+    self.currentTime = currentTime;
 }
 
 @end

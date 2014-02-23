@@ -23,8 +23,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lablePlanCreateTime;
 @property (weak, nonatomic) IBOutlet UILabel *labelPlanInterval;
 
-//@property (nonatomic) sqlite3* _sqliteDb;
-
 @property (nonatomic, strong) NSMutableArray *plans;
 
 @end

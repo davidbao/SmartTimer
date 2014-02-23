@@ -23,5 +23,6 @@
 - (NSString*)getCurrentTimeStr;
 
 - (void)toPlan:(Plan&)plan;
+- (void)fromPlan:(const Plan&)plan;
 
 @end
