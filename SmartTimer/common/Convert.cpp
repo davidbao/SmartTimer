@@ -128,7 +128,7 @@ namespace Common
             struct tm tmp;
             memset(&tmp, 0, sizeof(tmp));
             tmp.tm_year = year - 1900;
-            tmp.tm_mon = month;
+            tmp.tm_mon = month - 1;
             tmp.tm_mday = day;
             tmp.tm_hour = hour;
             tmp.tm_min = minute;
@@ -153,7 +153,7 @@ namespace Common
             struct tm tmp;
             memset(&tmp, 0, sizeof(tmp));
             tmp.tm_year = year - 1900;
-            tmp.tm_mon = month;
+            tmp.tm_mon = month - 1;
             tmp.tm_mday = day;
             tmp.tm_hour = hour;
             tmp.tm_min = minute;
@@ -176,7 +176,7 @@ namespace Common
             struct tm tmp;
             memset(&tmp, 0, sizeof(tmp));
             tmp.tm_year = year - 1900;
-            tmp.tm_mon = month;
+            tmp.tm_mon = month - 1;
             tmp.tm_mday = day;
             tmp.tm_hour = 0;
             tmp.tm_min = 0;
