@@ -7,6 +7,8 @@
 //
 
 #import "PlanViewController.h"
+#import "AddPlanViewController.h"
+#import "PlanDetailViewController.h"
 #include "Common/Singleton.h"
 #include "PlanService.h"
 
@@ -50,9 +52,7 @@
     NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if(cell) {
-        NSArray* views = cell.subviews;
-        assert(views);
-        UIView* view = views[0];
+        UIView* view = cell.contentView;
         assert(view);
         NSArray* labels = view.subviews;
         assert(labels);
@@ -83,10 +83,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
+    [PlanDetailViewController setCurrentPlan:currentPlan];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self.plans removeAllObjects];
@@ -101,5 +102,7 @@
         [self.plans addObject:nsplan];
     }
     
-    [self.tableView reloadData];}
+    [self.tableView reloadData];
+}
+
 @end

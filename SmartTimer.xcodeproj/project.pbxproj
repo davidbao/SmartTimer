@@ -34,6 +34,8 @@
 		629CD94518B4343D00D24686 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92418B4343D00D24686 /* UIKit.framework */; };
 		629CD94D18B4343D00D24686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 629CD94B18B4343D00D24686 /* InfoPlist.strings */; };
 		629CD94F18B4343D00D24686 /* SmartTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD94E18B4343D00D24686 /* SmartTimerTests.m */; };
+		62C9485018B9D34F003BE1CB /* PlanDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */; };
+		62C9485318B9DFB9003BE1CB /* StatPlanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9485218B9DFB9003BE1CB /* StatPlanViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,10 @@
 		629CD94C18B4343D00D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		629CD94E18B4343D00D24686 /* SmartTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartTimerTests.m; sourceTree = "<group>"; };
 		629CD95C18B434F500D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		62C9484E18B9D34F003BE1CB /* PlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailViewController.h; sourceTree = "<group>"; };
+		62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlanDetailViewController.mm; sourceTree = "<group>"; };
+		62C9485118B9DFB9003BE1CB /* StatPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatPlanViewController.h; sourceTree = "<group>"; };
+		62C9485218B9DFB9003BE1CB /* StatPlanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StatPlanViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +250,10 @@
 				62991AEE18B63F3400050A04 /* AddPlanViewController.mm */,
 				6271B1C618B8A5460021DC44 /* NSPlan.h */,
 				6271B1C718B8A5460021DC44 /* NSPlan.mm */,
+				62C9484E18B9D34F003BE1CB /* PlanDetailViewController.h */,
+				62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */,
+				62C9485118B9DFB9003BE1CB /* StatPlanViewController.h */,
+				62C9485218B9DFB9003BE1CB /* StatPlanViewController.mm */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -379,9 +389,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62C9485018B9D34F003BE1CB /* PlanDetailViewController.mm in Sources */,
 				62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */,
 				62991AF918B6415600050A04 /* Exception.cpp in Sources */,
 				629CD93A18B4343D00D24686 /* PlanViewController.mm in Sources */,
+				62C9485318B9DFB9003BE1CB /* StatPlanViewController.mm in Sources */,
 				62991AEF18B63F3400050A04 /* AddPlanViewController.mm in Sources */,
 				6285E94F18B71DA200F3141A /* PlanService.cpp in Sources */,
 				629CD93118B4343D00D24686 /* AppDelegate.m in Sources */,

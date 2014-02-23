@@ -16,7 +16,6 @@
 
 @implementation AddPlanViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -28,18 +27,15 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void) dismissCurrentView{
-    
-}
-
 - (IBAction)AddPlan:(UIBarButtonItem *)sender {
     string name = [_planName.text UTF8String];
     time_t interval = _planInterval.countDownDuration;  // unit: sec
-    time_t now = time(NULL);
+    time_t now = [[NSDate date] timeIntervalSince1970];
     
     PlanService* pservice = Singleton<PlanService>::instance();
     pservice->addPlan(name, interval, now);
     
     [self dismissModalViewControllerAnimated:YES];
 }
+
 @end

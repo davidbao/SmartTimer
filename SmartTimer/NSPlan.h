@@ -12,11 +12,12 @@
 @interface NSPlan : NSObject
 
 @property (nonatomic,strong) NSString *name;
+@property (nonatomic) NSInteger planId;
 @property (nonatomic,strong) NSNumber *internal;
 @property (nonatomic,strong) NSDate *currentTime;
 
 - (id)initWithPlan:(const Plan*)plan;
-- (id)initWithName:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime;
+- (id)initWithName:(NSInteger) planId name:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime;
 
 - (NSString*)getInternalStr;
 - (NSString*)getCurrentTimeStr;

@@ -15,15 +15,16 @@
     NSNumber* internal = [[NSNumber alloc] initWithLong:plan->Interval];
     NSDate *currentTime = [[NSDate alloc] initWithTimeIntervalSince1970:plan->CurrentTime];
     
-    NSPlan *nsplan = [[NSPlan alloc] initWithName:name internal:internal currentTime:currentTime];
+    NSPlan *nsplan = [[NSPlan alloc] initWithName:plan->Id name:name internal:internal currentTime:currentTime];
     
     return nsplan;
 }
-- (id)initWithName:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime{
+- (id)initWithName:(NSInteger) planId name:(NSString *)name internal:(NSNumber *)internal currentTime:(NSDate *)currentTime{
     self = [super init];
     
     if (self)
     {
+        _planId = planId;
         _name = name;
         _internal = internal;
         _currentTime = currentTime;

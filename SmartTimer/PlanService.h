@@ -25,6 +25,8 @@ public:
         return &_plans;
     }
     
+    void editPlan(int planId, const string& name, const time_t interval, const time_t currentTime);
+    
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
     
