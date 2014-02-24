@@ -24,6 +24,8 @@ public:
     
     void updatePlan(const Plan& plan);
     
+    void deletePlan(const Plan& plan);
+    
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
 };

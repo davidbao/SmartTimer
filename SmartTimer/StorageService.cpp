@@ -17,8 +17,6 @@ namespace Storage
     {
         _needUpdatePlans = true;
         _sqliteClient = NULL;
-        
-//        openDb();
     }
 
     StorageService::~StorageService(void)
@@ -59,14 +57,14 @@ namespace Storage
         return 0;
     }
 
-    void StorageService::openDb(const string& path, const string& sql)
+    void StorageService::openDb()
     {
     #if DEBUG
         Stopwatch sw("Create or open database file");
     #endif
         
         // /Users/baowei/Library/Application Support/iPhone Simulator/7.0.3/Applications/38C384D2-9C25-4150-9282-04BAD990917C
-        string fileName = path + "/smartTimer.db";
+        string fileName = _path + "/smartTimer.db";
         
         bool error = false;
         const char* errorMsg = NULL;
@@ -80,7 +78,7 @@ namespace Storage
                 if(length == 0)
                 {
                     // create some tables from resource.
-                    result = _sqliteClient->executeSql(sql);
+                    result = _sqliteClient->executeSql(_sql);
                     if(result == SQLITE_OK)
                     {
 #if DEBUG
@@ -151,7 +149,13 @@ namespace Storage
     
     void StorageService::selectPlans()
 	{
+#if DEBUG
+		Stopwatch sw("StorageService::selectPlans", 100);
+#endif
+        
 		Locker locker(&_plansMutex);
+        
+        openDb();
         
 		string sql = "SELECT * FROM [Plans]";
         
@@ -201,13 +205,19 @@ namespace Storage
 			const char* error = _sqliteClient->getErrorMsg();
             Debug::Write(error);
         }
+        
+        closeDb();
 	}
     void StorageService::addPlan(const Plans& plans)
     {
 #if DEBUG
 		string mess = Convert::convertStr("StorageService::addPlans, count = %d", (int)plans.count());
-		Stopwatch sw(mess);
+		Stopwatch sw(mess, 100);
 #endif
+        
+        Locker locker(&_plansMutex);
+        
+        openDb();
         
 		DataTable table("Plans");
 		table.addColumn(new DataColumn("Id", Integer));
@@ -239,6 +249,8 @@ namespace Storage
 			const char* error = _sqliteClient->getErrorMsg();
             Debug::Write(error);
         }
+        
+        closeDb();
     }
     void StorageService::addPlan(const Plan& plan)
     {
@@ -252,11 +264,13 @@ namespace Storage
 		Stopwatch sw("StorageService::updatePlan", 100);
 #endif
         Locker locker(&_plansMutex);
+        
+        openDb();
 
         char str[256];
         memset(str, 0, sizeof(str));
         
-        string sql = "UPDATE [Plans] SET [Name]='%s',[Interval]='%d',[CurrentTime]='%s' where [Id]=%d";
+        string sql = "UPDATE [Plans] SET [Name]='%s',[Interval]=%d,[CurrentTime]='%s' where [Id]=%d";
         
         sprintf(str, sql.c_str(), plan.Name.c_str(), plan.Interval, Convert::getDateTimeStr(plan.CurrentTime).c_str(), plan.Id);
         
@@ -270,18 +284,22 @@ namespace Storage
 			const char* error = _sqliteClient->getErrorMsg();
             Debug::Write(error);
         }
+        
+        closeDb();
     }
-    void StorageService::removePlan(const Plan& plan)
+    void StorageService::deletePlan(const Plan& plan)
     {
 #if DEBUG
-		Stopwatch sw("StorageService::removePlan", 100);
+		Stopwatch sw("StorageService::deletePlan", 100);
 #endif
 		Locker locker(&_plansMutex);
+        
+        openDb();
         
         char str[256];
         memset(str, 0, sizeof(str));
         
-		string sql = "DELETE FROM [Plans] where Id='%d';";
+		string sql = "DELETE FROM [Plans] where Id=%d;";
         sprintf(str, sql.c_str(), plan.Id);
         
 		int result = _sqliteClient->executeSql(str);
@@ -294,6 +312,8 @@ namespace Storage
 			const char* error = _sqliteClient->getErrorMsg();
             Debug::Write(error);
         }
+        
+        closeDb();
     }
 }
 

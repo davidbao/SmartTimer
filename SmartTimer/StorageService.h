@@ -24,14 +24,22 @@ namespace Storage
         StorageService(void);
         ~StorageService(void);
         
-        void openDb(const string& path, const string& sql);
+        inline void initDbInfo(const string& path, const string& sql)
+        {
+            assert(!path.empty());
+            assert(!sql.empty());
+            
+            _path = path;
+            _sql = sql;
+        }
+        void openDb();
         void closeDb();
         
         void selectPlans();
         void addPlan(const Plan& plan);
         void addPlan(const Plans& plans);
         void updatePlan(const Plan& plan);
-        void removePlan(const Plan& plan);
+        void deletePlan(const Plan& plan);
 		inline Plans* getPlans()
 		{
 			if(_needUpdatePlans)
@@ -58,6 +66,9 @@ namespace Storage
 		Plans _plans;
 		bool _needUpdatePlans;
 		mutex _plansMutex;
+        
+        string _path;
+        string _sql;
     };
 }
     

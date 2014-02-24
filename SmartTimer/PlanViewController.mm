@@ -87,6 +87,36 @@
     [PlanDetailViewController setCurrentPlan:currentPlan];
 }
 
+//- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation: (UITableViewRowAnimation)animation{
+//    
+//}
+//- (void)deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation: (UITableViewRowAnimation)animation{
+//    
+//}
+//- (NSString *)tableView:(UITableView *)tableView
+//                        titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return @"delete";
+//}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // remove the plan from service.
+        NSPlan* nsplan = [self.plans objectAtIndex:indexPath.row];
+        assert(nsplan);
+        Plan plan;
+        [nsplan toPlan:plan];
+        PlanService* pservice = Singleton<PlanService>::instance();
+        pservice->deletePlan(plan);
+        
+        [self.plans removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -103,6 +133,10 @@
     }
     
     [self.tableView reloadData];
+}
+
+- (IBAction)editAction:(id)sender {
+    [self.tableView setEditing:self.tableView.editing == NO ? YES : NO animated:YES];
 }
 
 @end

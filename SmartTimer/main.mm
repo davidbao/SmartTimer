@@ -19,21 +19,17 @@ int main(int argc, char * argv[])
 {
     @autoreleasepool {
         Singleton<Storage::StorageService>::initialize();
-//        NSString* path = [[NSBundle mainBundle] executablePath];
+
         NSString* resPath = [[NSBundle mainBundle] pathForResource:@"smartTimer"
                                                          ofType:@"sql"];
         NSString* content = [NSString stringWithContentsOfFile:resPath
-                                                      encoding:NSUTF8StringEncoding
+                                                         encoding:NSUTF8StringEncoding
                                                          error:NULL];
         
-        // First, test for existence.
-//        BOOL success;
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        NSError *error;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         
-        Singleton<Storage::StorageService>::instance()->openDb([documentsDirectory UTF8String], [content UTF8String]);
+        Singleton<Storage::StorageService>::instance()->initDbInfo([documentsDirectory UTF8String], [content UTF8String]);
         Singleton<PlanService>::initialize();
         
         int result = UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));

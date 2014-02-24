@@ -52,7 +52,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="计划" id="jnb-p9-Xzs">
-                        <barButtonItem key="leftBarButtonItem" title="编辑" id="eMZ-oh-0J4"/>
+                        <barButtonItem key="leftBarButtonItem" title="编辑" id="eMZ-oh-0J4">
+                            <connections>
+                                <action selector="editAction:" destination="8en-YO-3AP" id="cwR-W6-DoZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="添加" id="VOy-kd-e0d">
                             <connections>
                                 <segue destination="T2x-hc-CWl" kind="modal" identifier="addSegue" id="B1c-4b-sJd"/>
