@@ -55,7 +55,6 @@ namespace Storage
         
         bool fileExists(const string& fileName) const;
         int getFileLength(const string& fileName) const;
-        bool isWritable(const string& fileName) const;
         
 #if DEBUG
         void insertDebugData();

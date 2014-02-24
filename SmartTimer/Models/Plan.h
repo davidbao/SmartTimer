@@ -29,7 +29,7 @@ public:
     {
         static int _currentId = 0;
         
-        Id = _currentId;
+        Id = ++_currentId;
         Name = name;
         Interval = interval;
         CurrentTime = currentTime;

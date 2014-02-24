@@ -33,6 +33,10 @@
     return self;
 }
 
+- (NSString*)getNameStr{
+    return [NSString stringWithFormat:@"%d - %@", self.planId, self.name];
+}
+
 - (NSString*)getIntervalStr{
     NSInteger ti = [self.interval integerValue];
     NSInteger hours = (ti / 3600);

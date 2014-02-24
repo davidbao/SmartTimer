@@ -19,6 +19,7 @@
 - (id)initWithPlan:(const Plan*)plan;
 - (id)initWithName:(NSInteger) planId name:(NSString *)name interval:(NSNumber *)interval currentTime:(NSDate *)currentTime;
 
+- (NSString*)getNameStr;
 - (NSString*)getIntervalStr;
 - (NSString*)getCurrentTimeStr;
 

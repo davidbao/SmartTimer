@@ -34,16 +34,6 @@ namespace Storage
         }
         return false;
     }
-    bool StorageService::isWritable(const string& fileName) const
-    {
-        FILE* fp = fopen(fileName.c_str(), "w+b");
-        if(fp != NULL)
-        {
-            fclose(fp);
-            return true;
-        }
-        return false;
-    }
     int StorageService::getFileLength(const string& fileName) const
     {
         FILE* fp = fopen(fileName.c_str(), "r+b");
@@ -68,38 +58,31 @@ namespace Storage
         
         bool error = false;
         const char* errorMsg = NULL;
-        if(!fileExists(fileName) || isWritable(fileName))
+        
+        _sqliteClient = new SqliteClient();
+        int result = _sqliteClient->open(fileName.c_str());
+        if(result == SQLITE_OK)
         {
-            _sqliteClient = new SqliteClient();
-            int result = _sqliteClient->open(fileName.c_str());
-            if(result == SQLITE_OK)
+            long length = getFileLength(fileName.c_str());
+            if(length == 0)
             {
-                long length = getFileLength(fileName.c_str());
-                if(length == 0)
+                // create some tables from resource.
+                result = _sqliteClient->executeSql(_sql);
+                if(result == SQLITE_OK)
                 {
-                    // create some tables from resource.
-                    result = _sqliteClient->executeSql(_sql);
-                    if(result == SQLITE_OK)
-                    {
 #if DEBUG
-                        insertDebugData();
+                    insertDebugData();
 #endif
 //                        result = insertInitializationData();
-                        
+                    
 //                        _createNewDBFile = true;
-                    }
                 }
             }
-            if(result != SQLITE_OK)
-            {
-                error = true;
-                errorMsg = _sqliteClient->getErrorMsg();
-            }
         }
-        else
+        if(result != SQLITE_OK)
         {
             error = true;
-            errorMsg = "'smartTimer.db' is readonly.";
+            errorMsg = _sqliteClient->getErrorMsg();
         }
         
         if(error)

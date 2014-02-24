@@ -61,7 +61,7 @@
             if(label){
                 switch(label.tag){
                     case 1:
-                        label.text = currentPlan.name;
+                        label.text = [currentPlan getNameStr];
                         break;
                     case 2:
                         label.text = [currentPlan getIntervalStr];
