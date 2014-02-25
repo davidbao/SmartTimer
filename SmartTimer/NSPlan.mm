@@ -96,4 +96,12 @@
     self.currentTime = currentTime;
 }
 
+- (Boolean)equalTo:(NSPlan*) plan{
+    return [self.name isEqualToString:plan.name] && [self.interval isEqualToNumber:plan.interval];
+}
+
+- (Boolean)equalTo:(NSString*) name interval:(NSNumber *)interval{
+    return [self.name isEqualToString:name] && [self.interval isEqualToNumber:interval];
+}
+
 @end

@@ -85,6 +85,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
     [PlanDetailViewController setCurrentPlan:currentPlan];
+    
+    PlanDetailViewController *detailViewController = [self.storyboard
+                                                      instantiateViewControllerWithIdentifier:@"PlanDetailViewController"];
+    UINavigationController *nav = [[UINavigationController alloc]
+                                   initWithRootViewController:detailViewController];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 //- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation: (UITableViewRowAnimation)animation{

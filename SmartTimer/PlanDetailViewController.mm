@@ -48,17 +48,23 @@ static NSPlan* editPlan = nil;
     editPlan = plan;
 }
 
-- (IBAction)editPlan:(id)sender {
+- (IBAction)editPlanAction:(id)sender {
     if(editPlan != nil) {
-        editPlan.name = self.planName.text;
-        editPlan.interval = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
-        editPlan.currentTime = [NSDate date];
+        NSString* name = self.planName.text;
+        NSNumber* interval = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
         
-        Plan plan;
-        [editPlan toPlan:plan];
-        PlanService* pservice = Singleton<PlanService>::instance();
-        pservice->updatePlan(plan);
+        if(![editPlan equalTo:name interval:interval]){
+            editPlan.name = name;
+            editPlan.interval = interval;
+            editPlan.currentTime = [NSDate date];
+            
+            Plan plan;
+            [editPlan toPlan:plan];
+            PlanService* pservice = Singleton<PlanService>::instance();
+            pservice->updatePlan(plan);
+        }
     }
+    editPlan = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
 

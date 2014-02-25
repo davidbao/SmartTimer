@@ -49,7 +49,8 @@ namespace Storage
             
 			return &_plans;
 		}
-        
+        bool getPlan(int planId, Plan& plan);
+
     private:
         DECLARE_SINGLETON_CLASS(StorageService);
         

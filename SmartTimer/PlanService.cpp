@@ -38,3 +38,10 @@ void PlanService::deletePlan(const Plan& plan)
     assert(sservice);
     sservice->deletePlan(plan);
 }
+
+bool PlanService::getPlan(int planId, Plan& plan)
+{
+    StorageService* sservice = Singleton<StorageService>::instance();
+    assert(sservice);
+    return sservice->getPlan(planId, plan);
+}

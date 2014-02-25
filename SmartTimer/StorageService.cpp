@@ -298,5 +298,21 @@ namespace Storage
         
         closeDb();
     }
+    
+    bool StorageService::getPlan(int planId, Plan& plan)
+    {
+        Locker locker(&_plansMutex);
+        
+        for(int i=0;i<_plans.count();i++)
+        {
+            const Plan* cplan = _plans.at(i);
+            if(cplan->Id == planId)
+            {
+                plan.copyFrom(cplan);
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

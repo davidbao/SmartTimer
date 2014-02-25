@@ -41,6 +41,14 @@ public:
         Interval = interval;
         CurrentTime = currentTime;
     }
+    
+    void copyFrom(const Plan* plan)
+    {
+        Id = plan->Id;
+        Name = plan->Name;
+        Interval = plan->Interval;
+        CurrentTime = plan->CurrentTime;
+    }
 };
 
 typedef Vector<Plan> Plans;

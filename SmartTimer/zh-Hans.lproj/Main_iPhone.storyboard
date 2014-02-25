@@ -44,9 +44,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="IEQ-qe-j4e" kind="modal" id="NtC-7C-K7M"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -76,7 +73,7 @@
         <!--Plan Detail View Controller - 计划明细-->
         <scene sceneID="ynL-UW-6b8">
             <objects>
-                <tableViewController id="81R-F4-82n" customClass="PlanDetailViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PlanDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="81R-F4-82n" customClass="PlanDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gaj-6j-auP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -203,7 +200,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="计划明细" id="lex-iG-0RA">
                         <barButtonItem key="leftBarButtonItem" title="完成" id="Apt-5K-wp3">
                             <connections>
-                                <action selector="editPlan:" destination="81R-F4-82n" id="RBK-1P-e22"/>
+                                <action selector="editPlanAction:" destination="81R-F4-82n" id="I9n-wI-1Te"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="统计" id="aQn-C7-0wI">
@@ -573,7 +570,4 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="OO8-eB-kLs"/>
-    </inferredMetricsTieBreakers>
 </document>
