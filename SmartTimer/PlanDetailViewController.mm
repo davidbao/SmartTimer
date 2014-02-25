@@ -8,6 +8,7 @@
 
 #import "PlanDetailViewController.h"
 #include "PlanService.h"
+#import "NSTask.h"
 
 @interface PlanDetailViewController ()
 
@@ -66,6 +67,40 @@ static NSPlan* editPlan = nil;
     }
     editPlan = nil;
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"TaskCell";
+    
+    NSTask *currentTask = [self.tasks objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    if(cell) {
+        UIView* view = cell.contentView;
+        assert(view);
+        NSArray* labels = view.subviews;
+        assert(labels);
+        for(int i=0;i<labels.count;i++){
+            UILabel* label = [labels objectAtIndex:i];
+            if(label){
+                switch(label.tag){
+                    case 1:
+                        label.text = [currentTask getNameStr];
+                        break;
+                    case 2:
+                        label.text = [currentTask getTotalTimeStr];
+                        break;
+                    case 3:
+                        label.text = [currentTask getStartTimeStr];
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    
+    return cell;
 }
 
 @end

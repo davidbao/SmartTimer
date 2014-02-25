@@ -109,7 +109,7 @@ namespace Storage
 		int result;
 		char str[1024];
         
-		// GradeInfo
+		// Plans
 		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(1,'plan1',1800,'2014-02-23 20:52:45');",
                 "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(2,'plan2',3600,'2014-02-22 21:52:45');",
@@ -120,6 +120,33 @@ namespace Storage
                 "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(7,'plan7',1200,'2014-02-17 02:52:45');",
                 "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(8,'plan8',9800,'2014-02-16 03:52:45');",
                 "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(9,'plan9',6400,'2014-02-10 04:52:45');"
+                );
+		result = _sqliteClient->executeSql(str);
+		if(result != SQLITE_OK)
+		{
+			const char* error = _sqliteClient->getErrorMsg();
+            Debug::Write(error);
+		}
+        
+		// Tasks
+		sprintf(str, "%s\n%s",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(1,1,'2014-02-21 20:52:45');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(2,1,'2014-02-23 21:52:45');"
+                );
+		result = _sqliteClient->executeSql(str);
+		if(result != SQLITE_OK)
+		{
+			const char* error = _sqliteClient->getErrorMsg();
+            Debug::Write(error);
+		}
+        
+		// TaskTimes
+		sprintf(str, "%s\n%s\n%s\n%s\n%s",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(1,1,1000);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(2,1,1100);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(3,1,1200);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(4,1,1300);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(5,2,2800);"
                 );
 		result = _sqliteClient->executeSql(str);
 		if(result != SQLITE_OK)
@@ -180,6 +207,8 @@ namespace Storage
 					}
 				}
                 
+                selectTasks(plan->Id, *plan);
+                
 				_plans.add(plan);
 			}
 		}
@@ -191,6 +220,60 @@ namespace Storage
         
         closeDb();
 	}
+    void StorageService::selectTasks(int planId, Plan& plan)
+    {
+        char str[256];
+        memset(str, 0, sizeof(str));
+        
+        string sql = "SELECT [Tasks].[Id],[Tasks].[PlanId],[Tasks].[StartTime],[TaskTimes].[Interval] FROM [Tasks],[TaskTimes] where [Tasks].[PlanId]==%d AND [Tasks].[Id]==[TaskTimes].[TaskId]";
+        
+        sprintf(str, sql.c_str(), planId);
+        
+		DataTable table;
+		int result = _sqliteClient->executeSqlQuery(str, table);
+		if(result == SQLITE_OK)
+        {
+			const DataRows* rows = table.getRows();
+			for (uint i = 0; i < rows->count(); i++)
+			{
+				DataRow* row = rows->at(i);
+				const DataCells* cells = row->getCells();
+				Task* task = NULL;
+                bool newTask = false;
+                for (uint j = 0; j < cells->count(); j++)
+				{
+					DataCell* cell = cells->at(j);
+					if(cell->matchColumnName("Id"))
+					{
+                        int taskId = cell->getValue().nValue;
+                        Task* prevTask = plan.getTask(taskId);
+                        newTask = prevTask == NULL;
+                        task = prevTask != NULL ? prevTask : new Task();
+						task->Id = taskId;
+					}
+					else if(cell->matchColumnName("PlanId"))
+					{
+						task->PlanId = cell->getValue().nValue;
+					}
+					else if(cell->matchColumnName("StartTime"))
+					{
+						task->StartTime = Convert::parseDateTime(cell->getValue().strValue);
+					}
+					else if(cell->matchColumnName("Interval"))
+					{
+						task->addInterval(cell->getValue().nValue);
+					}
+					else
+					{
+						assert(false);
+					}
+				}
+                
+                if(newTask)
+                    plan.addTask(task);
+            }
+        }
+    }
     void StorageService::addPlan(const Plans& plans)
     {
 #if DEBUG
@@ -253,7 +336,7 @@ namespace Storage
         char str[256];
         memset(str, 0, sizeof(str));
         
-        string sql = "UPDATE [Plans] SET [Name]='%s',[Interval]=%d,[CurrentTime]='%s' where [Id]=%d";
+        string sql = "UPDATE [Plans] SET [Name]='%s',[Interval]=%d,[CurrentTime]='%s' where [Id]==%d";
         
         sprintf(str, sql.c_str(), plan.Name.c_str(), plan.Interval, Convert::getDateTimeStr(plan.CurrentTime).c_str(), plan.Id);
         

@@ -45,13 +45,17 @@
 }
 
 - (NSString*)getCurrentTimeStr{
+    return [NSPlan getTimeStr:self.currentTime];
+}
+
++ (NSString*)getTimeStr:(NSDate*)time{
     NSDate *now = [NSDate date];
     NSDateComponents *nowComps = [[NSCalendar currentCalendar]
-                                 components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
-                                 fromDate:now];
+                                  components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
+                                  fromDate:now];
     NSDateComponents *ctComps = [[NSCalendar currentCalendar]
                                  components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
-                                 fromDate:_currentTime];
+                                 fromDate:time];
     NSDateFormatter *ft = [[NSDateFormatter alloc] init];
     
     if (nowComps.year == ctComps.year &&
@@ -61,22 +65,22 @@
         [ft setDateFormat:@"HH:mm"];
     }
     else if (nowComps.year == ctComps.year &&
-        nowComps.month == ctComps.month &&
-        nowComps.day - 1 == ctComps.day &&
-        nowComps.era == ctComps.era) {
+             nowComps.month == ctComps.month &&
+             nowComps.day - 1 == ctComps.day &&
+             nowComps.era == ctComps.era) {
         return NSLocalizedString(@"yesterday", @"");
     }
     else if (nowComps.year == ctComps.year &&
-         nowComps.month == ctComps.month &&
-         nowComps.day - 7 <= ctComps.day &&
-         nowComps.era == ctComps.era) {
+             nowComps.month == ctComps.month &&
+             nowComps.day - 7 <= ctComps.day &&
+             nowComps.era == ctComps.era) {
         [ft setDateFormat:@"cccc"];
     }
     else{
         [ft setDateFormat:@"yy-MM-dd"];
     }
     
-    return [ft stringFromDate:_currentTime];
+    return [ft stringFromDate:time];
 }
 
 - (void)toPlan:(Plan&)plan{

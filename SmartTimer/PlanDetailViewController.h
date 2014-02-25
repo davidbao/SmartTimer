@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *planName;
 @property (weak, nonatomic) IBOutlet UIDatePicker *planInterval;
 
+@property (nonatomic, strong) NSMutableArray *tasks;
+
 + (void)setCurrentPlan:(NSPlan*) plan;
 
 @end

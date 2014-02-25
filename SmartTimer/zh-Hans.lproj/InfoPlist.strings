@@ -1,3 +1,4 @@
 /* Localized versions of Info.plist keys */
 
 "yesterday" = "昨天";
+"task"      = "任务";

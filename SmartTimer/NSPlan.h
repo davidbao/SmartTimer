@@ -23,6 +23,8 @@
 - (NSString*)getIntervalStr;
 - (NSString*)getCurrentTimeStr;
 
++ (NSString*)getTimeStr:(NSDate*)time;
+
 - (Boolean)equalTo:(NSPlan*) plan;
 - (Boolean)equalTo:(NSString*) name interval:(NSNumber *)interval;
 

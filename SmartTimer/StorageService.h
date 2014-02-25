@@ -57,6 +57,8 @@ namespace Storage
         bool fileExists(const string& fileName) const;
         int getFileLength(const string& fileName) const;
         
+        void selectTasks(int planId, Plan& plan);
+        
 #if DEBUG
         void insertDebugData();
 #endif
