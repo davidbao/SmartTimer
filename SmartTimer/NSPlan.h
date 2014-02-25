@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSTask.h"
 #include "Plan.h"
 
 @interface NSPlan : NSObject
@@ -15,6 +16,8 @@
 @property (nonatomic) NSInteger planId;
 @property (nonatomic,strong) NSNumber *interval;
 @property (nonatomic,strong) NSDate *currentTime;
+
+@property (nonatomic, strong) NSMutableArray *tasks;
 
 - (id)initWithPlan:(const Plan*)plan;
 - (id)initWithName:(NSInteger) planId name:(NSString *)name interval:(NSNumber *)interval currentTime:(NSDate *)currentTime;

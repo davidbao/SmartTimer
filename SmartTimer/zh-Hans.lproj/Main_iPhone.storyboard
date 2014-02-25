@@ -62,7 +62,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tablePlan" destination="C2n-JD-Wmp" id="h9K-87-evP"/>
                         <segue destination="IEQ-qe-j4e" kind="push" identifier="detailSegue" id="OO8-eB-kLs"/>
                     </connections>
                 </tableViewController>
@@ -145,7 +144,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </tableViewSection>
                             <tableViewSection headerTitle="任务" id="Xbl-nJ-hA5">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="213" id="ZZS-jE-PCI">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="213" id="ZZS-jE-PCI">
                                         <rect key="frame" x="0.0" y="311" width="320" height="213"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZZS-jE-PCI" id="O3s-AJ-snv">

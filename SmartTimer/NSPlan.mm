@@ -17,6 +17,14 @@
     
     NSPlan *nsplan = [[NSPlan alloc] initWithName:plan->Id name:name interval:interval currentTime:currentTime];
     
+    const Tasks* tasks = plan->getTasks();
+    for (int i=0;i<tasks->count();i++)
+    {
+        const Task* task = tasks->at(i);
+        NSTask* nstask = [[NSTask alloc] initWithTask:task];
+        [nsplan.tasks addObject:nstask];
+    }
+    
     return nsplan;
 }
 - (id)initWithName:(NSInteger) planId name:(NSString *)name interval:(NSNumber *)interval currentTime:(NSDate *)currentTime{
@@ -28,6 +36,8 @@
         _name = name;
         _interval = interval;
         _currentTime = currentTime;
+        
+        _tasks = [NSMutableArray arrayWithObjects:nil];
     }
     
     return self;

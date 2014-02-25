@@ -11,6 +11,32 @@
 
 @implementation NSTask
 
+- (id)initWithTask:(const Task*)task{
+    NSInteger planId = task->PlanId;
+    NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:task->StartTime];
+    
+    NSTask *nstask = [[NSTask alloc] initWithTaskId:task->Id];
+    nstask.planId = planId;
+    nstask.startTime = startTime;
+    const Array<time_t>* intervals = task->getIntervals();
+    for(int i=0;i<intervals->count();i++){
+        time_t interval = intervals->at(i);
+        [self.intervals addObject:[NSNumber numberWithInteger:interval]];
+    }
+    
+    return nstask;
+}
+- (id)initWithTaskId:(int)taskId{
+    self = [super init];
+    
+    if (self)
+    {
+        _taskId = taskId;
+    }
+    
+    return self;
+}
+
 - (NSInteger)getTotalTime{
     return 0;
 }

@@ -12,8 +12,10 @@
 #include <stdio.h>
 #include <string>
 #include "../common/Vector.h"
+#include "../common/Array.h"
 
 using namespace std;
+using namespace Common;
 
 struct Task{
 public:
@@ -24,18 +26,24 @@ public:
     Task(){
         Id = 0;
         PlanId = 0;
-        _intervalCount = 0;
-        memset(_intervals, 0, sizeof(_intervals));
+        clearIntervals();
     }
     
-    void addInterval(time_t interval)
+    inline void addInterval(time_t interval)
     {
-        _intervals[_intervalCount++] = interval;
+        _intervals.add(interval);
+    }
+    inline void clearIntervals()
+    {
+        _intervals.clear();
+    }
+    inline const Array<time_t>* getIntervals() const
+    {
+        return (const Array<time_t>*)&_intervals;
     }
     
 private:
-    time_t _intervals[32];
-    int _intervalCount;
+    Array<time_t> _intervals;
 };
 
 typedef Vector<Task> Tasks;
@@ -70,19 +78,20 @@ public:
         CurrentTime = currentTime;
     }
     
-    void copyFrom(const Plan* plan)
+    inline void copyFrom(const Plan* plan)
     {
         Id = plan->Id;
         Name = plan->Name;
         Interval = plan->Interval;
         CurrentTime = plan->CurrentTime;
+        _tasks.addRange(&plan->_tasks);
     }
     
-    void addTask(const Task* task)
+    inline void addTask(const Task* task)
     {
         _tasks.add(task);
     }
-    Task* getTask(int taskId) const
+    inline Task* getTask(int taskId) const
     {
         for(int i=0;i<_tasks.count();i++)
         {
@@ -93,6 +102,14 @@ public:
             }
         }
         return NULL;
+    }
+    inline int getTaskCount() const
+    {
+        return _tasks.count();
+    }
+    inline const Tasks* getTasks() const
+    {
+        return &_tasks;
     }
     
 private:

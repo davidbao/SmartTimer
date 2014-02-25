@@ -58,6 +58,7 @@ static NSPlan* editPlan = nil;
             editPlan.name = name;
             editPlan.interval = interval;
             editPlan.currentTime = [NSDate date];
+            // todo: sync tasks.
             
             Plan plan;
             [editPlan toPlan:plan];
@@ -69,38 +70,68 @@ static NSPlan* editPlan = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return section == 0 ? 2 : [editPlan.tasks count];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TaskCell";
     
-    NSTask *currentTask = [self.tasks objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if(cell) {
-        UIView* view = cell.contentView;
-        assert(view);
-        NSArray* labels = view.subviews;
-        assert(labels);
-        for(int i=0;i<labels.count;i++){
-            UILabel* label = [labels objectAtIndex:i];
-            if(label){
-                switch(label.tag){
-                    case 1:
-                        label.text = [currentTask getNameStr];
-                        break;
-                    case 2:
-                        label.text = [currentTask getTotalTimeStr];
-                        break;
-                    case 3:
-                        label.text = [currentTask getStartTimeStr];
-                        break;
-                    default:
-                        break;
+    if(indexPath.section == 1){
+        NSTask *currentTask = [editPlan.tasks objectAtIndex:indexPath.row];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        if(cell) {
+            UIView* view = cell.contentView;
+            assert(view);
+            NSArray* labels = view.subviews;
+            assert(labels);
+            for(int i=0;i<labels.count;i++){
+                UILabel* label = [labels objectAtIndex:i];
+                if(label){
+                    switch(label.tag){
+                        case 1:
+                            label.text = [currentTask getNameStr];
+                            break;
+                        case 2:
+                            label.text = [currentTask getTotalTimeStr];
+                            break;
+                        case 3:
+                            label.text = [currentTask getStartTimeStr];
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
+        
+        return cell;
     }
-    
-    return cell;
+    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
+//    [PlanDetailViewController setCurrentPlan:currentPlan];
+//    
+//    PlanDetailViewController *detailViewController = [self.storyboard
+//                                                      instantiateViewControllerWithIdentifier:@"PlanDetailViewController"];
+//    UINavigationController *nav = [[UINavigationController alloc]
+//                                   initWithRootViewController:detailViewController];
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

@@ -18,11 +18,6 @@
 @property (nonatomic, weak) BlueShield *shield;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 
-@property (strong, nonatomic) IBOutlet UITableView *tablePlan;
-@property (weak, nonatomic) IBOutlet UILabel *labelPlanName;
-@property (weak, nonatomic) IBOutlet UILabel *lablePlanCreateTime;
-@property (weak, nonatomic) IBOutlet UILabel *labelPlanInterval;
-
 @property (nonatomic, strong) NSMutableArray *plans;
 
 @end

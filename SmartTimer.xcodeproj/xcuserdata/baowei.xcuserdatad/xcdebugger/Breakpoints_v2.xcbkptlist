@@ -40,13 +40,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SmartTimer/PlanDetailViewController.mm"
-            timestampString = "415008844.402798"
+            timestampString = "415029743.228852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PlanDetailViewController tableView:cellForRowAtIndexPath:]"
+                  moduleName = "SmartTimer"
+                  urlString = "file:///Users/baowei/Documents/workspace/SmartTimer/SmartTimer/PlanDetailViewController.mm"
+                  timestampString = "415030292.1825"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "89">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PlanDetailViewController tableView:cellForRowAtIndexPath:]"
+                  moduleName = "SmartTimer"
+                  urlString = "file:///Users/baowei/Documents/workspace/SmartTimer/SmartTimer/PlanDetailViewController.mm"
+                  timestampString = "415030292.182802"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "480">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
