@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NSPlan.h"
 
 @interface TaskViewController : UITableViewController
+
+@property (nonatomic, strong) NSMutableArray *tasks;
+
++ (void)setCurrentPlan:(NSPlan*) plan;
 
 @end

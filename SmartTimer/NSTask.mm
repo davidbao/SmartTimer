@@ -7,7 +7,7 @@
 //
 
 #import "NSTask.h"
-#import "NSPlan.h"
+#include "common/Convert.h"
 
 @implementation NSTask
 
@@ -19,9 +19,10 @@
     nstask.planId = planId;
     nstask.startTime = startTime;
     const Array<time_t>* intervals = task->getIntervals();
+    nstask.intervals = [NSMutableArray arrayWithObjects:nil];
     for(int i=0;i<intervals->count();i++){
         time_t interval = intervals->at(i);
-        [self.intervals addObject:[NSNumber numberWithInteger:interval]];
+        [nstask.intervals addObject:[NSNumber numberWithInteger:interval]];
     }
     
     return nstask;
@@ -37,23 +38,103 @@
     return self;
 }
 
-- (NSInteger)getTotalTime{
-    return 0;
++ (NSString*)getTimeStr:(NSDate*)time{
+    NSDate *now = [NSDate date];
+    NSDateComponents *nowComps = [[NSCalendar currentCalendar]
+                                  components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
+                                  fromDate:now];
+    NSDateComponents *ctComps = [[NSCalendar currentCalendar]
+                                 components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear|NSCalendarUnitEra
+                                 fromDate:time];
+    NSDateFormatter *ft = [[NSDateFormatter alloc] init];
+    
+    if (nowComps.year == ctComps.year &&
+        nowComps.month == ctComps.month &&
+        nowComps.day == ctComps.day &&
+        nowComps.era == ctComps.era) {
+        [ft setDateFormat:@"HH:mm"];
+    }
+    else if (nowComps.year == ctComps.year &&
+             nowComps.month == ctComps.month &&
+             nowComps.day - 1 == ctComps.day &&
+             nowComps.era == ctComps.era) {
+        return NSLocalizedString(@"yesterday", @"");
+    }
+    else if (nowComps.year == ctComps.year &&
+             nowComps.month == ctComps.month &&
+             nowComps.day - 7 <= ctComps.day &&
+             nowComps.era == ctComps.era) {
+        [ft setDateFormat:@"cccc"];
+    }
+    else{
+        [ft setDateFormat:@"yy-MM-dd"];
+    }
+    
+    return [ft stringFromDate:time];
+}
++ (NSString*)getHMTimeStr:(int)time{
+    NSInteger hours = (time / 3600);
+    NSInteger minutes = (time / 60) % 60;
+    return [NSString stringWithFormat:@"%02i:%02i", hours, minutes];
 }
 
 - (NSString*)getNameStr{
     return [NSString stringWithFormat:@"%@%d", NSLocalizedString(@"task", @""), self.taskId];
 }
 
+- (NSInteger)getTotalTime{
+    time_t value = 0;
+    for(int i=0;i<self.intervals.count;i++){
+        time_t interval = [self.intervals[i] intValue];
+        time_t prevInterval = i > 0 ? [self.intervals[i-1] intValue] : 0;
+        if((i % 2) == 0){     // pause
+            assert(interval > prevInterval);
+            value += interval - prevInterval;
+        }
+        else{                // resume or stop
+        }
+    }
+    return value;
+}
 - (NSString*)getTotalTimeStr{
-    NSInteger ti = [self getTotalTime];
-    NSInteger hours = (ti / 3600);
-    NSInteger minutes = (ti / 60) % 60;
-    return [NSString stringWithFormat:@"%02i:%02i", hours, minutes];
+    return [NSTask getHMTimeStr:[self getTotalTime]];
 }
 
 - (NSString*)getStartTimeStr{
-    return [NSPlan getTimeStr:self.startTime];
+    return [NSTask getTimeStr:self.startTime];
+}
+
+- (NSString*)getPauseTimeStr{
+    time_t value = 0;
+    for(int i=0;i<self.intervals.count;i++){
+        time_t interval = [self.intervals[i] intValue];
+        time_t prevInterval = i > 0 ? [self.intervals[i-1] intValue] : 0;
+        if((i % 2) == 0){     // pause
+            
+        }
+        else{                // resume or stop
+            assert(interval > prevInterval);
+            value += interval - prevInterval;
+        }
+    }
+    return [NSTask getHMTimeStr:value];
+}
+- (NSString*)getFullStartTimeStr{
+    string str = Convert::getDateTimeStr([self.startTime timeIntervalSince1970]);
+    return [NSString stringWithUTF8String:str.c_str()];
+}
+- (NSString*)getFullStopTimeStr{
+    if(self.intervals.count == 0){
+        return @"";
+    }
+    else{
+        time_t interval = [self.intervals[self.intervals.count-1] intValue];
+        string str = Convert::getDateTimeStr([self.startTime timeIntervalSince1970] + interval);
+        return [NSString stringWithUTF8String:str.c_str()];
+    }
+}
+- (NSString*)getPauseCountStr{
+    return [NSString stringWithFormat:@"%d", self.intervals.count / 2];
 }
 
 @end

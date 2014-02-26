@@ -17,7 +17,7 @@
 		6285E94118B6F39400F3141A /* Convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93F18B6F39400F3141A /* Convert.cpp */; };
 		6285E94318B702AB00F3141A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6285E94218B702AB00F3141A /* libsqlite3.dylib */; };
 		6285E94F18B71DA200F3141A /* PlanService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E94D18B71DA200F3141A /* PlanService.cpp */; };
-		6290520C18BDDC7500BACAA6 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6290520B18BDDC7500BACAA6 /* TaskViewController.m */; };
+		6290520C18BDDC7500BACAA6 /* TaskViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6290520B18BDDC7500BACAA6 /* TaskViewController.mm */; };
 		62991AEF18B63F3400050A04 /* AddPlanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62991AEE18B63F3400050A04 /* AddPlanViewController.mm */; };
 		62991AF818B6415600050A04 /* BCDUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF118B6415600050A04 /* BCDUtilities.cpp */; };
 		62991AF918B6415600050A04 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 62991AF518B6415600050A04 /* Exception.cpp */; };
@@ -88,7 +88,7 @@
 		6285E94D18B71DA200F3141A /* PlanService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanService.cpp; sourceTree = "<group>"; };
 		6285E94E18B71DA200F3141A /* PlanService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanService.h; sourceTree = "<group>"; };
 		6290520A18BDDC7500BACAA6 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
-		6290520B18BDDC7500BACAA6 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		6290520B18BDDC7500BACAA6 /* TaskViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TaskViewController.mm; sourceTree = "<group>"; };
 		62991AED18B63F3400050A04 /* AddPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPlanViewController.h; sourceTree = "<group>"; };
 		62991AEE18B63F3400050A04 /* AddPlanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddPlanViewController.mm; sourceTree = "<group>"; };
 		62991AF018B6415600050A04 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Array.h; path = common/Array.h; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				627AEDAC18BC811300326136 /* NSTask.h */,
 				627AEDAD18BC811300326136 /* NSTask.mm */,
 				6290520A18BDDC7500BACAA6 /* TaskViewController.h */,
-				6290520B18BDDC7500BACAA6 /* TaskViewController.m */,
+				6290520B18BDDC7500BACAA6 /* TaskViewController.mm */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 				629CD92D18B4343D00D24686 /* main.mm in Sources */,
 				6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */,
 				6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */,
-				6290520C18BDDC7500BACAA6 /* TaskViewController.m in Sources */,
+				6290520C18BDDC7500BACAA6 /* TaskViewController.mm in Sources */,
 				62991B0218B6421800050A04 /* MBProgressHUD.m in Sources */,
 				6285E93B18B6F25800F3141A /* Trace.cpp in Sources */,
 			);

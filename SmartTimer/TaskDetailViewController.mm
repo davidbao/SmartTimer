@@ -12,17 +12,21 @@
 
 @end
 
+static NSTask* editTask = nil;
+
 @implementation TaskDetailViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if(editTask){
+        self.totalTime.text = [editTask getTotalTimeStr];
+        self.pauseTime.text = [editTask getPauseTimeStr];
+        self.startTime.text = [editTask getFullStartTimeStr];
+        self.stopTime.text = [editTask getFullStopTimeStr];
+        self.pauseCount.text = [editTask getPauseCountStr];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,7 +36,12 @@
 }
 
 - (IBAction)Done:(id)sender {
+    editTask = nil;
     [self dismissModalViewControllerAnimated:YES];
+}
+
++ (void)setCurrentTask:(NSTask*) task{
+    editTask = task;
 }
 
 @end

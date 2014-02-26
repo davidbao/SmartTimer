@@ -69,8 +69,8 @@
         <!--Task Detail View Controller - 任务明细-->
         <scene sceneID="mge-8N-WDw">
             <objects>
-                <tableViewController id="rdk-Yu-BjV" customClass="TaskDetailViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EyH-ay-hkL">
+                <tableViewController storyboardIdentifier="TaskDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rdk-Yu-BjV" customClass="TaskDetailViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EyH-ay-hkL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,10 +203,17 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pauseCount" destination="0i9-qb-u7M" id="zAN-AX-jxR"/>
+                        <outlet property="pauseTime" destination="L1b-Ho-hF7" id="ZK0-fh-Bv9"/>
+                        <outlet property="startTime" destination="6un-Zr-dc6" id="oYh-6p-QAr"/>
+                        <outlet property="stopTime" destination="mPd-VA-hJL" id="WUf-4j-O1Q"/>
+                        <outlet property="totalTime" destination="8fb-cC-dUt" id="KGC-A7-Dv8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egd-f0-eiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="692" y="1547"/>
+            <point key="canvasLocation" x="692" y="833"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="u6f-8r-hn7">
@@ -221,7 +228,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s5R-ng-Iox" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198" y="1547"/>
+            <point key="canvasLocation" x="198" y="833"/>
         </scene>
         <!--Add Plan View Controller - 添加-->
         <scene sceneID="D0p-CB-Heo">
@@ -354,18 +361,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="XFp-iB-0P4">
             <objects>
                 <tableViewController storyboardIdentifier="PlanDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Zp-6d-Ve2" customClass="PlanDetailViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GER-hZ-AZ8">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GER-hZ-AZ8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="irx-5U-n4K">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hnw-UI-iSz">
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hnw-UI-iSz">
                                         <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hnw-UI-iSz" id="f8v-jK-56d">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T3w-f0-B23">
@@ -387,7 +394,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <rect key="frame" x="0.0" y="108" width="320" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e9U-s3-qrA" id="MEU-QQ-uva">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="1800" minuteInterval="1" useCurrentDate="NO" id="Mjq-C4-xQV">
@@ -397,7 +404,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                         <!--2010-02-20 02:00:00 +0000-->
                                                     </date>
                                                     <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <mutableData key="data">
+                                                        <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -415,7 +422,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                                     </timeZone>
                                                 </datePicker>
                                             </subviews>
@@ -430,12 +437,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="计划明细" id="tpD-Od-lTB">
-                        <barButtonItem key="leftBarButtonItem" title="完成" id="TJ4-PM-PGf"/>
+                        <barButtonItem key="leftBarButtonItem" title="完成" id="TJ4-PM-PGf">
+                            <connections>
+                                <action selector="editPlanAction:" destination="4Zp-6d-Ve2" id="lX6-Y7-zGi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="统计" id="KVn-rg-Jb7">
+                            <connections>
+                                <segue destination="pS9-JW-e7d" kind="modal" id="6ub-qQ-Jfi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="planInterval" destination="Mjq-C4-xQV" id="EAi-4s-ew7"/>
+                        <outlet property="planName" destination="VHE-W5-UQr" id="fUW-d0-ECF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fqu-61-uo9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673" y="1950"/>
+            <point key="canvasLocation" x="1185" y="1582"/>
         </scene>
         <!--Task View Controller - 任务-->
         <scene sceneID="hCS-l4-Qik">
@@ -484,13 +504,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="任务" id="8k8-ql-gN6">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="cf7-JU-h28"/>
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="cf7-JU-h28">
+                            <connections>
+                                <action selector="ReturnAction:" destination="5Lz-Be-ahT" id="aAX-J7-eHG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="同步" id="7km-Ur-0mY"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JMB-bD-YaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673" y="2618"/>
+            <point key="canvasLocation" x="1185" y="2250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qiz-C2-10f">
@@ -541,7 +565,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Tab Bar Controller-->
         <scene sceneID="rcz-nK-xm2">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="H30-SZ-tSs" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="PlanDetailTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H30-SZ-tSs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="ssL-WP-MkO">
@@ -555,13 +579,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhf-gB-sPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="621" y="2284"/>
+            <point key="canvasLocation" x="198" y="1916"/>
         </scene>
         <!--Navigation Controller - 计划-->
         <scene sceneID="qiA-8b-uPN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vk8-uf-SGM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="计划" id="NYd-8w-SNp"/>
+                    <tabBarItem key="tabBarItem" title="计划" image="Plan" id="NYd-8w-SNp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gNS-D3-OqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -574,13 +598,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JhA-dc-tv4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1147" y="1950"/>
+            <point key="canvasLocation" x="692" y="1582"/>
         </scene>
         <!--Navigation Controller - 任务-->
         <scene sceneID="Qpo-VU-int">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0BG-nX-F39" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="任务" id="5a7-sS-Upw"/>
+                    <tabBarItem key="tabBarItem" title="任务" image="Task" id="5a7-sS-Upw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5SY-mj-MU4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -593,9 +617,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVC-zu-sdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1147" y="2618"/>
+            <point key="canvasLocation" x="692" y="2250"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Plan" width="30" height="30"/>
+        <image name="Task" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

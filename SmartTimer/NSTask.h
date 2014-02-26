@@ -17,12 +17,19 @@
 
 @property (nonatomic, strong) NSMutableArray *intervals;
 
++ (NSString*)getTimeStr:(NSDate*)time;
++ (NSString*)getHMTimeStr:(int)time;
+
 - (id)initWithTask:(const Task*)task;
 - (id)initWithTaskId:(int)taskId;
 
 - (NSString*)getNameStr;
 - (NSString*)getTotalTimeStr;
 - (NSString*)getStartTimeStr;
+- (NSString*)getPauseTimeStr;
+- (NSString*)getFullStartTimeStr;
+- (NSString*)getFullStopTimeStr;
+- (NSString*)getPauseCountStr;
 
 - (NSInteger)getTotalTime;
 

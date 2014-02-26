@@ -9,10 +9,11 @@
 #import "PlanViewController.h"
 #import "AddPlanViewController.h"
 #import "PlanDetailViewController.h"
+#import "TaskViewController.h"
+#import "NSPlan.h"
+
 #include "Common/Singleton.h"
 #include "PlanService.h"
-
-#import "NSPlan.h"
 
 @interface PlanViewController ()
 
@@ -85,27 +86,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
     [PlanDetailViewController setCurrentPlan:currentPlan];
+    [TaskViewController setCurrentPlan:currentPlan];
     
-    PlanDetailViewController *detailViewController = [self.storyboard
-                                                      instantiateViewControllerWithIdentifier:@"PlanDetailViewController"];
-//    UITabBarController *tab = [[UITabBarController alloc]
-//                               initWithRootViewController:detailViewController];
-    
-    UINavigationController *nav = [[UINavigationController alloc]
-                                   initWithRootViewController:detailViewController];
-    [self presentViewController:nav animated:YES completion:nil];
+    UITabBarController *tabController = [self.storyboard
+                                         instantiateViewControllerWithIdentifier:@"PlanDetailTabBarController"];
+    [self presentViewController:tabController animated:YES completion:nil];
 }
 
-//- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation: (UITableViewRowAnimation)animation{
-//    
-//}
-//- (void)deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation: (UITableViewRowAnimation)animation{
-//    
-//}
-//- (NSString *)tableView:(UITableView *)tableView
-//                        titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return @"delete";
-//}
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // remove the plan from service.

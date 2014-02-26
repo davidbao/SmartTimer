@@ -28,6 +28,8 @@ public:
     
     bool getPlan(int planId, Plan& plan);
     
+    const Tasks* getTasks(int planId);
+    
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
 };

@@ -45,3 +45,17 @@ bool PlanService::getPlan(int planId, Plan& plan)
     assert(sservice);
     return sservice->getPlan(planId, plan);
 }
+
+const Tasks* PlanService::getTasks(int planId)
+{
+    const Plans* plans = getPlans();
+    for(int i=0;i<plans->count();i++)
+    {
+        const Plan* plan = plans->at(i);
+        if(plan->Id == planId)
+        {
+            return plan->getTasks();
+        }
+    }
+    return NULL;
+}
