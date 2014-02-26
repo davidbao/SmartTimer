@@ -88,6 +88,9 @@
     
     PlanDetailViewController *detailViewController = [self.storyboard
                                                       instantiateViewControllerWithIdentifier:@"PlanDetailViewController"];
+//    UITabBarController *tab = [[UITabBarController alloc]
+//                               initWithRootViewController:detailViewController];
+    
     UINavigationController *nav = [[UINavigationController alloc]
                                    initWithRootViewController:detailViewController];
     [self presentViewController:nav animated:YES completion:nil];
