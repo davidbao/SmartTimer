@@ -1,0 +1,12 @@
+/* 
+  File.strings
+  SmartTimer
+
+  Created by baowei on 14-2-27.
+  Copyright (c) 2014年 TicktockLib. All rights reserved.
+*/
+
+"yesterday" = "yesterday";
+"task"      = "task";
+"Done"      = "Done";
+"Edit"      = "Edit";

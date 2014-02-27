@@ -11,6 +11,7 @@
 		6201784C18B9EA3C00DE2914 /* StorageService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6201784A18B9EA3C00DE2914 /* StorageService.cpp */; };
 		6201785318BA06DD00DE2914 /* smartTimer.sql in Resources */ = {isa = PBXBuildFile; fileRef = 6201785218BA06DD00DE2914 /* smartTimer.sql */; };
 		6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6271B1C718B8A5460021DC44 /* NSPlan.mm */; };
+		6279BAFF18BF17BA00F861C7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6279BB0118BF17BA00F861C7 /* Localizable.strings */; };
 		627AEDAE18BC811300326136 /* NSTask.mm in Sources */ = {isa = PBXBuildFile; fileRef = 627AEDAD18BC811300326136 /* NSTask.mm */; };
 		6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93218B6EFB700F3141A /* SqliteClient.cpp */; };
 		6285E93B18B6F25800F3141A /* Trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6285E93918B6F25800F3141A /* Trace.cpp */; };
@@ -67,6 +68,8 @@
 		623840A418B439BC00BFACC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6271B1C618B8A5460021DC44 /* NSPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPlan.h; sourceTree = "<group>"; };
 		6271B1C718B8A5460021DC44 /* NSPlan.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSPlan.mm; sourceTree = "<group>"; };
+		6279BB0018BF17BA00F861C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6279BB0218BF17BE00F861C7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		627AEDAC18BC811300326136 /* NSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTask.h; sourceTree = "<group>"; };
 		627AEDAD18BC811300326136 /* NSTask.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSTask.mm; sourceTree = "<group>"; };
 		6285E92F18B6DEEE00F3141A /* Plan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Plan.h; path = Models/Plan.h; sourceTree = "<group>"; };
@@ -288,6 +291,7 @@
 				629CD92918B4343D00D24686 /* InfoPlist.strings */,
 				629CD92C18B4343D00D24686 /* main.mm */,
 				629CD92E18B4343D00D24686 /* SmartTimer-Prefix.pch */,
+				6279BB0118BF17BA00F861C7 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -392,6 +396,7 @@
 			files = (
 				629CD93718B4343D00D24686 /* Main_iPad.storyboard in Resources */,
 				629CD93C18B4343D00D24686 /* Images.xcassets in Resources */,
+				6279BAFF18BF17BA00F861C7 /* Localizable.strings in Resources */,
 				629CD93418B4343D00D24686 /* Main_iPhone.storyboard in Resources */,
 				6201785318BA06DD00DE2914 /* smartTimer.sql in Resources */,
 				629CD92B18B4343D00D24686 /* InfoPlist.strings in Resources */,
@@ -454,6 +459,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6279BB0118BF17BA00F861C7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6279BB0018BF17BA00F861C7 /* en */,
+				6279BB0218BF17BE00F861C7 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		629CD92918B4343D00D24686 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

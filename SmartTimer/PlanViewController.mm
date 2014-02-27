@@ -113,6 +113,43 @@
     }
 }
 
+////点击删除按钮后的回调
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//    UIButton* b = (UIButton*)[cell viewWithTag:1];
+//    [UIView beginAnimations:@"" context:nil];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        b.frame = CGRectMake(b.frame.origin.x-15, b.frame.origin.y, b.frame.size.width, b.frame.size.height);
+//        
+//    }];
+//    [UIView commitAnimations];
+//}
+////将要出现删除按钮时的回调，调整subview的位置
+//-(void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//    UIButton* b = (UIButton*)[cell viewWithTag:1];
+//    [UIView beginAnimations:@"" context:nil];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        b.frame = CGRectMake(b.frame.origin.x-15, b.frame.origin.y, b.frame.size.width, b.frame.size.height);
+//        
+//    }];
+//    [UIView commitAnimations];
+//}
+////删除按钮消失后的回调，用于重新调整subview到原来位置
+//-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//    UIButton* b = (UIButton*)[cell viewWithTag:1];
+//    [UIView beginAnimations:@"" context:nil];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        b.frame = CGRectMake(b.frame.origin.x+15, b.frame.origin.y, b.frame.size.width, b.frame.size.height);
+//        
+//    }];
+//    [UIView commitAnimations];
+//    
+//}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -132,6 +169,9 @@
 }
 
 - (IBAction)editAction:(id)sender {
+    self.navigationItem.leftBarButtonItem.title = self.tableView.editing == NO ?
+                                                NSLocalizedString(@"Done", @"") :
+                                                NSLocalizedString(@"Edit", @"");
     [self.tableView setEditing:self.tableView.editing == NO ? YES : NO animated:YES];
 }
 
