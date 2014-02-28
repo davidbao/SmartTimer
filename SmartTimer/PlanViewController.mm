@@ -63,12 +63,7 @@
                 switch(label.tag){
                     case 1:
                         label.text = [currentPlan getNameStr];
-                        if(![currentPlan enabled]){
-                            label.textColor = [UIColor lightGrayColor];
-                        }
-                        else{
-                            label.textColor = [UIColor blackColor];
-                        }
+                        label.textColor = [currentPlan enabled] ? nil : [UIColor lightGrayColor];
                         break;
                     case 2:
                         label.text = [currentPlan getIntervalStr];
@@ -111,6 +106,9 @@
     }
     
     [self.tableView reloadData];
+}
+
+- (IBAction)syncAction:(id)sender {
 }
 
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
