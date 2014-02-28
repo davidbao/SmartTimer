@@ -29,6 +29,8 @@
 - (Boolean)equalTo:(NSPlan*) plan;
 - (Boolean)equalTo:(NSString*) name interval:(NSNumber *)interval;
 
+- (BOOL)enabled;
+
 - (void)toPlan:(Plan&)plan;
 - (void)fromPlan:(const Plan&)plan;
 

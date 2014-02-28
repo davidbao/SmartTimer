@@ -112,6 +112,11 @@ public:
         return &_tasks;
     }
     
+    inline bool enabled() const
+    {
+        return Interval > 0;
+    }
+    
 private:
     Tasks _tasks;
 };

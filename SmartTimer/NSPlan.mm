@@ -44,18 +44,19 @@
 }
 
 - (NSString*)getNameStr{
-    return [NSString stringWithFormat:@"%d - %@", self.planId, self.name];
+    NSString* name = [self enabled] ? self.name : NSLocalizedString(@"Empty", nil);
+    return [NSString stringWithFormat:@"%d - %@", self.planId, name];
 }
 
 - (NSString*)getIntervalStr{
     NSInteger ti = [self.interval integerValue];
     NSInteger hours = (ti / 3600);
     NSInteger minutes = (ti / 60) % 60;
-    return [NSString stringWithFormat:@"%02i:%02i", hours, minutes];
+    return [self enabled] ? [NSString stringWithFormat:@"%02i:%02i", hours, minutes] : @"";
 }
 
 - (NSString*)getCurrentTimeStr{
-    return [NSTask getTimeStr:self.currentTime];
+    return [self enabled] ? [NSTask getTimeStr:self.currentTime] : @"";
 }
 
 - (void)toPlan:(Plan&)plan{
@@ -83,4 +84,7 @@
     return [self.name isEqualToString:name] && [self.interval isEqualToNumber:interval];
 }
 
+- (BOOL)enabled{
+    return [self.interval longValue] > 0;
+}
 @end

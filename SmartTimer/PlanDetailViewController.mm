@@ -24,9 +24,18 @@ static NSPlan* editPlan = nil;
     
     if(editPlan != nil) {
         self.navigationItem.title = editPlan.name;
+        self.planId.text = [NSString stringWithFormat:@"%d", editPlan.planId];
         self.planName.text = editPlan.name;
-        self.planInterval.countDownDuration = [editPlan.interval doubleValue];
+        [self.enablePlan setOn:[editPlan enabled]];
+        if([editPlan enabled]){
+            self.planInterval.countDownDuration = [editPlan.interval doubleValue];
+        }
     }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+    [self enablePlanAction:self.enablePlan];
 }
 
 - (void)viewDidUnload{
@@ -43,10 +52,21 @@ static NSPlan* editPlan = nil;
     editPlan = plan;
 }
 
+-(void)dismissKeyboard
+{
+    if ([self.planName isFirstResponder]){
+        [self.planName resignFirstResponder];
+    }
+}
+- (IBAction)enablePlanAction:(UISwitch *)sender {
+    self.planName.enabled = sender.isOn;
+    self.planInterval.userInteractionEnabled = sender.isOn;
+}
+
 - (IBAction)editPlanAction:(id)sender {
     if(editPlan != nil) {
         NSString* name = self.planName.text;
-        NSNumber* interval = [[NSNumber alloc] initWithDouble:self.planInterval.countDownDuration];
+        NSNumber* interval = [[NSNumber alloc] initWithDouble:self.enablePlan.isOn ? self.planInterval.countDownDuration : 0];
         
         if(![editPlan equalTo:name interval:interval]){
             editPlan.name = name;

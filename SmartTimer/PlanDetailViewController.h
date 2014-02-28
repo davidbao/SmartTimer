@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *planName;
 @property (weak, nonatomic) IBOutlet UIDatePicker *planInterval;
+@property (weak, nonatomic) IBOutlet UITextField *planId;
+@property (weak, nonatomic) IBOutlet UISwitch *enablePlan;
 
 + (void)setCurrentPlan:(NSPlan*) plan;
 

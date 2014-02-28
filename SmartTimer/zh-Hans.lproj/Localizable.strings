@@ -6,7 +6,8 @@
   Copyright (c) 2014年 TicktockLib. All rights reserved.
 */
 
-"yesterday" = "昨天";
-"task"      = "任务";
-"Done"      = "完成";
-"Edit"      = "编辑";
+"yesterday"     = "昨天";
+"task"          = "任务";
+"Done"          = "完成";
+"Edit"          = "编辑";
+"Empty"         = "空";

@@ -63,6 +63,12 @@
                 switch(label.tag){
                     case 1:
                         label.text = [currentPlan getNameStr];
+                        if(![currentPlan enabled]){
+                            label.textColor = [UIColor lightGrayColor];
+                        }
+                        else{
+                            label.textColor = [UIColor blackColor];
+                        }
                         break;
                     case 2:
                         label.text = [currentPlan getIntervalStr];
@@ -79,39 +85,58 @@
     
     return cell;
 }
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSPlan *currentPlan = [self.plans objectAtIndex:indexPath.row];
     [PlanDetailViewController setCurrentPlan:currentPlan];
     [TaskViewController setCurrentPlan:currentPlan];
-    
+
     UITabBarController *tabController = [self.storyboard
                                          instantiateViewControllerWithIdentifier:@"PlanDetailTabBarController"];
     [self presentViewController:tabController animated:YES completion:nil];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // remove the plan from service.
-        NSPlan* nsplan = [self.plans objectAtIndex:indexPath.row];
-        assert(nsplan);
-        Plan plan;
-        [nsplan toPlan:plan];
-        PlanService* pservice = Singleton<PlanService>::instance();
-        pservice->deletePlan(plan);
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.plans removeAllObjects];
+    
+    PlanService* pservice = Singleton<PlanService>::instance();
+    const Plans* plans = pservice->getPlans();
+    for(int i=0;i<plans->count();i++)
+    {
+        const Plan* plan = plans->at(i);
+        NSPlan *nsplan = [[NSPlan alloc] initWithPlan:plan];
         
-        [self.plans removeObjectAtIndex:indexPath.row];
-        // Delete the row from the data source.
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
+        [self.plans addObject:nsplan];
     }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+    
+    [self.tableView reloadData];
 }
+
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
+//
+//
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // remove the plan from service.
+//        NSPlan* nsplan = [self.plans objectAtIndex:indexPath.row];
+//        assert(nsplan);
+//        Plan plan;
+//        [nsplan toPlan:plan];
+//        PlanService* pservice = Singleton<PlanService>::instance();
+//        pservice->deletePlan(plan);
+//        
+//        [self.plans removeObjectAtIndex:indexPath.row];
+//        // Delete the row from the data source.
+//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        
+//    }
+//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//    }
+//}
 
 ////点击删除按钮后的回调
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -149,30 +174,11 @@
 //    [UIView commitAnimations];
 //    
 //}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    [self.plans removeAllObjects];
-    
-    PlanService* pservice = Singleton<PlanService>::instance();
-    const Plans* plans = pservice->getPlans();
-    for(int i=0;i<plans->count();i++)
-    {
-        const Plan* plan = plans->at(i);
-        NSPlan *nsplan = [[NSPlan alloc] initWithPlan:plan];
-        
-        [self.plans addObject:nsplan];
-    }
-    
-    [self.tableView reloadData];
-}
-
-- (IBAction)editAction:(id)sender {
-    self.navigationItem.leftBarButtonItem.title = self.tableView.editing == NO ?
-                                                NSLocalizedString(@"Done", @"") :
-                                                NSLocalizedString(@"Edit", @"");
-    [self.tableView setEditing:self.tableView.editing == NO ? YES : NO animated:YES];
-}
+//- (IBAction)editAction:(id)sender {
+//    self.navigationItem.leftBarButtonItem.title = self.tableView.editing == NO ?
+//                                                NSLocalizedString(@"Done", @"") :
+//                                                NSLocalizedString(@"Edit", @"");
+//    [self.tableView setEditing:self.tableView.editing == NO ? YES : NO animated:YES];
+//}
 
 @end
