@@ -21,6 +21,14 @@ static NSPlan* editPlan = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // fixed a bug, the date picker show black background if system version less than 6.0.
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(version <= 6.0){
+        CGRect frame = self.planInterval.frame;
+        frame.size.height = 216;
+        [self.planInterval setFrame:frame];
+    }
     
     if(editPlan != nil) {
         self.navigationItem.title = editPlan.name;
@@ -81,7 +89,7 @@ static NSPlan* editPlan = nil;
         }
     }
     editPlan = nil;
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

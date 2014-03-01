@@ -37,7 +37,7 @@ static NSTask* editTask = nil;
 
 - (IBAction)Done:(id)sender {
     editTask = nil;
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 + (void)setCurrentTask:(NSTask*) task{

@@ -36,7 +36,7 @@
     PlanService* pservice = Singleton<PlanService>::instance();
     pservice->addPlan(plan);
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

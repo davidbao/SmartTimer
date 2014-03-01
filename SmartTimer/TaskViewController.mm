@@ -38,7 +38,7 @@ static NSPlan* editPlan = nil;
 
 - (IBAction)ReturnAction:(id)sender {
     editPlan = nil;
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
