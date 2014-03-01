@@ -108,9 +108,6 @@
     [self.tableView reloadData];
 }
 
-- (IBAction)syncAction:(id)sender {
-}
-
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return YES;
 //}

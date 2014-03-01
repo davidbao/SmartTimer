@@ -55,7 +55,7 @@
                     <navigationItem key="navigationItem" title="计划" id="jnb-p9-Xzs">
                         <barButtonItem key="rightBarButtonItem" title="同步" id="VOy-kd-e0d">
                             <connections>
-                                <action selector="syncAction:" destination="8en-YO-3AP" id="2dn-ZD-HkZ"/>
+                                <segue destination="YZR-Yd-9O9" kind="modal" id="di1-P5-jXA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -323,7 +323,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5p-9p-GUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1651" y="95"/>
+            <point key="canvasLocation" x="2583" y="95"/>
         </scene>
         <!--Stat Plan View Controller - 统计-->
         <scene sceneID="VKw-mt-q7R">
@@ -581,6 +581,41 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1185" y="833"/>
         </scene>
+        <!--Search View Controller - 查找-->
+        <scene sceneID="gYP-aZ-HX4">
+            <objects>
+                <tableViewController id="Bip-sq-vlw" customClass="SearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="piZ-1f-sFR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="shieldCell" id="apg-Np-OcB">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="apg-Np-OcB" id="egU-fu-mOa">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Bip-sq-vlw" id="LK5-bw-fyc"/>
+                            <outlet property="delegate" destination="Bip-sq-vlw" id="tLl-pY-b3L"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="查找" id="CNQ-Ra-7Fj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="ckX-Am-nSk">
+                            <connections>
+                                <action selector="refreshAction:" destination="Bip-sq-vlw" id="81r-g9-Dfd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mm8-Ay-97V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651" y="95"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="WQh-Xj-1Wk">
             <objects>
@@ -595,7 +630,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FgK-NZ-6lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1185" y="95"/>
+            <point key="canvasLocation" x="2117" y="95"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gND-pC-VTR">
@@ -668,6 +703,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVC-zu-sdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="692" y="2250"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fvn-Gk-1F9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YZR-Yd-9O9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="I8f-H3-25r"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zen-q5-8e6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bip-sq-vlw" kind="relationship" relationship="rootViewController" id="NGQ-Mc-wor"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZK2-hz-O7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185" y="95"/>
         </scene>
     </scenes>
     <resources>

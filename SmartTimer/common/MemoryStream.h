@@ -371,21 +371,21 @@ namespace Common
 			else
 			{
 				int offset = 0;
-				long year = BCDUtilities::BCDToInt64(buffer, offset, 2);
+				long year = (long)BCDUtilities::BCDToInt64(buffer, offset, 2);
 				offset += 2;
-				long month = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long month = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
-				long day = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long day = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
 
-				long hour = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long hour = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
-				long minute = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long minute = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
 				long second = 0;
 				if(includedSec)
 				{
-					second = BCDUtilities::BCDToInt64(buffer, offset, 1);
+					second = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 					offset += 1;
 				}
                 struct tm tmp;
@@ -438,11 +438,11 @@ namespace Common
 			else
 			{
 				int offset = 0;
-				long year = BCDUtilities::BCDToInt64(buffer, offset, 2);
+				long year = (long)BCDUtilities::BCDToInt64(buffer, offset, 2);
 				offset += 2;
-				long month = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long month = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
-				long day = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long day = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
 
                 struct tm tmp;
@@ -490,12 +490,12 @@ namespace Common
 			else
 			{
 				int offset = 0;
-				long hour = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long hour = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
-				long minute = BCDUtilities::BCDToInt64(buffer, offset, 1);
+				long minute = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
 				offset += 1;
 				long second = 0;
-                second = BCDUtilities::BCDToInt64(buffer, offset, 1);
+                second = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
                 offset += 1;
 
                 struct tm tmp;

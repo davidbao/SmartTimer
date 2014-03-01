@@ -8,15 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #include "Models/Plan.h"
-#import <CoreBluetooth/CoreBluetooth.h>
-//#include "sqlite3.h"
-
-@class BlueShield;
 
 @interface PlanViewController : UITableViewController
-
-@property (nonatomic, weak) BlueShield *shield;
-@property (nonatomic, strong) CBPeripheral *peripheral;
 
 @property (nonatomic, strong) NSMutableArray *plans;
 
