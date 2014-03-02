@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    SyncNone = 0,
+    SyncPlan = 1,
+    SyncTask = 2,
+}SyncTypes;
+
 @interface SearchViewController : UITableViewController
+
+@property (nonatomic) SyncTypes syncType;
 
 @end

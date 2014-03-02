@@ -32,15 +32,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"shieldSegue"]) {
-//        BSShieldViewController *shieldController = (BSShieldViewController *)segue.destinationViewController;
-//        shieldController.peripheral = sender;
-//        shieldController.shield = _shield;
-    }
-    
-}
-
 - (IBAction)refreshAction:(id)sender {
     NSDeviceService* dservice = [NSDeviceService sharedInstance];
     [dservice refresh:self.tableView];
@@ -79,11 +70,15 @@
     // Navigation logic may go here. Create and push another view controller.
     NSDeviceService* dservice = [NSDeviceService sharedInstance];
     CBPeripheral *p = [dservice.shield.peripherals objectAtIndex:indexPath.row];
-    
-    // connect shield.
-    [dservice syncPlans:p parentView:tableView];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.syncType == SyncPlan){
+        // connect shield and sync the plans from phone.
+        [dservice syncPlans:p parentViewController:self];
+    }
+    else if(self.syncType == SyncTask){
+        // connect shield and sync the plans from phone.
+        [dservice syncTasks:p parentViewController:self];
+    }
 }
 
 #pragma mark - IBAction

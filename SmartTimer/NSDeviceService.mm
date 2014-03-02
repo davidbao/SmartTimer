@@ -16,6 +16,7 @@
 #include "common/MemoryStream.h"
 #include "common/Crc16Utilities.h"
 #include "PlanService.h"
+#include "common/Thread.h"
 
 using namespace Common;
 
@@ -32,6 +33,7 @@ const int Tail = 0xEF;
 
 static int _frameId = 0;
 
+static bool _connected = false;
 static bool _retrivedTasks = false;
 static byte _tasksBuffer[512];
 static int _tasksBufferCount = 0;
@@ -58,6 +60,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
 
 - (void)connectShield:(CBPeripheral*)p{
     self.peripheral = p;
+    _connected = false;
     
     [_shield connectPeripheral:_peripheral];
     
@@ -69,6 +72,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                characteristicUUID:[CBUUID UUIDWithString:BS_SERIAL_RX_UUID]
                                 p:_peripheral
                                on:YES];
+            
+            _connected = true;
             
             [_shield didUpdateValueBlock:^(NSData *data, NSError *error) {
                 byte* buffer = (byte*)[data bytes];
@@ -106,23 +111,45 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     });
 }
 
-- (void)syncPlans:(CBPeripheral*)p parentView:(UIView*)parent{
-    double timeout = 5;
-    [MBProgressHUD showHUDAddedTo:parent animated:YES];
-
+- (void)syncPlans:(CBPeripheral*)p parentViewController:(UITableViewController*)parent{
+    double timeout = 3;
+    [MBProgressHUD showHUDAddedTo:parent.tableView animated:YES];
+    
     // connect shield.
     [self connectShield:p];
     
-    //[NSThread sleepForTimeInterval:5];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        // sync time.
+        [self syncTime];
+        Thread::msleep(100);
+        // download plans.
+        [self download];
     
-    // sync time.
-    [self syncTime];
-    // download plans.
-    [self download];
+        [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
+        
+        [parent dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)syncTasks:(CBPeripheral*)p parentViewController:(UITableViewController*)parent{
+    double timeout = 5;
+    [MBProgressHUD showHUDAddedTo:parent.tableView animated:YES];
+    
+    // connect shield.
+    [self connectShield:p];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [MBProgressHUD hideAllHUDsForView:parent animated:YES];
+        // sync time.
+        [self syncTime];
+        Thread::msleep(100);
+        // download plans.
+        [self upload];
+        
+        [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
+        
+        [parent dismissViewControllerAnimated:YES completion:nil];
     });
 }
 
@@ -143,11 +170,21 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 byte command = stream.readByte();
                 if(command == 0x21){             // sync time.
                     byte status = stream.readByte();
-                    NSLog(@"Sync time successfully. status is %d", status);
+#if DEBUG
+                    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+                    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
+                    NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
+                    printf("time: %s, Sync time successfully. status is %d", [timeStr UTF8String], status);
+#endif
                 }
                 else if(command == 0x22){        // download.
                     byte status = stream.readByte();
-                    NSLog(@"Download the plans successfully. status is %d", status);
+#if DEBUG
+                    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+                    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
+                    NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
+                    printf("time: %s, Download the plans successfully. status is %d", [timeStr UTF8String], status);
+#endif
                 }
                 else if(command == 0x23){        // retrived the packet count.
                     byte status = stream.readByte();
@@ -218,7 +255,12 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 
                 [self sendTxBuffer:buffer sendLength:length];
                 
-                NSLog(@"Get the tasks successfully.");
+#if DEBUG
+                NSDateFormatter *DateFormatter2=[[NSDateFormatter alloc] init];
+                [DateFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
+                NSString* timeStr2 = [DateFormatter2 stringFromDate:[NSDate date]];
+                printf("time: %s, Get the tasks successfully.\n", [timeStr2 UTF8String]);
+#endif
             }
         }
     }
@@ -412,13 +454,12 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     [self sendTxBuffer:buffer sendLength:length];
 }
 
-- (void) sendTxBuffer:(unsigned char*) buffer
-           sendLength:(int)length{
+- (void) sendTxBuffer:(unsigned char*) buffer sendLength:(int)length{
     NSData *data = [[NSData alloc] initWithBytes:buffer length:(uint)length];
     [_shield writeValue:[CBUUID UUIDWithString:BS_SERIAL_SERVICE_UUID]
      characteristicUUID:[CBUUID UUIDWithString:BS_SERIAL_TX_UUID]
-                      p:_peripheral
-                   data:data];
+                        p:_peripheral
+                        data:data];
 }
 
 @end

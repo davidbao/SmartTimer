@@ -9,6 +9,7 @@
 #import "TaskViewController.h"
 #import "NSTask.h"
 #import "TaskDetailViewController.h"
+#import "SearchViewController.h"
 #include "PlanService.h"
 
 @interface TaskViewController ()
@@ -116,6 +117,15 @@ static NSPlan* editPlan = nil;
     }
     
     [self.tableView reloadData];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"syncTasksSegue"]) {
+        UINavigationController* nav = (UINavigationController*)segue.destinationViewController;
+        SearchViewController *searchController = (SearchViewController *)nav.topViewController;
+        searchController.syncType = SyncTask;
+    }
 }
 
 @end

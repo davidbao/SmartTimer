@@ -21,11 +21,7 @@
 - (void)controlSetup:(UITableView*)tableView;
 - (void)refresh:(UITableView*)tableView;
 
-- (void)syncPlans:(CBPeripheral*)p parentView:(UIView*)parent;
-
-- (void)connectShield:(CBPeripheral*)p;
-- (void)syncTime;
-- (void)download;
-- (void)upload;
+- (void)syncPlans:(CBPeripheral*)p parentViewController:(UITableViewController*)parent;
+- (void)syncTasks:(CBPeripheral*)p parentViewController:(UITableViewController*)parent;
 
 @end

@@ -11,6 +11,7 @@
 #import "PlanDetailViewController.h"
 #import "TaskViewController.h"
 #import "NSPlan.h"
+#import "SearchViewController.h"
 
 #include "Common/Singleton.h"
 #include "PlanService.h"
@@ -106,6 +107,14 @@
     }
     
     [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"syncPlansSegue"]) {
+        UINavigationController* nav = (UINavigationController*)segue.destinationViewController;
+        SearchViewController *searchController = (SearchViewController *)nav.topViewController;
+        searchController.syncType = SyncPlan;
+    }
 }
 
 //- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

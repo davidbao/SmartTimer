@@ -55,7 +55,7 @@
                     <navigationItem key="navigationItem" title="计划" id="jnb-p9-Xzs">
                         <barButtonItem key="rightBarButtonItem" title="同步" id="VOy-kd-e0d">
                             <connections>
-                                <segue destination="YZR-Yd-9O9" kind="modal" id="di1-P5-jXA"/>
+                                <segue destination="YZR-Yd-9O9" kind="modal" identifier="syncPlansSegue" id="di1-P5-jXA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -559,7 +559,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <action selector="ReturnAction:" destination="5Lz-Be-ahT" id="aAX-J7-eHG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="同步" id="7km-Ur-0mY"/>
+                        <barButtonItem key="rightBarButtonItem" title="同步" id="7km-Ur-0mY">
+                            <connections>
+                                <segue destination="YZR-Yd-9O9" kind="modal" identifier="syncTasksSegue" id="ndN-us-y45"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JMB-bD-YaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -735,4 +739,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="ndN-us-y45"/>
+    </inferredMetricsTieBreakers>
 </document>
