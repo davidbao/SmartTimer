@@ -11,3 +11,11 @@
 "Done"          = "完成";
 "Edit"          = "编辑";
 "Empty"         = "空";
+
+"Ok"            = "确定";
+"Error"         = "错误";
+"Information"   = "消息";
+"Success"       = "成功";
+"Failed"        = "失败";
+"SyncPlansInfo" = "校时%@；\n同步计划%@！";
+"SyncTasksInfo" = "校时%@；\n同步任务%@！";

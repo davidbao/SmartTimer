@@ -99,6 +99,8 @@ static NSPlan* editPlan = nil;
                                          instantiateViewControllerWithIdentifier:@"TaskDetailViewController"];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:detailController];
     [self presentViewController:nav animated:YES completion:nil];
+    
+//    [self performSegueWithIdentifier:@"shieldSegue" sender:currentTask];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -125,6 +127,7 @@ static NSPlan* editPlan = nil;
         UINavigationController* nav = (UINavigationController*)segue.destinationViewController;
         SearchViewController *searchController = (SearchViewController *)nav.topViewController;
         searchController.syncType = SyncTask;
+        searchController.planId = editPlan != nil ? editPlan.planId : 0;
     }
 }
 

@@ -87,6 +87,16 @@ public:
         _tasks.addRange(&plan->_tasks);
     }
     
+    inline void clearTask()
+    {
+        _tasks.clear();
+    }
+    
+    inline void addTasks(const Tasks& tasks)
+    {
+        _tasks.addRange(&tasks);
+    }
+    
     inline void addTask(const Task* task)
     {
         _tasks.add(task);

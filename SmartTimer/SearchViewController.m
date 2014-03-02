@@ -74,10 +74,16 @@
     if(self.syncType == SyncPlan){
         // connect shield and sync the plans from phone.
         [dservice syncPlans:p parentViewController:self];
+//        [dservice didSyncPlansOnBlock:^(id response, NSError *error) {
+//        }];
+
     }
     else if(self.syncType == SyncTask){
         // connect shield and sync the plans from phone.
+        dservice.planId = self.planId;
         [dservice syncTasks:p parentViewController:self];
+//        [dservice didSyncTasksOnBlock:^(id response, NSError *error) {
+//        }];
     }
 }
 

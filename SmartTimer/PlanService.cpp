@@ -59,3 +59,18 @@ const Tasks* PlanService::getTasks(int planId)
     }
     return NULL;
 }
+
+void PlanService::updateTasks(int planId, const Tasks& tasks)
+{
+    const Plans* plans = getPlans();
+    for(int i=0;i<plans->count();i++)
+    {
+        Plan* plan = plans->at(i);
+        if(plan->Id == planId)
+        {
+            plan->clearTask();
+            plan->addTasks(tasks);
+        }
+    }
+}
+

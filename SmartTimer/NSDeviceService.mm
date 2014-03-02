@@ -10,6 +10,7 @@
 #import "BlueShield.h"
 #import "BSDefines.h"
 #import "MBProgressHUD.h"
+#import "NSTask.h"
 #include "common/BCDUtilities.h"
 #include "common/Array.h"
 #include "common/ByteArray.h"
@@ -39,6 +40,14 @@ static byte _tasksBuffer[512];
 static int _tasksBufferCount = 0;
 static NSObject *_tasksLocker = [[NSObject alloc] init];
 
+@interface NSDeviceService()
+@property (copy, nonatomic) SyncSuccessBlock syncPlansOnBlock;
+@property (copy, nonatomic) SyncSuccessBlock syncTasksOnBlock;
+@property (nonatomic) BOOL syncTimeSuccess;
+@property (nonatomic) BOOL syncPlansSuccess;
+@property (nonatomic) BOOL syncTasksSuccess;
+@end
+
 @implementation NSDeviceService
 
 + (id)sharedInstance{
@@ -56,6 +65,13 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     }
     
     return self;
+}
+
+- (void)didSyncPlansOnBlock:(SyncSuccessBlock)block {
+    _syncPlansOnBlock = block;
+}
+- (void)didSyncTasksOnBlock:(SyncSuccessBlock)block {
+    _syncTasksOnBlock = block;
 }
 
 - (void)connectShield:(CBPeripheral*)p{
@@ -90,6 +106,16 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
             }];
         });
     }];
+}
+
+- (void) msbox:(NSString*) title buttonTitle:(NSString*)buttonTitle info:(NSString*)str{
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(title, nil)
+                                                        message:str
+                                                        delegate:nil
+                                                        cancelButtonTitle:NSLocalizedString(buttonTitle, nil)
+                                                        otherButtonTitles:nil];
+    [errorAlert show];
+    
 }
 
 - (void)controlSetup:(UITableView*)tableView{
@@ -128,12 +154,23 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     
         [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
         
+        // messagebox something.
+        // self.syncTimeSuccess
+        // self.syncPlansSuccess
+        NSString* sstr = NSLocalizedString(@"Success", nil);
+        NSString* fstr = NSLocalizedString(@"Failed", nil);
+        [self msbox:NSLocalizedString(@"Information", nil)
+                                                    buttonTitle:NSLocalizedString(@"Ok", nil)
+                                                    info:[NSString stringWithFormat:NSLocalizedString(@"SyncPlansInfo", nil),
+                                                                      self.syncTimeSuccess == YES ? sstr : fstr,
+                                                                      self.syncPlansSuccess == YES ? sstr : fstr]];
+        
         [parent dismissViewControllerAnimated:YES completion:nil];
     });
 }
 
 - (void)syncTasks:(CBPeripheral*)p parentViewController:(UITableViewController*)parent{
-    double timeout = 5;
+    double timeout = 3;
     [MBProgressHUD showHUDAddedTo:parent.tableView animated:YES];
     
     // connect shield.
@@ -146,11 +183,38 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
         Thread::msleep(100);
         // download plans.
         [self upload];
-        
+
         [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
+        
+        // messagebox something.
+        // self.syncTimeSuccess
+        // self.syncTasksSuccess
+        NSString* sstr = NSLocalizedString(@"Success", nil);
+        NSString* fstr = NSLocalizedString(@"Failed", nil);
+        [self msbox:NSLocalizedString(@"Information", nil)
+                                                    buttonTitle:NSLocalizedString(@"Ok", nil)
+                                                    info:[NSString stringWithFormat:NSLocalizedString(@"SyncTasksInfo", nil),
+                                                                        self.syncTimeSuccess == YES ? sstr : fstr,
+                                                                        self.syncTasksSuccess == YES ? sstr : fstr]];
         
         [parent dismissViewControllerAnimated:YES completion:nil];
     });
+}
+
+- (Boolean)checkBuffer:(const unsigned char*) buffer
+                length:(int) length{
+    byte header = buffer[0];
+    byte tail = buffer[length-1];
+    if(header == Header && tail == Tail){
+        ushort expected = Crc16Utilities::CheckByBit(buffer, 0, length-3); // remove cr16 & tail
+        byte crcHigh = buffer[length-3];
+        byte crcLow = buffer[length-2];
+        ushort actual = ((crcHigh << 8) & 0xFF00) + crcLow;
+        if(expected == actual){
+            return YES;
+        }
+    }
+    return NO;
 }
 
 -(void)processReceiveBuffer:(byte*)buffer length:(int)length{
@@ -158,32 +222,31 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     if (length > 8)
     {
         byte header = stream.readByte();
-        byte tail = buffer[length-1];
-        if(header == Header && tail == Tail){
-            ushort expected = Crc16Utilities::CheckByBit(buffer, 0, length-3); // remove cr16 & tail
-            byte crcHigh = buffer[length-3];
-            byte crcLow = buffer[length-2];
-            ushort actual = ((crcHigh << 8) & 0xFF00) + crcLow;
-            if(expected == actual){
-                stream.readByte();               // skip frameId
+        if(header == Header){
+            ushort len = BCDUtilities::BCDToUInt16(buffer+2);
+            Boolean check = (len == length - 4 && [self checkBuffer:buffer length:length]) ||
+            (len != length - 4);
+            if(check){                stream.readByte();               // skip frameId
                 stream.readInt16();              // skip length
                 byte command = stream.readByte();
                 if(command == 0x21){             // sync time.
                     byte status = stream.readByte();
+                    self.syncTimeSuccess = status == 0 ? YES : NO;
 #if DEBUG
                     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                     NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                    printf("time: %s, Sync time successfully. status is %d", [timeStr UTF8String], status);
+                    printf("time: %s, Sync time successfully. status is %d\n", [timeStr UTF8String], status);
 #endif
                 }
                 else if(command == 0x22){        // download.
                     byte status = stream.readByte();
+                    self.syncPlansSuccess = status == 0 ? YES : NO;
 #if DEBUG
                     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                     NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                    printf("time: %s, Download the plans successfully. status is %d", [timeStr UTF8String], status);
+                    printf("time: %s, Download the plans successfully. status is %d\n", [timeStr UTF8String], status);
 #endif
                 }
                 else if(command == 0x23){        // retrived the packet count.
@@ -246,6 +309,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                     }
                     tasks.add(task);
                 }
+                PlanService* pservice = Singleton<PlanService>::instance();
+                pservice->updateTasks(self.planId, tasks);
                 
                 // send ack.
                 byte buffer[512];
@@ -430,6 +495,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
 }
 
 - (void)syncTime{
+    self.syncTimeSuccess = NO;
+    
     byte buffer[512];
     memset(buffer, 0, sizeof(buffer));
     int length = 0;
@@ -438,6 +505,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     [self sendTxBuffer:buffer sendLength:length];
 }
 - (void)download{
+    self.syncPlansSuccess = NO;
+    
     byte buffer[512];
     memset(buffer, 0, sizeof(buffer));
     int length = 0;
@@ -446,6 +515,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     [self sendTxBuffer:buffer sendLength:length];
 }
 - (void)upload{
+    self.syncTasksSuccess = NO;
+    
     byte buffer[512];
     memset(buffer, 0, sizeof(buffer));
     int length = 0;

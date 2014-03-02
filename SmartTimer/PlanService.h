@@ -30,6 +30,8 @@ public:
     
     const Tasks* getTasks(int planId);
     
+    void updateTasks(int planId, const Tasks& tasks);
+    
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
 };

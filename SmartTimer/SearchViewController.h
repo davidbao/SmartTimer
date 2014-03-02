@@ -17,5 +17,6 @@ typedef enum {
 @interface SearchViewController : UITableViewController
 
 @property (nonatomic) SyncTypes syncType;
+@property (nonatomic) NSInteger planId;
 
 @end
