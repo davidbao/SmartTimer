@@ -62,6 +62,7 @@ namespace Storage
 #if DEBUG
         void insertDebugData();
 #endif
+        void insertData();
         
         SqliteClient* _sqliteClient;
         

@@ -19,3 +19,5 @@
 "Failed"        = "失败";
 "SyncPlansInfo" = "校时%@；\n同步计划%@！";
 "SyncTasksInfo" = "校时%@；\n同步任务%@！";
+
+"Plan"          = "计划";

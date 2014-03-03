@@ -55,6 +55,8 @@ public:
     time_t Interval;
     time_t CurrentTime;
     
+    const int MaxPlanCount = 9;
+    
     Plan()
     {
         Id = 0;

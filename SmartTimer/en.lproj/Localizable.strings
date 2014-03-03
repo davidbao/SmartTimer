@@ -19,3 +19,5 @@
 "Failed"        = "unsuccessfully";
 "SyncPlansInfo" = "Sync time @%s；\nSync plans @%s！";
 "SyncTasksInfo" = "Sync time @%s；\nSync tasks @%s！";
+
+"Plan"          = "Plan";

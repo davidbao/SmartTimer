@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SmartTimer/StorageService.cpp"
-            timestampString = "415109459.394658"
+            timestampString = "415520344.138394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413">
+            startingLineNumber = "442"
+            endingLineNumber = "442">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -127,6 +127,36 @@
             endingLineNumber = "244"
             landmarkName = "-processReceiveBuffer:length:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NSDeviceService processReceiveBuffer:length:]"
+                  moduleName = "SmartTimer"
+                  urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
+                  timestampString = "415520498.608991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "244"
+                  endingLineNumber = "244"
+                  offsetFromSymbolStart = "1096">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NSDeviceService processReceiveBuffer:length:]"
+                  moduleName = "SmartTimer"
+                  urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
+                  timestampString = "415520498.610366"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "244"
+                  endingLineNumber = "244"
+                  offsetFromSymbolStart = "1115">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -87,6 +87,10 @@
     }
 }
 
+- (IBAction)CancelAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - IBAction
 
 @end
