@@ -60,16 +60,55 @@ const Tasks* PlanService::getTasks(int planId)
     return NULL;
 }
 
-void PlanService::updateTasks(int planId, const Tasks& tasks)
+bool PlanService::hasSamePlanId(const Tasks* tasks, int planId)
 {
-    const Plans* plans = getPlans();
-    for(int i=0;i<plans->count();i++)
-    {
-        Plan* plan = plans->at(i);
-        if(plan->Id == planId)
+    for(int i=0;i<tasks->count();i++) {
+        Task* task = tasks->at(i);
+        if(task->PlanId == planId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void PlanService::updateTasks(const Tasks& allTasks)
+{
+    Vector<Tasks> tasks;
+    for (int i =0;i<allTasks.count();i++) {
+        Task* task = allTasks.at(i);
+        
+        Tasks* addTasks = NULL;
+        for (int j=0; j<tasks.count(); j++) {
+            Tasks* temps = tasks.at(j);
+            if(hasSamePlanId(temps, task->PlanId)) {
+                addTasks = temps;
+            }
+        }
+        
+        if(addTasks == NULL)
         {
-            plan->clearTask();
-            plan->addTasks(tasks);
+            addTasks = new Tasks();
+            tasks.add(addTasks);
+        }
+        Task* newTask = new Task();
+        newTask->copyFrom(task);
+        addTasks->add(newTask);
+    }
+
+    const Plans* plans = getPlans();
+    for (int j=0; j<tasks.count(); j++) {
+        Tasks* temps = tasks.at(j);
+        if(temps->count() > 0) {
+            for(int i=0;i<plans->count();i++)
+            {
+                Plan* plan = plans->at(i);
+                if(plan->Id == temps->at(0)->PlanId)
+                {
+                    plan->clearTask();
+                    plan->addTasks(*temps);
+                    break;
+                }
+            }
         }
     }
 }

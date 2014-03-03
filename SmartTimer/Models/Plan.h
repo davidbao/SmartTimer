@@ -42,6 +42,19 @@ public:
         return (const Array<time_t>*)&_intervals;
     }
     
+    inline void copyFrom(const Task* task)
+    {
+        Id = task->Id;
+        PlanId = task->PlanId;
+        StartTime = task->StartTime;
+    
+        clearIntervals();
+        for(int i=0;i<task->_intervals.count();i++)
+        {
+            addInterval(task->_intervals.at(i));
+        }
+    }
+    
 private:
     Array<time_t> _intervals;
 };
@@ -96,7 +109,12 @@ public:
     
     inline void addTasks(const Tasks& tasks)
     {
-        _tasks.addRange(&tasks);
+        for(int i=0;i<tasks.count();i++)
+        {
+            Task* task = new Task();
+            task->copyFrom(tasks.at(i));
+            _tasks.add(task);
+        }
     }
     
     inline void addTask(const Task* task)

@@ -30,10 +30,12 @@ public:
     
     const Tasks* getTasks(int planId);
     
-    void updateTasks(int planId, const Tasks& tasks);
+    void updateTasks(const Tasks& allTasks);
     
 private:
     DECLARE_SINGLETON_CLASS(PlanService);
+    
+    bool hasSamePlanId(const Tasks* tasks, int planId);
 };
 
 #endif /* defined(__SmartTimer__PlanService__) */

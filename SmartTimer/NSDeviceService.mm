@@ -18,6 +18,8 @@
 #include "common/Crc16Utilities.h"
 #include "PlanService.h"
 #include "common/Thread.h"
+#include "Common/TickTimeout.h"
+#include "Common/Stopwatch.h"
 
 using namespace Common;
 
@@ -35,6 +37,10 @@ const int Tail = 0xEF;
 static int _frameId = 0;
 
 static bool _connected = false;
+static bool _isSyncTimeSuccess = false;
+static bool _isDownloadSuccess = false;
+static bool _isUploadSuccess = false;
+
 static bool _retrivedTasks = false;
 static byte _tasksBuffer[512];
 static int _tasksBufferCount = 0;
@@ -78,6 +84,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     self.peripheral = p;
     _connected = false;
     
+    NSLog(@"shield is connecting.");
     [_shield connectPeripheral:_peripheral];
     
     [_shield didDiscoverCharacteristicsBlock:^(id response, NSError *error) {
@@ -90,6 +97,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                                on:YES];
             
             _connected = true;
+            NSLog(@"shield is connected.");
             
             [_shield didUpdateValueBlock:^(NSData *data, NSError *error) {
                 byte* buffer = (byte*)[data bytes];
@@ -99,13 +107,18 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                 [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                 NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                printf("time: %s, recv buffer: %s\n", [timeStr UTF8String], array.toString().data());
+                printf("%s, recv buffer: %s\n", [timeStr UTF8String], array.toString().data());
 #endif
                
                 [self processReceiveBuffer:data];
             }];
         });
     }];
+}
+
+bool isConnected(void* param)
+{
+    return _connected;
 }
 
 - (void) msbox:(NSString*) title buttonTitle:(NSString*)buttonTitle info:(NSString*)str{
@@ -137,67 +150,96 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     });
 }
 
+bool isSyncTimeSuccess(void* param)
+{
+    return _isSyncTimeSuccess;
+}
+
+bool isDownloadSuccess(void* param)
+{
+    return _isDownloadSuccess;
+}
+
+bool isUploadSuccess(void* param)
+{
+    return _isUploadSuccess;
+}
+
 - (void)syncPlans:(CBPeripheral*)p parentViewController:(UITableViewController*)parent{
-    double timeout = 3;
     [MBProgressHUD showHUDAddedTo:parent.tableView animated:YES];
     
     // connect shield.
     [self connectShield:p];
     
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        // sync time.
-        [self syncTime];
-        Thread::msleep(100);
-        // download plans.
-        [self download];
-    
-        [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
-        
-        // messagebox something.
-        // self.syncTimeSuccess
-        // self.syncPlansSuccess
-        NSString* sstr = NSLocalizedString(@"Success", nil);
-        NSString* fstr = NSLocalizedString(@"Failed", nil);
-        [self msbox:NSLocalizedString(@"Information", nil)
-                                                    buttonTitle:NSLocalizedString(@"Ok", nil)
-                                                    info:[NSString stringWithFormat:NSLocalizedString(@"SyncPlansInfo", nil),
-                                                                      self.syncTimeSuccess == YES ? sstr : fstr,
-                                                                      self.syncPlansSuccess == YES ? sstr : fstr]];
-        
-        [parent dismissViewControllerAnimated:YES completion:nil];
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("ConnectShield_queue", 0);
+    dispatch_async(backgroundQueue, ^{
+        TickTimeout::sdelay(10, isConnected, NULL);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // sync time.
+            [self syncTime];
+            Thread::msleep(100);
+            // download plans.
+            [self download];
+            
+            dispatch_queue_t backgroundQueue2 = dispatch_queue_create("Download_queue", 0);
+            dispatch_async(backgroundQueue2, ^{
+                TickTimeout::sdelay(3, isDownloadSuccess, NULL);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
+                    // messagebox something.
+                    // self.syncTimeSuccess
+                    // self.syncPlansSuccess
+                    NSString* sstr = NSLocalizedString(@"Success", nil);
+                    NSString* fstr = NSLocalizedString(@"Failed", nil);
+                    [self msbox:NSLocalizedString(@"Information", nil)
+                                                                buttonTitle:NSLocalizedString(@"Ok", nil)
+                                                                info:[NSString stringWithFormat:NSLocalizedString(@"SyncPlansInfo", nil),
+                                                                                  self.syncTimeSuccess == YES ? sstr : fstr,
+                                                                                  self.syncPlansSuccess == YES ? sstr : fstr]];
+                    
+                    [parent dismissViewControllerAnimated:YES completion:nil];
+                });
+            });
+        });
     });
 }
 
 - (void)syncTasks:(CBPeripheral*)p parentViewController:(UITableViewController*)parent{
-    double timeout = 3;
     [MBProgressHUD showHUDAddedTo:parent.tableView animated:YES];
     
     // connect shield.
     [self connectShield:p];
     
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        // sync time.
-        [self syncTime];
-        Thread::msleep(100);
-        // download plans.
-        [self upload];
-
-        [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
-        
-        // messagebox something.
-        // self.syncTimeSuccess
-        // self.syncTasksSuccess
-        NSString* sstr = NSLocalizedString(@"Success", nil);
-        NSString* fstr = NSLocalizedString(@"Failed", nil);
-        [self msbox:NSLocalizedString(@"Information", nil)
-                                                    buttonTitle:NSLocalizedString(@"Ok", nil)
-                                                    info:[NSString stringWithFormat:NSLocalizedString(@"SyncTasksInfo", nil),
-                                                                        self.syncTimeSuccess == YES ? sstr : fstr,
-                                                                        self.syncTasksSuccess == YES ? sstr : fstr]];
-        
-        [parent dismissViewControllerAnimated:YES completion:nil];
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("ConnectShield_queue", 0);
+    dispatch_async(backgroundQueue, ^{
+        TickTimeout::sdelay(10, isConnected, NULL);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // sync time.
+            [self syncTime];
+            Thread::msleep(100);
+            // upload tasks.
+            [self upload];
+            
+            dispatch_queue_t backgroundQueue2 = dispatch_queue_create("Upload_queue", 0);
+            dispatch_async(backgroundQueue2, ^{
+                TickTimeout::sdelay(3, isUploadSuccess, NULL);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideAllHUDsForView:parent.tableView animated:YES];
+                    // messagebox something.
+                    // self.syncTimeSuccess
+                    // self.syncTasksSuccess
+                    NSString* sstr = NSLocalizedString(@"Success", nil);
+                    NSString* fstr = NSLocalizedString(@"Failed", nil);
+                    [self msbox:NSLocalizedString(@"Information", nil)
+                    buttonTitle:NSLocalizedString(@"Ok", nil)
+                           info:[NSString stringWithFormat:NSLocalizedString(@"SyncTasksInfo", nil),
+                                 self.syncTimeSuccess == YES ? sstr : fstr,
+                                 self.syncTasksSuccess == YES ? sstr : fstr]];
+                    
+                    [parent dismissViewControllerAnimated:YES completion:nil];
+                });
+            });
+        });
     });
 }
 
@@ -231,22 +273,24 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 byte command = stream.readByte();
                 if(command == 0x21){             // sync time.
                     byte status = stream.readByte();
-                    self.syncTimeSuccess = status == 0 ? YES : NO;
+                    _isSyncTimeSuccess = true;
+                    self.syncTimeSuccess = (status == 0 || status == 1) ? YES : NO;
 #if DEBUG
                     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                     NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                    printf("time: %s, Sync time successfully. status is %d\n", [timeStr UTF8String], status);
+                    printf("%s, Sync time successfully. status is %d\n", [timeStr UTF8String], status);
 #endif
                 }
                 else if(command == 0x22){        // download.
                     byte status = stream.readByte();
+                    _isDownloadSuccess = true;
                     self.syncPlansSuccess = status == 0 ? YES : NO;
 #if DEBUG
                     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                     NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                    printf("time: %s, Download the plans successfully. status is %d\n", [timeStr UTF8String], status);
+                    printf("%s, Download the plans successfully. status is %d\n", [timeStr UTF8String], status);
 #endif
                 }
                 else if(command == 0x23){        // retrived the packet count.
@@ -287,12 +331,14 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
             if(_tasksBufferCount >= len + 4 &&
                buffer[length-1] == Tail){
                 _retrivedTasks = false;
+                _isUploadSuccess = true;
+                self.syncTasksSuccess = YES;
 #if DEBUG
                 ByteArray array(_tasksBuffer, _tasksBufferCount);
                 NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
                 [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                 NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-                printf("time: %s, recv full buffer: %s\n", [timeStr UTF8String], array.toString().data());
+                printf("%s, recv full buffer: %s\n", [timeStr UTF8String], array.toString().data());
 #endif
                 // process 0x24 command.
                 Tasks tasks;
@@ -300,8 +346,8 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 byte tcount = stream.readBCDByte();
                 for(int i=0;i<tcount;i++){
                     Task* task = new Task();
-                    //task->PlanId
-                    task->Id = stream.readBCDByte();
+                    task->PlanId = stream.readBCDByte();
+                    task->Id = i + 1;
                     task->StartTime = stream.readBCDDateTime();
                     byte timeCount = stream.readBCDByte();
                     for (int j=0; j<timeCount; j++) {
@@ -310,7 +356,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                     tasks.add(task);
                 }
                 PlanService* pservice = Singleton<PlanService>::instance();
-                pservice->updateTasks(self.planId, tasks);
+                pservice->updateTasks(tasks);
                 
                 // send ack.
                 byte buffer[512];
@@ -324,7 +370,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
                 NSDateFormatter *DateFormatter2=[[NSDateFormatter alloc] init];
                 [DateFormatter2 setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
                 NSString* timeStr2 = [DateFormatter2 stringFromDate:[NSDate date]];
-                printf("time: %s, Get the tasks successfully.\n", [timeStr2 UTF8String]);
+                printf("%s, Get the tasks successfully.\n", [timeStr2 UTF8String]);
 #endif
             }
         }
@@ -375,7 +421,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
     [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss.SSS"];
     NSString* timeStr = [DateFormatter stringFromDate:[NSDate date]];
-    printf("time: %s, send buffer: %s\n", [timeStr UTF8String], stream.buffer()->toString().data());
+    printf("%s, send buffer: %s\n", [timeStr UTF8String], stream.buffer()->toString().data());
 #endif
     
     stream.copyTo(buffer);
@@ -495,6 +541,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
 }
 
 - (void)syncTime{
+    _isSyncTimeSuccess = false;
     self.syncTimeSuccess = NO;
     
     byte buffer[512];
@@ -505,6 +552,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     [self sendTxBuffer:buffer sendLength:length];
 }
 - (void)download{
+    _isDownloadSuccess = false;
     self.syncPlansSuccess = NO;
     
     byte buffer[512];
@@ -515,6 +563,7 @@ static NSObject *_tasksLocker = [[NSObject alloc] init];
     [self sendTxBuffer:buffer sendLength:length];
 }
 - (void)upload{
+    _isUploadSuccess = false;
     self.syncTasksSuccess = NO;
     
     byte buffer[512];

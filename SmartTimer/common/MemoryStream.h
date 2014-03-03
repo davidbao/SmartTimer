@@ -324,7 +324,7 @@ namespace Common
         }
 		inline void writeBCDDateTime(const time_t timep, bool includedSec = true)
 		{
-			// such like YYYYMMDDHHSSmm or YYYYMMDDHHSS
+			// such like YYYYMMDDHHmmss or YYYYMMDDHHSS
 			int len = includedSec ? 7 : 6;
 			byte* buffer = new byte[len];
 			memset(buffer, 0, len);
@@ -348,7 +348,7 @@ namespace Common
 		}
 		inline time_t readBCDDateTime(bool includedSec = true)
 		{
-			// such like YYYYMMDDHHSSmm or YYYYMMDDHHSS
+			// such like YYYYMMDDHHmmss or YYYYMMDDHHSS
 			int len = includedSec ? 7 : 6;
 			byte* buffer = new byte[len];
 			memset(buffer, 0, len);
@@ -391,7 +391,7 @@ namespace Common
                 struct tm tmp;
                 memset(&tmp, 0, sizeof(tmp));
                 tmp.tm_year = year - 1900;
-                tmp.tm_mon = month;
+                tmp.tm_mon = month - 1;
                 tmp.tm_mday = day;
                 tmp.tm_hour = hour;
                 tmp.tm_min = minute;
@@ -412,7 +412,7 @@ namespace Common
 				int offset = 0;
 				BCDUtilities::Int64ToBCD(tmp->tm_year + 1900, buffer + offset, 2);
 				offset += 2;
-				buffer[offset++] = BCDUtilities::ByteToBCD((byte)tmp->tm_mon);
+				buffer[offset++] = BCDUtilities::ByteToBCD((byte)tmp->tm_mon + 1);
 				buffer[offset++] = BCDUtilities::ByteToBCD((byte)tmp->tm_mday);
 			}
 			write(buffer, 0, sizeof(buffer));
@@ -448,14 +448,14 @@ namespace Common
                 struct tm tmp;
                 memset(&tmp, 0, sizeof(tmp));
                 tmp.tm_year = year - 1900;
-                tmp.tm_mon = month;
+                tmp.tm_mon = month - 1;
                 tmp.tm_mday = day;
                 return mktime(&tmp);
 			}
 		}
 		inline void writeBCDTime(const time_t timep)
 		{
-			// such like HHSSmm
+			// such like HHmmss
 			byte buffer[3];
 			memset(buffer, 0, sizeof(buffer));
 			if(timep > 0)
@@ -470,7 +470,7 @@ namespace Common
 		}
         inline time_t readBCDTime()
 		{
-			// such like HHSSmm
+			// such like HHmmss
 			byte buffer[3];
 			memset(buffer, 0, sizeof(buffer));
 			read(buffer, 0, sizeof(buffer));
@@ -498,12 +498,7 @@ namespace Common
                 second = (long)BCDUtilities::BCDToInt64(buffer, offset, 1);
                 offset += 1;
 
-                struct tm tmp;
-                memset(&tmp, 0, sizeof(tmp));
-                tmp.tm_hour = hour;
-                tmp.tm_min = minute;
-                tmp.tm_sec = second;
-                return mktime(&tmp);
+                return hour * 3600 + minute * 60 + second;
 			}
 		}
 

@@ -24,7 +24,7 @@ static NSPlan* editPlan = nil;
 
     // fixed a bug, the date picker show black background if system version less than 6.0.
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if(version <= 6.0){
+    if(version < 7.0){
         CGRect frame = self.planInterval.frame;
         frame.size.height = 216;
         [self.planInterval setFrame:frame];
