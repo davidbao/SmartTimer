@@ -42,6 +42,7 @@
 		629CD94518B4343D00D24686 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92418B4343D00D24686 /* UIKit.framework */; };
 		629CD94D18B4343D00D24686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 629CD94B18B4343D00D24686 /* InfoPlist.strings */; };
 		629CD94F18B4343D00D24686 /* SmartTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD94E18B4343D00D24686 /* SmartTimerTests.m */; };
+		62BD439E18C58F700034A274 /* NSMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BD439D18C58F700034A274 /* NSMessageBox.m */; };
 		62C9485018B9D34F003BE1CB /* PlanDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */; };
 		62C9485318B9DFB9003BE1CB /* StatPlanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9485218B9DFB9003BE1CB /* StatPlanViewController.mm */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,8 @@
 		629CD94C18B4343D00D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		629CD94E18B4343D00D24686 /* SmartTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartTimerTests.m; sourceTree = "<group>"; };
 		629CD95C18B434F500D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		62BD439C18C58F700034A274 /* NSMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMessageBox.h; sourceTree = "<group>"; };
+		62BD439D18C58F700034A274 /* NSMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMessageBox.m; sourceTree = "<group>"; };
 		62C9484E18B9D34F003BE1CB /* PlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailViewController.h; sourceTree = "<group>"; };
 		62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlanDetailViewController.mm; sourceTree = "<group>"; };
 		62C9485118B9DFB9003BE1CB /* StatPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatPlanViewController.h; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 				6290520B18BDDC7500BACAA6 /* TaskViewController.mm */,
 				626A8FD218C1D34F00FFABF5 /* SearchViewController.h */,
 				626A8FD318C1D34F00FFABF5 /* SearchViewController.m */,
+				62BD439C18C58F700034A274 /* NSMessageBox.h */,
+				62BD439D18C58F700034A274 /* NSMessageBox.m */,
 			);
 			path = SmartTimer;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				626A8FD418C1D34F00FFABF5 /* SearchViewController.m in Sources */,
 				6201784918B9E72D00DE2914 /* TaskDetailViewController.mm in Sources */,
 				629CD92D18B4343D00D24686 /* main.mm in Sources */,
+				62BD439E18C58F700034A274 /* NSMessageBox.m in Sources */,
 				6285E93418B6EFB700F3141A /* SqliteClient.cpp in Sources */,
 				6271B1C818B8A5460021DC44 /* NSPlan.mm in Sources */,
 				6290520C18BDDC7500BACAA6 /* TaskViewController.mm in Sources */,

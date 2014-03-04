@@ -21,3 +21,4 @@
 "SyncTasksInfo" = "校时%@；\n同步任务%@！";
 
 "Plan"          = "计划";
+"PlanNameCannotBeEmpty" = "计划的名字不能为空！";

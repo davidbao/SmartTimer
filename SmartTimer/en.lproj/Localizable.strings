@@ -21,3 +21,4 @@
 "SyncTasksInfo" = "Sync time @%s；\nSync tasks @%s！";
 
 "Plan"          = "Plan";
+"PlanNameCannotBeEmpty" = "The plan name can not be empty!";

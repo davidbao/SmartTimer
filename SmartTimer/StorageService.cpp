@@ -71,7 +71,7 @@ namespace Storage
                 result = _sqliteClient->executeSql(_sql);
                 if(result == SQLITE_OK)
                 {
-#if DEBUG
+#if !DEBUG
                     insertDebugData();
 #else
                     insertData();
@@ -166,18 +166,17 @@ namespace Storage
 		int result;
 		char str[1024];
         
-		// Plans
-        // todo: change the plan name.
+		// Plans, the plan's name is empty.
 		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(1,'plan1',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(2,'plan2',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(3,'plan3',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(4,'plan4',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(5,'plan5',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(6,'plan6',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(7,'plan7',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(8,'plan8',0,'2000-01-01 00:00:00');",
-                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(9,'plan9',0,'2000-01-01 00:00:00');"
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(1,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(2,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(3,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(4,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(5,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(6,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(7,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(8,'',0,'2000-01-01 00:00:00');",
+                "INSERT INTO [Plans] (Id,Name,Interval,CurrentTime) values(9,'',0,'2000-01-01 00:00:00');"
                 );
 		result = _sqliteClient->executeSql(str);
 		if(result != SQLITE_OK)

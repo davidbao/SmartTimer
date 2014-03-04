@@ -7,14 +7,17 @@
 //
 
 #import "PlanDetailViewController.h"
-#include "PlanService.h"
 #import "NSTask.h"
+#import "NSMessageBox.h"
+#include "PlanService.h"
+
+#define MAX_PLANNAME_LENGTH 8
+
+static NSPlan* editPlan = nil;
 
 @interface PlanDetailViewController ()
 
 @end
-
-static NSPlan* editPlan = nil;
 
 @implementation PlanDetailViewController
 
@@ -29,6 +32,7 @@ static NSPlan* editPlan = nil;
         frame.size.height = 216;
         [self.planInterval setFrame:frame];
     }
+    self.planInterval.countDownDuration = 1800;
     
     if(editPlan != nil) {
         self.navigationItem.title = editPlan.name;
@@ -39,6 +43,8 @@ static NSPlan* editPlan = nil;
             self.planInterval.countDownDuration = [editPlan.interval doubleValue];
         }
     }
+    
+    self.planName.delegate = (id)self;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
@@ -66,12 +72,42 @@ static NSPlan* editPlan = nil;
         [self.planName resignFirstResponder];
     }
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    int textLen = strlen([textField.text UTF8String]);
+//    int strLen = strlen([string UTF8String]);
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+
+    return newLength <= MAX_PLANNAME_LENGTH;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSInteger length = textField.text.length;
+    if(length>MAX_PLANNAME_LENGTH)
+    {
+        NSString *memo = [textField.text substringWithRange:NSMakeRange(0, MAX_PLANNAME_LENGTH)];
+        self.planName.text = memo;
+    }
+}
+
 - (IBAction)enablePlanAction:(UISwitch *)sender {
     self.planName.enabled = sender.isOn;
     self.planInterval.userInteractionEnabled = sender.isOn;
 }
 
 - (IBAction)editPlanAction:(id)sender {
+    if(self.enablePlan.isOn){
+        if(self.planName.text == nil ||
+           self.planName.text.length == 0){
+            [NSMessageBox show:NSLocalizedString(@"Error", nil)
+                   buttonTitle:NSLocalizedString(@"Ok", nil)
+                          info:NSLocalizedString(@"PlanNameCannotBeEmpty", nil)];
+            [self.planName becomeFirstResponder];
+
+            return;
+        }
+    }
+    
     if(editPlan != nil) {
         NSString* name = self.planName.text;
         NSNumber* interval = [[NSNumber alloc] initWithDouble:self.enablePlan.isOn ? self.planInterval.countDownDuration : 0];
@@ -80,7 +116,6 @@ static NSPlan* editPlan = nil;
             editPlan.name = name;
             editPlan.interval = interval;
             editPlan.currentTime = [NSDate date];
-            // todo: sync tasks.
             
             Plan plan;
             [editPlan toPlan:plan];

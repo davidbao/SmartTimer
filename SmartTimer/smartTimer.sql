@@ -11,7 +11,7 @@ drop table if exists TaskTimes;
 create table Plans
 (
    Id			integer				not null,
-   Name			char(16)			not null,
+   Name			char(16),
    Interval		integer				not null,
    CurrentTime	datetime			not null,
    primary key (Id)

@@ -11,6 +11,7 @@
 #import "BSDefines.h"
 #import "MBProgressHUD.h"
 #import "NSTask.h"
+#import "NSMessageBox.h"
 #include "common/BCDUtilities.h"
 #include "common/Array.h"
 #include "common/ByteArray.h"
@@ -121,16 +122,6 @@ bool isConnected(void* param)
     return _connected;
 }
 
-- (void) msbox:(NSString*) title buttonTitle:(NSString*)buttonTitle info:(NSString*)str{
-    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(title, nil)
-                                                        message:str
-                                                        delegate:nil
-                                                        cancelButtonTitle:NSLocalizedString(buttonTitle, nil)
-                                                        otherButtonTitles:nil];
-    [errorAlert show];
-    
-}
-
 - (void)controlSetup:(UITableView*)tableView{
     [_shield controlSetup];
     
@@ -191,7 +182,7 @@ bool isUploadSuccess(void* param)
                     // self.syncPlansSuccess
                     NSString* sstr = NSLocalizedString(@"Success", nil);
                     NSString* fstr = NSLocalizedString(@"Failed", nil);
-                    [self msbox:NSLocalizedString(@"Information", nil)
+                    [NSMessageBox show:NSLocalizedString(@"Information", nil)
                                                                 buttonTitle:NSLocalizedString(@"Ok", nil)
                                                                 info:[NSString stringWithFormat:NSLocalizedString(@"SyncPlansInfo", nil),
                                                                                   self.syncTimeSuccess == YES ? sstr : fstr,
@@ -230,11 +221,11 @@ bool isUploadSuccess(void* param)
                     // self.syncTasksSuccess
                     NSString* sstr = NSLocalizedString(@"Success", nil);
                     NSString* fstr = NSLocalizedString(@"Failed", nil);
-                    [self msbox:NSLocalizedString(@"Information", nil)
-                    buttonTitle:NSLocalizedString(@"Ok", nil)
-                           info:[NSString stringWithFormat:NSLocalizedString(@"SyncTasksInfo", nil),
-                                 self.syncTimeSuccess == YES ? sstr : fstr,
-                                 self.syncTasksSuccess == YES ? sstr : fstr]];
+                    [NSMessageBox show:NSLocalizedString(@"Information", nil)
+                                                            buttonTitle:NSLocalizedString(@"Ok", nil)
+                                                                   info:[NSString stringWithFormat:NSLocalizedString(@"SyncTasksInfo", nil),
+                                                                         self.syncTimeSuccess == YES ? sstr : fstr,
+                                                                         self.syncTasksSuccess == YES ? sstr : fstr]];
                     
                     [parent dismissViewControllerAnimated:YES completion:nil];
                 });
