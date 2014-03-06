@@ -46,6 +46,7 @@
 		62BD443F18C83F2C0034A274 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD443E18C83F2C0034A274 /* libCorePlot-CocoaTouch.a */; };
 		62BD444518C854D40034A274 /* TimeLineChartViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62BD444418C854D40034A274 /* TimeLineChartViewController.mm */; };
 		62BD444818C867EB0034A274 /* SelectTaskTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62BD444718C867EB0034A274 /* SelectTaskTableViewController.mm */; };
+		62BD444B18C878260034A274 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD444A18C878260034A274 /* libCorePlot-CocoaTouch.a */; };
 		62C9485018B9D34F003BE1CB /* PlanDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */; };
 		62C9485318B9DFB9003BE1CB /* TimeBarChartViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62C9485218B9DFB9003BE1CB /* TimeBarChartViewController.mm */; };
 /* End PBXBuildFile section */
@@ -221,6 +222,7 @@
 		62BD444418C854D40034A274 /* TimeLineChartViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimeLineChartViewController.mm; sourceTree = "<group>"; };
 		62BD444618C867EB0034A274 /* SelectTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTaskTableViewController.h; sourceTree = "<group>"; };
 		62BD444718C867EB0034A274 /* SelectTaskTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectTaskTableViewController.mm; sourceTree = "<group>"; };
+		62BD444A18C878260034A274 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		62C9484E18B9D34F003BE1CB /* PlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailViewController.h; sourceTree = "<group>"; };
 		62C9484F18B9D34F003BE1CB /* PlanDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlanDetailViewController.mm; sourceTree = "<group>"; };
 		62C9485118B9DFB9003BE1CB /* TimeBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeBarChartViewController.h; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				629CD92318B4343D00D24686 /* CoreGraphics.framework in Frameworks */,
 				629CD92518B4343D00D24686 /* UIKit.framework in Frameworks */,
 				629CD92118B4343D00D24686 /* Foundation.framework in Frameworks */,
+				62BD444B18C878260034A274 /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +359,7 @@
 		629CD92618B4343D00D24686 /* SmartTimer */ = {
 			isa = PBXGroup;
 			children = (
+				62BD444918C878260034A274 /* libs */,
 				62BD444018C83F4E0034A274 /* Views */,
 				62BD43EF18C83EA90034A274 /* CorePlotHeaders */,
 				6285E94C18B71D3D00F3141A /* Logic */,
@@ -513,6 +517,14 @@
 				62BD444718C867EB0034A274 /* SelectTaskTableViewController.mm */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		62BD444918C878260034A274 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				62BD444A18C878260034A274 /* libCorePlot-CocoaTouch.a */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
