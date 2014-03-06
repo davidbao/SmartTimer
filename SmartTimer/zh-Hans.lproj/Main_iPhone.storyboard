@@ -457,7 +457,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="统计" id="KVn-rg-Jb7">
                             <connections>
-                                <segue destination="r6B-qn-FQu" kind="modal" id="G7O-5p-CLc"/>
+                                <segue destination="r6B-qn-FQu" kind="modal" identifier="selectTaskSegue" id="G7O-5p-CLc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -628,7 +628,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="mjE-p8-kzX">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="3hX-aH-QH9" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ue7-Dv-mYc">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -849,7 +849,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <action selector="ReturnAction:" destination="IUl-5M-elN" id="b8b-vT-ThS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="统计" id="GAo-rh-spe"/>
+                        <barButtonItem key="rightBarButtonItem" title="统计" id="GAo-rh-spe">
+                            <connections>
+                                <segue destination="3hX-aH-QH9" kind="modal" identifier="statTasksSegue" id="Q0j-Tq-k4R"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hg-DD-ONO" userLabel="First Responder" sceneMemberID="firstResponder"/>

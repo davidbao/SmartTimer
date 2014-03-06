@@ -11,7 +11,8 @@
 
 @interface SelectTaskTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *tasks;
+@property (nonatomic, strong) NSMutableArray *allTasks;
+@property (nonatomic, strong) NSMutableArray *selectedTasks;
 
 + (void)setCurrentPlan:(NSPlan*) plan;
 

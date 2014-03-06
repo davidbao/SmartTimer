@@ -9,6 +9,7 @@
 #import "PlanDetailViewController.h"
 #import "NSTask.h"
 #import "NSMessageBox.h"
+#import "SelectTaskTableViewController.h"
 #include "PlanService.h"
 
 #define MAX_PLANNAME_LENGTH 8
@@ -125,6 +126,12 @@ static NSPlan* editPlan = nil;
     }
     editPlan = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"selectTaskSegue"]) {
+        [SelectTaskTableViewController setCurrentPlan:editPlan];
+    }
 }
 
 @end

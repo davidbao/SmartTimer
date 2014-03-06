@@ -18,4 +18,6 @@
 
 @property (readwrite, strong, nonatomic) NSMutableArray *dataForPlot;
 
++ (void)setSelectedTasks:(NSMutableArray*) tasks;
+
 @end

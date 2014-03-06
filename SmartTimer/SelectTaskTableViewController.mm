@@ -7,6 +7,9 @@
 //
 
 #import "SelectTaskTableViewController.h"
+#import "TimeBarChartViewController.h"
+#import "TimeLineChartViewController.h"
+
 #include "PlanService.h"
 
 static NSPlan* editPlan = nil;
@@ -21,7 +24,8 @@ static NSPlan* editPlan = nil;
 {
     [super viewDidLoad];
     
-    self.tasks = [NSMutableArray arrayWithObjects:nil];
+    self.allTasks = [NSMutableArray arrayWithObjects:nil];
+    self.selectedTasks = [NSMutableArray arrayWithObjects:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,7 +34,7 @@ static NSPlan* editPlan = nil;
     // Dispose of any resources that can be recreated.
 }
 
-+ (void)setCurrentPlan:(NSPlan*) plan{
++ (void)setCurrentPlan:(NSPlan*) plan {
     editPlan = plan;
 }
 
@@ -48,14 +52,14 @@ static NSPlan* editPlan = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.tasks count];
+    return [self.allTasks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TaskCell";
     
-    NSTask *currentTask = [self.tasks objectAtIndex:indexPath.row];
+    NSTask *currentTask = [self.allTasks objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if(cell) {
         UIView* view = cell.contentView;
@@ -88,14 +92,28 @@ static NSPlan* editPlan = nil;
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSTask *currentTask = [self.tasks objectAtIndex:indexPath.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell) {
+        NSTask *currentTask = [self.allTasks objectAtIndex:indexPath.row];
+        if (cell.accessoryType == UITableViewCellAccessoryNone) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [self.selectedTasks addObject:currentTask];
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [self.selectedTasks removeObject:currentTask];
+        }
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.tasks removeAllObjects];
+    [self.allTasks removeAllObjects];
+    [self.selectedTasks removeAllObjects];
     
     PlanService* pservice = Singleton<PlanService>::instance();
     const Tasks* tasks = pservice->getTasks(editPlan.planId);
@@ -104,16 +122,16 @@ static NSPlan* editPlan = nil;
         const Task* task = tasks->at(i);
         NSTask *nstask = [[NSTask alloc] initWithTask:task];
         
-        [self.tasks addObject:nstask];
+        [self.allTasks addObject:nstask];
     }
     
     [self.tableView reloadData];
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"syncTasksSegue"]) {
-
+    if ([segue.identifier isEqualToString:@"statTasksSegue"]) {
+        [TimeBarChartViewController setSelectedTasks:self.selectedTasks];
+        [TimeLineChartViewController setSelectedTasks:self.selectedTasks];
     }
 }
 

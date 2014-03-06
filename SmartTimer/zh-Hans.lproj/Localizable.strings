@@ -22,3 +22,5 @@
 
 "Plan"          = "计划";
 "PlanNameCannotBeEmpty" = "计划的名字不能为空！";
+
+"Total&AllTimeStat"     = "累计/有效时间统计";

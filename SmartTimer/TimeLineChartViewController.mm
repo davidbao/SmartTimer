@@ -8,6 +8,8 @@
 
 #import "TimeLineChartViewController.h"
 
+static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
+
 @implementation TimeLineChartViewController
 
 @synthesize dataForPlot;
@@ -19,6 +21,11 @@
 
 - (IBAction)DoneAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
++ (void)setSelectedTasks:(NSMutableArray*) tasks {
+    [selectedTasks removeAllObjects];
+    [selectedTasks addObjectsFromArray:tasks];
 }
 
 #pragma mark -

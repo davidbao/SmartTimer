@@ -8,6 +8,8 @@
 
 #import "TimeBarChartViewController.h"
 
+static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
+
 @interface TimeBarChartViewController ()
 
 @end
@@ -27,7 +29,14 @@
     // Dispose of any resources that can be recreated.
 }
 
++ (void)setSelectedTasks:(NSMutableArray*) tasks {
+    [selectedTasks removeAllObjects];
+    [selectedTasks addObjectsFromArray:tasks];
+}
+
 - (IBAction)DoneAction:(id)sender {
+    [selectedTasks removeAllObjects];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -55,7 +64,7 @@
     
     // Create barChart from theme
     barChart = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
-    CPTTheme *theme = [CPTTheme themeNamed:kCPTPlainWhiteTheme];
+    CPTTheme *theme = [CPTTheme themeNamed:kCPTDarkGradientTheme];
     [barChart applyTheme:theme];
     CPTGraphHostingView *hostingView = (CPTGraphHostingView *)self.view;
     hostingView.hostedGraph = barChart;
@@ -77,7 +86,7 @@
     barChart.plotAreaFrame.paddingBottom = 100.0;
     
     // Graph title
-    NSString *lineOne = @"Graph Title";
+    NSString *lineOne = NSLocalizedString(@"Total&AllTimeStat", nil);
     NSString *lineTwo = @"Line 2";
     
     BOOL hasAttributedStringAdditions = (&NSFontAttributeName != NULL) &&
@@ -94,6 +103,7 @@
         UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
         [graphTitle addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(0, lineOne.length)];
         titleFont = [UIFont fontWithName:@"Helvetica" size:12.0];
+
         [graphTitle addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(lineOne.length + 1, lineTwo.length)];
         
         barChart.attributedTitle = graphTitle;

@@ -20,4 +20,6 @@
 
 -(void)timerFired;
 
++ (void)setSelectedTasks:(NSMutableArray*) tasks;
+
 @end

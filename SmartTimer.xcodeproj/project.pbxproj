@@ -802,7 +802,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/baowei/iOSProjects/SmartTimer/SmartTimer/libs,
+					SmartTimer/libs/,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -828,7 +828,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/baowei/iOSProjects/SmartTimer/SmartTimer/libs,
+					SmartTimer/libs/,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
