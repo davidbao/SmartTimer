@@ -21,11 +21,13 @@ static NSTask* editTask = nil;
     [super viewDidLoad];
     
     if(editTask){
-        self.totalTime.text = [editTask getTotalTimeStr];
-        self.pauseTime.text = [editTask getPauseTimeStr];
-        self.startTime.text = [editTask getFullStartTimeStr];
-        self.stopTime.text = [editTask getFullStopTimeStr];
-        self.pauseCount.text = [editTask getPauseCountStr];
+        self.planTime.text      = [editTask getPlanTimeStr];
+        self.validTime.text     = [editTask getValidTimeStr];
+        self.totalTime.text     = [editTask getTotalTimeStr];
+        self.pauseTime.text     = [editTask getPauseTimeStr];
+        self.startTime.text     = [editTask getFullStartTimeStr];
+        self.stopTime.text      = [editTask getFullStopTimeStr];
+        self.pauseCount.text    = [editTask getPauseCountStr];
     }
 }
 

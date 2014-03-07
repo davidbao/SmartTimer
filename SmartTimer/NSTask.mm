@@ -7,16 +7,18 @@
 //
 
 #import "NSTask.h"
+#import "NSPlan.h"
 #include "common/Convert.h"
 
 @implementation NSTask
 
-- (id)initWithTask:(const Task*)task{
+- (id)initWithPlan:(NSPlan*)plan task:(const Task*)task{
     NSInteger planId = task->PlanId;
     NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:task->StartTime];
     
     NSTask *nstask = [[NSTask alloc] initWithTaskId:task->Id];
     nstask.planId = planId;
+    nstask.plan = plan;
     nstask.startTime = startTime;
     const Array<time_t>* intervals = task->getIntervals();
     nstask.intervals = [NSMutableArray arrayWithObjects:nil];
@@ -82,7 +84,12 @@
     return [NSString stringWithFormat:@"%@%d", NSLocalizedString(@"task", @""), self.taskId];
 }
 
-- (NSInteger)getTotalTime{
+- (NSString*)getPlanTimeStr{
+    assert(self.plan != nil);
+    return [self.plan getIntervalStr];
+}
+
+- (NSInteger)getValidTime{
     time_t value = 0;
     for(int i=0;i<self.intervals.count;i++){
         time_t interval = [self.intervals[i] intValue];
@@ -96,15 +103,30 @@
     }
     return value;
 }
+- (NSString*)getValidTimeStr{
+    return [NSTask getHMTimeStr:[self getValidTime]];
+}
+
+- (NSInteger)getTotalTime{
+    if(self.intervals.count == 0){
+        return 0;
+    }
+    else{
+        return [self.intervals[self.intervals.count-1] intValue];
+    }
+}
 - (NSString*)getTotalTimeStr{
     return [NSTask getHMTimeStr:[self getTotalTime]];
 }
 
+- (NSDate*)getStartTime{
+    return self.startTime;
+}
 - (NSString*)getStartTimeStr{
-    return [NSTask getTimeStr:self.startTime];
+    return [NSTask getTimeStr:[self getStartTime]];
 }
 
-- (NSString*)getPauseTimeStr{
+- (NSInteger)getPauseTime{
     time_t value = 0;
     for(int i=0;i<self.intervals.count;i++){
         time_t interval = [self.intervals[i] intValue];
@@ -117,24 +139,41 @@
             value += interval - prevInterval;
         }
     }
-    return [NSTask getHMTimeStr:value];
+    return value;
+}
+- (NSString*)getPauseTimeStr{
+    return [NSTask getHMTimeStr:[self getPauseTime]];
+}
+
+- (NSDate*)getStopTime{
+    time_t interval = [self getTotalTime];
+    if(interval == 0){
+        return nil;
+    }
+    else{
+        return [self.startTime dateByAddingTimeInterval:interval];
+    }
 }
 - (NSString*)getFullStartTimeStr{
     string str = Convert::getDateTimeStr([self.startTime timeIntervalSince1970]);
     return [NSString stringWithUTF8String:str.c_str()];
 }
 - (NSString*)getFullStopTimeStr{
-    if(self.intervals.count == 0){
+    NSDate* date = [self getStopTime];
+    if(date == nil){
         return @"";
     }
     else{
-        time_t interval = [self.intervals[self.intervals.count-1] intValue];
-        string str = Convert::getDateTimeStr([self.startTime timeIntervalSince1970] + interval);
+        string str = Convert::getDateTimeStr([date timeIntervalSince1970]);
         return [NSString stringWithUTF8String:str.c_str()];
     }
 }
+
+- (NSInteger)getPauseCount{
+    return self.intervals.count / 2;
+}
 - (NSString*)getPauseCountStr{
-    return [NSString stringWithFormat:@"%d", self.intervals.count / 2];
+    return [NSString stringWithFormat:@"%d", [self getPauseCount]];
 }
 
 @end

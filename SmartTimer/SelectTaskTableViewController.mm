@@ -12,6 +12,8 @@
 
 #include "PlanService.h"
 
+#define MAX_SELECTEDTASKS_COUNT 16
+
 static NSPlan* editPlan = nil;
 
 @interface SelectTaskTableViewController ()
@@ -26,6 +28,17 @@ static NSPlan* editPlan = nil;
     
     self.allTasks = [NSMutableArray arrayWithObjects:nil];
     self.selectedTasks = [NSMutableArray arrayWithObjects:nil];
+    
+    [self initTableViewData];
+    
+    for (int i=0; i<MIN([self.allTasks count], MAX_SELECTEDTASKS_COUNT); i++) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if(cell){
+            NSTask *currentTask = self.allTasks[i];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [self.selectedTasks addObject:currentTask];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,23 +122,38 @@ static NSPlan* editPlan = nil;
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
+- (void)initTableViewData {
     [self.allTasks removeAllObjects];
-    [self.selectedTasks removeAllObjects];
     
     PlanService* pservice = Singleton<PlanService>::instance();
     const Tasks* tasks = pservice->getTasks(editPlan.planId);
     for(int i=0;i<tasks->count();i++)
     {
         const Task* task = tasks->at(i);
-        NSTask *nstask = [[NSTask alloc] initWithTask:task];
+        NSTask *nstask = [[NSTask alloc] initWithPlan:editPlan task:task];
         
         [self.allTasks addObject:nstask];
     }
     
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self initTableViewData];
+    
+    [self.selectedTasks removeAllObjects];
+    
+    for (int i=0; i<[self.allTasks count]; i++) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if(cell){
+            NSTask *currentTask = self.allTasks[i];
+            if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+                [self.selectedTasks addObject:currentTask];
+            }
+        }
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

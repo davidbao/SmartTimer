@@ -71,7 +71,7 @@ namespace Storage
                 result = _sqliteClient->executeSql(_sql);
                 if(result == SQLITE_OK)
                 {
-#if !DEBUG
+#if DEBUG
                     insertDebugData();
 #else
                     insertData();

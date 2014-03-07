@@ -21,7 +21,7 @@
     for (int i=0;i<tasks->count();i++)
     {
         const Task* task = tasks->at(i);
-        NSTask* nstask = [[NSTask alloc] initWithTask:task];
+        NSTask* nstask = [[NSTask alloc] initWithPlan:self task:task];
         [nsplan.tasks addObject:nstask];
     }
     

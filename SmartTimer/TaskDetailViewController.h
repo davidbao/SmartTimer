@@ -11,6 +11,8 @@
 
 @interface TaskDetailViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *planTime;
+@property (weak, nonatomic) IBOutlet UITextField *validTime;
 @property (weak, nonatomic) IBOutlet UITextField *totalTime;
 @property (weak, nonatomic) IBOutlet UITextField *pauseTime;
 @property (weak, nonatomic) IBOutlet UITextField *startTime;
