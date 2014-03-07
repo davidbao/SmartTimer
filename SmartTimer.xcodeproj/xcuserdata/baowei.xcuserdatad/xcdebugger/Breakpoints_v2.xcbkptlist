@@ -135,12 +135,12 @@
                   symbolName = "-[NSDeviceService syncTasks:parentViewController:]"
                   moduleName = "SmartTimer"
                   urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
-                  timestampString = "415873116.887979"
+                  timestampString = "415889368.761731"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "416">
+                  offsetFromSymbolStart = "412">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -149,12 +149,12 @@
                   symbolName = "-[NSDeviceService syncTasks:parentViewController:]"
                   moduleName = "SmartTimer"
                   urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
-                  timestampString = "415873116.888387"
+                  timestampString = "415889368.761949"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "566">
+                  offsetFromSymbolStart = "498">
                </Location>
             </Locations>
          </BreakpointContent>

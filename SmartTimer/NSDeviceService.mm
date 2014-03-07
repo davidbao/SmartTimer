@@ -452,8 +452,8 @@ bool isUploadSuccess(void* param)
     for(int i=0;i<plans->count();i++){
         const Plan* plan = plans->at(i);
         stream.writeBCDByte(plan->Id);
-        byte hour = plan->Interval / 60;
-        byte minute = plan->Interval % 60;
+        byte hour = plan->Interval / 3600;
+        byte minute = (plan->Interval / 60) % 60;
         stream.writeBCDByte(hour);
         stream.writeBCDByte(minute);
     }
