@@ -104,7 +104,7 @@ void PlanService::updateTasks(const Tasks& allTasks)
                 Plan* plan = plans->at(i);
                 if(plan->Id == temps->at(0)->PlanId)
                 {
-                    plan->clearTask();
+//                    plan->clearTask();
                     plan->addTasks(*temps);
                     break;
                 }

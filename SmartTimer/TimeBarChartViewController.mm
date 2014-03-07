@@ -94,10 +94,11 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     graph.paddingTop    = 0.0f;
     graph.paddingBottom = 0.0f;
     
-    graph.plotAreaFrame.paddingLeft   = 45.0;
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    graph.plotAreaFrame.paddingLeft   = version < 7.0 ? 45.0 : 98.0;
     graph.plotAreaFrame.paddingTop    = 20.0;
     graph.plotAreaFrame.paddingRight  = 20.0;
-    graph.plotAreaFrame.paddingBottom = 50.0;
+    graph.plotAreaFrame.paddingBottom = version < 7.0 ? 50.0 : 98.0;
     
     // Graph title
 //    NSString *lineOne = NSLocalizedString(@"Total&AllTimeStat", nil);

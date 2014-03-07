@@ -70,15 +70,16 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     graph.paddingTop    = 0.0f;
     graph.paddingBottom = 0.0f;
     
-    graph.plotAreaFrame.paddingLeft   = 45.0;
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    graph.plotAreaFrame.paddingLeft   = version < 7.0 ? 45.0 : 98.0;
     graph.plotAreaFrame.paddingTop    = 20.0;
     graph.plotAreaFrame.paddingRight  = 20.0;
-    graph.plotAreaFrame.paddingBottom = 50.0;
+    graph.plotAreaFrame.paddingBottom = version < 7.0 ? 50.0 : 98.0;
     
     // Setup plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromInteger(self.maxYAxisTime)];
-    int xAxisLength = selectedTasks.count;
+    int xAxisLength = selectedTasks.count + 1;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xAxisLength)];
     
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
@@ -129,19 +130,19 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     boundLinePlot.dataSource    = self;
     [graph addPlot:boundLinePlot];
     
-    // Do a blue gradient
-    CPTColor *areaColor1       = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8];
-    CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:areaColor1 endingColor:[CPTColor clearColor]];
-    areaGradient1.angle = -90.0f;
-    CPTFill *areaGradientFill = [CPTFill fillWithGradient:areaGradient1];
-    boundLinePlot.areaFill      = areaGradientFill;
-    boundLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+//    // Do a blue gradient
+//    CPTColor *areaColor1       = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8];
+//    CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:areaColor1 endingColor:[CPTColor clearColor]];
+//    areaGradient1.angle = -90.0f;
+//    CPTFill *areaGradientFill = [CPTFill fillWithGradient:areaGradient1];
+//    boundLinePlot.areaFill      = areaGradientFill;
+//    boundLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
     
     // Add plot symbols
     CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
     symbolLineStyle.lineColor = [CPTColor blackColor];
     CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-    plotSymbol.fill          = [CPTFill fillWithColor:[CPTColor blueColor]];
+    plotSymbol.fill          = [CPTFill fillWithColor:boundLinePlot.dataLineStyle.lineColor];
     plotSymbol.lineStyle     = symbolLineStyle;
     plotSymbol.size          = CGSizeMake(10.0, 10.0);
     boundLinePlot.plotSymbol = plotSymbol;
@@ -149,31 +150,41 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     // Create a green plot area
     CPTScatterPlot *dataSourceLinePlot = [[CPTScatterPlot alloc] init];
     lineStyle                        = [CPTMutableLineStyle lineStyle];
+    lineStyle.miterLimit             = 1.0f;
     lineStyle.lineWidth              = 3.f;
     lineStyle.lineColor              = [CPTColor greenColor];
-    lineStyle.dashPattern            = [NSArray arrayWithObjects:[NSNumber numberWithFloat:5.0f], [NSNumber numberWithFloat:5.0f], nil];
+//    lineStyle.dashPattern            = [NSArray arrayWithObjects:[NSNumber numberWithFloat:5.0f], [NSNumber numberWithFloat:5.0f], nil];
     dataSourceLinePlot.dataLineStyle = lineStyle;
     dataSourceLinePlot.identifier    = @"TotalTimeInterval";
     dataSourceLinePlot.dataSource    = self;
-    
-    // Put an area gradient under the plot above
-    CPTColor *areaColor       = [CPTColor colorWithComponentRed:0.3 green:1.0 blue:0.3 alpha:0.8];
-    CPTGradient *areaGradient = [CPTGradient gradientWithBeginningColor:areaColor endingColor:[CPTColor clearColor]];
-    areaGradient.angle               = -90.0f;
-    areaGradientFill                 = [CPTFill fillWithGradient:areaGradient];
-    dataSourceLinePlot.areaFill      = areaGradientFill;
-    dataSourceLinePlot.areaBaseValue = CPTDecimalFromString(@"1.75");
-    
-    // Animate in the new plot, as an example
-    dataSourceLinePlot.opacity = 0.0f;
     [graph addPlot:dataSourceLinePlot];
     
-    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeInAnimation.duration            = 1.0f;
-    fadeInAnimation.removedOnCompletion = NO;
-    fadeInAnimation.fillMode            = kCAFillModeForwards;
-    fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];
-    [dataSourceLinePlot addAnimation:fadeInAnimation forKey:@"animateOpacity"];
+    // Put an area gradient under the plot above
+//    CPTColor *areaColor       = [CPTColor colorWithComponentRed:0.3 green:1.0 blue:0.3 alpha:0.8];
+//    CPTGradient *areaGradient = [CPTGradient gradientWithBeginningColor:areaColor endingColor:[CPTColor clearColor]];
+//    areaGradient.angle               = -90.0f;
+//    areaGradientFill                 = [CPTFill fillWithGradient:areaGradient];
+//    dataSourceLinePlot.areaFill      = areaGradientFill;
+//    dataSourceLinePlot.areaBaseValue = CPTDecimalFromString(@"1.75");
+    
+    // Add plot symbols
+    CPTMutableLineStyle *symbolLineStyle2 = [CPTMutableLineStyle lineStyle];
+    symbolLineStyle2.lineColor = [CPTColor blackColor];
+    CPTPlotSymbol *plotSymbol2 = [CPTPlotSymbol ellipsePlotSymbol];
+    plotSymbol2.fill          = [CPTFill fillWithColor:dataSourceLinePlot.dataLineStyle.lineColor];
+    plotSymbol2.lineStyle     = symbolLineStyle2;
+    plotSymbol2.size          = CGSizeMake(10.0, 10.0);
+    dataSourceLinePlot.plotSymbol = plotSymbol2;
+    
+//    // Animate in the new plot, as an example
+//    dataSourceLinePlot.opacity = 0.0f;
+//    
+//    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+//    fadeInAnimation.duration            = 1.0f;
+//    fadeInAnimation.removedOnCompletion = NO;
+//    fadeInAnimation.fillMode            = kCAFillModeForwards;
+//    fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];
+//    [dataSourceLinePlot addAnimation:fadeInAnimation forKey:@"animateOpacity"];
 }
 
 #pragma mark -
@@ -201,7 +212,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
         }
     }
     else if(fieldEnum == CPTScatterPlotFieldX){
-        num = [NSNumber numberWithFloat:index];
+        num = [NSNumber numberWithFloat:index+1];
     }
 
     return num;

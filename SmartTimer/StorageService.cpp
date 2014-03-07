@@ -146,7 +146,7 @@ namespace Storage
 		}
         
 		// TaskTimes
-		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
+		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(1,1,1000);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(2,1,2100);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(3,1,4200);",
@@ -157,7 +157,8 @@ namespace Storage
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(8,2,9200);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(9,3,1800);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(10,3,6800);",
-                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(11,3,10000);"
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(11,3,10000);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(12,4,9800);"
                 );
 		result = _sqliteClient->executeSql(str);
 		if(result != SQLITE_OK)

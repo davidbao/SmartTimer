@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SmartTimer/StorageService.cpp"
-            timestampString = "415870243.300746"
+            timestampString = "415894614.429071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448">
+            startingLineNumber = "442"
+            endingLineNumber = "442">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,52 +111,6 @@
             endingLineNumber = "25"
             landmarkName = "-init"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SmartTimer/NSDeviceService.mm"
-            timestampString = "415600816.741365"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "-syncTasks:parentViewController:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[NSDeviceService syncTasks:parentViewController:]"
-                  moduleName = "SmartTimer"
-                  urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
-                  timestampString = "415889368.761731"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "235"
-                  endingLineNumber = "235"
-                  offsetFromSymbolStart = "412">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[NSDeviceService syncTasks:parentViewController:]"
-                  moduleName = "SmartTimer"
-                  urlString = "file:///Users/baowei/iOSProjects/SmartTimer/SmartTimer/NSDeviceService.mm"
-                  timestampString = "415889368.761949"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "235"
-                  endingLineNumber = "235"
-                  offsetFromSymbolStart = "498">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
