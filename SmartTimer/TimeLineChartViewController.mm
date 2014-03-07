@@ -7,12 +7,17 @@
 //
 
 #import "TimeLineChartViewController.h"
+#import "NSTask.h"
 
 static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
 
-@implementation TimeLineChartViewController
+@interface TimeLineChartViewController ()
 
-@synthesize dataForPlot;
+@property (nonatomic) NSInteger maxYAxisTime;
+
+@end
+
+@implementation TimeLineChartViewController
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -35,49 +40,83 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
 {
     [super viewDidLoad];
     
+    int maxTime = 0;
+    for (int i=0; i<selectedTasks.count; i++) {
+        NSTask* task = selectedTasks[i];
+        int time = [task getTotalTime];
+        if(time > maxTime){
+            maxTime = time;
+        }
+    }
+    
+    self.maxYAxisTime = maxTime * 120 / 100;
+    
     // Create graph from theme
     graph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
-    CPTTheme *theme = [CPTTheme themeNamed:kCPTPlainWhiteTheme];
+    CPTTheme *theme = [CPTTheme themeNamed:kCPTDarkGradientTheme];
     [graph applyTheme:theme];
     CPTGraphHostingView *hostingView = (CPTGraphHostingView *)self.view;
     hostingView.collapsesLayers = NO; // Setting to YES reduces GPU memory usage, but can slow drawing/scrolling
     hostingView.hostedGraph     = graph;
     
-    graph.paddingLeft   = 10.0;
-    graph.paddingTop    = 10.0;
-    graph.paddingRight  = 10.0;
-    graph.paddingBottom = 10.0;
+    // Border
+    graph.plotAreaFrame.borderLineStyle = nil;
+    graph.plotAreaFrame.cornerRadius    = 0.0f;
+    graph.plotAreaFrame.masksToBorder   = NO;
+    
+    // Paddings
+    graph.paddingLeft   = 0.0f;
+    graph.paddingRight  = 0.0f;
+    graph.paddingTop    = 0.0f;
+    graph.paddingBottom = 0.0f;
+    
+    graph.plotAreaFrame.paddingLeft   = 45.0;
+    graph.plotAreaFrame.paddingTop    = 20.0;
+    graph.plotAreaFrame.paddingRight  = 20.0;
+    graph.plotAreaFrame.paddingBottom = 50.0;
     
     // Setup plot space
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-    plotSpace.allowsUserInteraction = YES;
-    plotSpace.xRange                = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(1.0) length:CPTDecimalFromFloat(2.0)];
-    plotSpace.yRange                = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(1.0) length:CPTDecimalFromFloat(3.0)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromInteger(self.maxYAxisTime)];
+    int xAxisLength = selectedTasks.count;
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xAxisLength)];
     
-    // Axes
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
-    x.majorIntervalLength         = CPTDecimalFromString(@"0.5");
-    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"2");
-    x.minorTicksPerInterval       = 2;
-    NSArray *exclusionRanges = [NSArray arrayWithObjects:
-                                [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(1.99) length:CPTDecimalFromFloat(0.02)],
-                                [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.99) length:CPTDecimalFromFloat(0.02)],
-                                [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(2.99) length:CPTDecimalFromFloat(0.02)],
-                                nil];
-    x.labelExclusionRanges = exclusionRanges;
+    //    x.axisLineStyle               = nil;
+    //    x.majorTickLineStyle          = nil;
+    //    x.minorTickLineStyle          = nil;
+    x.majorIntervalLength         = CPTDecimalFromString(@"1");
+    //    x.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+    //    x.title                       = NSLocalizedString(@"task", nil);
+    //    x.titleLocation               = CPTDecimalFromFloat(7.5f);
+    //    x.titleOffset                 = 55.0f;
+    
+    // Define some custom labels for the data elements
+    x.labelRotation  = M_PI / 4;
+    x.labelingPolicy = CPTAxisLabelingPolicyNone;
     
     CPTXYAxis *y = axisSet.yAxis;
-    y.majorIntervalLength         = CPTDecimalFromString(@"0.5");
-    y.minorTicksPerInterval       = 5;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromString(@"2");
-    exclusionRanges               = [NSArray arrayWithObjects:
-                                     [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(1.99) length:CPTDecimalFromFloat(0.02)],
-                                     [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.99) length:CPTDecimalFromFloat(0.02)],
-                                     [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(3.99) length:CPTDecimalFromFloat(0.02)],
-                                     nil];
-    y.labelExclusionRanges = exclusionRanges;
-    y.delegate             = self;
+    //    y.axisLineStyle               = nil;
+    //    y.majorTickLineStyle          = nil;
+    //    y.minorTickLineStyle          = nil;
+    y.majorIntervalLength           = CPTDecimalFromFloat(self.maxYAxisTime/5.0f);
+    y.minorTicksPerInterval         = 0;
+    y.labelOffset                   = 0;
+    //    y.orthogonalCoordinateDecimal = CPTDecimalFromString(@"0");
+    //    y.title                         = NSLocalizedString(@"Time", nil);
+    //    y.titleOffset                   = 45.0f;
+    //    y.titleLocation               = CPTDecimalFromFloat(1500.0f);
+    NSDateFormatter *dateformatter  = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm"];
+    NSDate *now = [NSDate date];
+    NSDateComponents *nowComps = [[NSCalendar currentCalendar]
+                                  components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear
+                                  fromDate:now];
+    NSDate* refDate = [[NSCalendar currentCalendar] dateFromComponents:nowComps];
+    CPTTimeFormatter *timeFormatter = [[CPTTimeFormatter alloc] initWithDateFormatter:dateformatter];
+    timeFormatter.referenceDate     = refDate;
+    y.labelFormatter                = timeFormatter;
     
     // Create a blue plot area
     CPTScatterPlot *boundLinePlot  = [[CPTScatterPlot alloc] init];
@@ -86,7 +125,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     lineStyle.lineWidth         = 3.0f;
     lineStyle.lineColor         = [CPTColor blueColor];
     boundLinePlot.dataLineStyle = lineStyle;
-    boundLinePlot.identifier    = @"Blue Plot";
+    boundLinePlot.identifier    = @"ValidTimeInterval";
     boundLinePlot.dataSource    = self;
     [graph addPlot:boundLinePlot];
     
@@ -114,7 +153,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     lineStyle.lineColor              = [CPTColor greenColor];
     lineStyle.dashPattern            = [NSArray arrayWithObjects:[NSNumber numberWithFloat:5.0f], [NSNumber numberWithFloat:5.0f], nil];
     dataSourceLinePlot.dataLineStyle = lineStyle;
-    dataSourceLinePlot.identifier    = @"Green Plot";
+    dataSourceLinePlot.identifier    = @"TotalTimeInterval";
     dataSourceLinePlot.dataSource    = self;
     
     // Put an area gradient under the plot above
@@ -135,29 +174,6 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     fadeInAnimation.fillMode            = kCAFillModeForwards;
     fadeInAnimation.toValue             = [NSNumber numberWithFloat:1.0];
     [dataSourceLinePlot addAnimation:fadeInAnimation forKey:@"animateOpacity"];
-    
-    // Add some initial data
-    NSMutableArray *contentArray = [NSMutableArray arrayWithCapacity:100];
-    NSUInteger i;
-    for ( i = 0; i < 60; i++ ) {
-        id x = [NSNumber numberWithFloat:1 + i * 0.05];
-        id y = [NSNumber numberWithFloat:1.2 * rand() / (float)RAND_MAX + 1.2];
-        [contentArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x, @"x", y, @"y", nil]];
-    }
-    self.dataForPlot = contentArray;
-    
-#ifdef PERFORMANCE_TEST
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(changePlotRange) userInfo:nil repeats:YES];
-#endif
-}
-
--(void)changePlotRange
-{
-    // Setup plot space
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-    
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0 + 2.0 * rand() / RAND_MAX)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(3.0 + 2.0 * rand() / RAND_MAX)];
 }
 
 #pragma mark -
@@ -165,20 +181,29 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return [dataForPlot count];
+    return selectedTasks.count;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    NSString *key = (fieldEnum == CPTScatterPlotFieldX ? @"x" : @"y");
-    NSNumber *num = [[dataForPlot objectAtIndex:index] valueForKey:key];
+    NSNumber *num = nil;
     
     // Green plot gets shifted above the blue
-    if ( [(NSString *)plot.identifier isEqualToString : @"Green Plot"] ) {
-        if ( fieldEnum == CPTScatterPlotFieldY ) {
-            num = [NSNumber numberWithDouble:[num doubleValue] + 1.0];
+    if ( fieldEnum == CPTScatterPlotFieldY ) {
+        assert(index >= 0 && index < selectedTasks.count);
+        NSTask* task = selectedTasks[index];
+        
+        if ( [plot.identifier isEqual:@"ValidTimeInterval"] ) {
+            num = (NSDecimalNumber *)[NSDecimalNumber numberWithUnsignedInteger:[task getValidTime]];
+        }
+        else if ( [plot.identifier isEqual:@"TotalTimeInterval"] ) {
+            num = (NSDecimalNumber *)[NSDecimalNumber numberWithUnsignedInteger:[task getTotalTime]];
         }
     }
+    else if(fieldEnum == CPTScatterPlotFieldX){
+        num = [NSNumber numberWithFloat:index];
+    }
+
     return num;
 }
 

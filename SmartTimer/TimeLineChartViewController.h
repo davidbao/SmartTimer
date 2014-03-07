@@ -11,12 +11,9 @@
 
 @interface TimeLineChartViewController : UIViewController<CPTPlotDataSource, CPTAxisDelegate>
 {
+    @private
     CPTXYGraph *graph;
-    
-    NSMutableArray *dataForPlot;
 }
-
-@property (readwrite, strong, nonatomic) NSMutableArray *dataForPlot;
 
 + (void)setSelectedTasks:(NSMutableArray*) tasks;
 

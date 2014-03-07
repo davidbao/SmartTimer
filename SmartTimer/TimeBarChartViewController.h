@@ -12,7 +12,7 @@
 @interface TimeBarChartViewController : UIViewController<CPTPlotDataSource>
 {
     @private
-    CPTXYGraph *barChart;
+    CPTXYGraph *graph;
     NSTimer *timer;
 }
 

@@ -76,28 +76,28 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     NSLog(@"\n----------------------------\ntimerFired: %lu", counter++);
 #endif
     
-    // Create barChart from theme
-    barChart = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
+    // Create graph from theme
+    graph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
     CPTTheme *theme = [CPTTheme themeNamed:kCPTDarkGradientTheme];
-    [barChart applyTheme:theme];
+    [graph applyTheme:theme];
     CPTGraphHostingView *hostingView = (CPTGraphHostingView *)self.view;
-    hostingView.hostedGraph = barChart;
+    hostingView.hostedGraph = graph;
     
     // Border
-    barChart.plotAreaFrame.borderLineStyle = nil;
-    barChart.plotAreaFrame.cornerRadius    = 0.0f;
-    barChart.plotAreaFrame.masksToBorder   = NO;
+    graph.plotAreaFrame.borderLineStyle = nil;
+    graph.plotAreaFrame.cornerRadius    = 0.0f;
+    graph.plotAreaFrame.masksToBorder   = NO;
     
     // Paddings
-    barChart.paddingLeft   = 0.0f;
-    barChart.paddingRight  = 0.0f;
-    barChart.paddingTop    = 0.0f;
-    barChart.paddingBottom = 0.0f;
+    graph.paddingLeft   = 0.0f;
+    graph.paddingRight  = 0.0f;
+    graph.paddingTop    = 0.0f;
+    graph.paddingBottom = 0.0f;
     
-    barChart.plotAreaFrame.paddingLeft   = 45.0;
-    barChart.plotAreaFrame.paddingTop    = 20.0;
-    barChart.plotAreaFrame.paddingRight  = 20.0;
-    barChart.plotAreaFrame.paddingBottom = 50.0;
+    graph.plotAreaFrame.paddingLeft   = 45.0;
+    graph.plotAreaFrame.paddingTop    = 20.0;
+    graph.plotAreaFrame.paddingRight  = 20.0;
+    graph.plotAreaFrame.paddingBottom = 50.0;
     
     // Graph title
 //    NSString *lineOne = NSLocalizedString(@"Total&AllTimeStat", nil);
@@ -120,7 +120,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
 //
 //        [graphTitle addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(lineOne.length + 1, lineTwo.length)];
 //        
-//        barChart.attributedTitle = graphTitle;
+//        graph.attributedTitle = graphTitle;
 //    }
 //    else {
 //        CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
@@ -129,20 +129,20 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
 //        titleStyle.fontSize      = 16.0;
 //        titleStyle.textAlignment = CPTTextAlignmentCenter;
 //        
-//        barChart.title          = [NSString stringWithFormat:@"%@\n%@", lineOne, lineTwo];
-//        barChart.titleTextStyle = titleStyle;
+//        graph.title          = [NSString stringWithFormat:@"%@\n%@", lineOne, lineTwo];
+//        graph.titleTextStyle = titleStyle;
 //    }
     
-//    barChart.titleDisplacement        = CGPointMake(0.0f, -20.0f);
-//    barChart.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
+//    graph.titleDisplacement        = CGPointMake(0.0f, -20.0f);
+//    graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
     
     // Add plot space for horizontal bar charts
-    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)barChart.defaultPlotSpace;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromInteger(self.maxYAxisTime)];
     int xAxisLength = selectedTasks.count * 2;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xAxisLength)];
     
-    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)barChart.axisSet;
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
     CPTXYAxis *x          = axisSet.xAxis;
 //    x.axisLineStyle               = nil;
 //    x.majorTickLineStyle          = nil;
@@ -204,7 +204,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     barPlot.dataSource      = self;
     barPlot.barOffset       = CPTDecimalFromFloat(1.f);
     barPlot.identifier      = @"ValidTimeInterval";
-    [barChart addPlot:barPlot toPlotSpace:plotSpace];
+    [graph addPlot:barPlot toPlotSpace:plotSpace];
     
     // Second bar plot
     barPlot                 = [CPTBarPlot tubularBarPlotWithColor:[CPTColor blueColor] horizontalBars:NO];
@@ -213,7 +213,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     barPlot.barOffset       = CPTDecimalFromFloat(1.5f);
     barPlot.barCornerRadius = 2.0f;
     barPlot.identifier      = @"TotalTimeInterval";
-    [barChart addPlot:barPlot toPlotSpace:plotSpace];
+    [graph addPlot:barPlot toPlotSpace:plotSpace];
 }
 
 #pragma mark -
