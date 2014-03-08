@@ -750,7 +750,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="qiA-8b-uPN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vk8-uf-SGM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="计划" image="Plan" id="NYd-8w-SNp"/>
+                    <tabBarItem key="tabBarItem" title="计划" image="PlanTabbar" id="NYd-8w-SNp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gNS-D3-OqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -769,7 +769,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="Qpo-VU-int">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0BG-nX-F39" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="任务" image="Task" id="5a7-sS-Upw"/>
+                    <tabBarItem key="tabBarItem" title="任务" image="TaskTabbar" id="5a7-sS-Upw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5SY-mj-MU4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -807,7 +807,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="vDJ-lb-y9r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wTF-32-WWA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="时间柱形图" id="sV3-W0-V1O"/>
+                    <tabBarItem key="tabBarItem" title="时间柱形图" image="BarChartTabbar" id="sV3-W0-V1O"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7cm-Ou-1Jk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -826,7 +826,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="4so-4a-RlY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T1F-M5-ehS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="时间折线图" id="hqc-S8-ccI"/>
+                    <tabBarItem key="tabBarItem" title="时间折线图" image="LineChartTabbar" id="hqc-S8-ccI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fvh-Qu-1ot">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -928,10 +928,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="Plan" width="30" height="30"/>
+        <image name="BarChartTabbar" width="30" height="30"/>
+        <image name="LineChartTabbar" width="30" height="30"/>
         <image name="PlanListImage" width="40" height="40"/>
-        <image name="Task" width="30" height="30"/>
+        <image name="PlanTabbar" width="30" height="30"/>
         <image name="TaskListImage" width="40" height="40"/>
+        <image name="TaskTabbar" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
