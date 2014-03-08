@@ -110,7 +110,7 @@ namespace Storage
     void StorageService::insertDebugData()
     {
 		int result;
-		char str[1024];
+		char str[2048];
         
 		// Plans
 		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
@@ -132,11 +132,17 @@ namespace Storage
 		}
         
 		// Tasks
-		sprintf(str, "%s\n%s\n%s\n%s",
-                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(1,1,'2014-02-21 20:52:45');",
-                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(2,1,'2014-02-23 21:52:45');",
-                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(3,1,'2014-02-22 10:12:23');",
-                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(4,1,'2014-02-24 08:09:11');"
+		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(1,1,'2014-01-01 20:52:45');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(2,1,'2014-01-02 21:52:45');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(3,1,'2014-01-03 10:12:23');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(4,1,'2014-01-04 08:09:11');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(5,1,'2014-01-05 09:11:22');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(6,1,'2014-01-06 03:54:33');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(7,1,'2014-01-07 07:21:44');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(8,1,'2014-01-08 01:54:24');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(9,1,'2014-01-10 03:03:30');",
+                "INSERT INTO [Tasks] (Id,PlanId,StartTime) values(10,1,'2014-01-15 06:01:49');"
                 );
 		result = _sqliteClient->executeSql(str);
 		if(result != SQLITE_OK)
@@ -146,7 +152,7 @@ namespace Storage
 		}
         
 		// TaskTimes
-		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
+		sprintf(str, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(1,1,1000);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(2,1,2100);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(3,1,4200);",
@@ -158,7 +164,13 @@ namespace Storage
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(9,3,1800);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(10,3,6800);",
                 "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(11,3,10000);",
-                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(12,4,9800);"
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(12,4,1800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(13,5,2800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(14,6,3800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(15,7,4800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(16,8,5800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(17,9,6800);",
+                "INSERT INTO [TaskTimes] (Id,TaskId,Interval) values(18,10,7800);"
                 );
 		result = _sqliteClient->executeSql(str);
 		if(result != SQLITE_OK)

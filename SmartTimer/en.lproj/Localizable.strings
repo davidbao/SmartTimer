@@ -6,22 +6,24 @@
   Copyright (c) 2014年 TicktockLib. All rights reserved.
 */
 
-"yesterday"     = "yesterday";
-"task"          = "task";
-"Done"          = "Done";
-"Edit"          = "Edit";
-"Empty"         = "Empty";
+"yesterday"             = "yesterday";
+"task"                  = "task";
+"Done"                  = "Done";
+"Edit"                  = "Edit";
+"Empty"                 = "Empty";
 
-"Ok"            = "Ok";
-"Error"         = "Error";
-"Information"   = "Information";
-"Success"       = "successfully";
-"Failed"        = "unsuccessfully";
-"SyncPlansInfo" = "Sync time @%s；\nSync plans @%s！";
-"SyncTasksInfo" = "Sync time @%s；\nSync tasks @%s！";
+"Ok"                    = "Ok";
+"Error"                 = "Error";
+"Information"           = "Information";
+"Success"               = "successfully";
+"Failed"                = "unsuccessfully";
+"SyncPlansInfo"         = "Sync time @%s；\nSync plans @%s！";
+"SyncTasksInfo"         = "Sync time @%s；\nSync tasks @%s！";
 
-"Plan"          = "Plan";
+"Plan"                  = "Plan";
 "PlanNameCannotBeEmpty" = "The plan name can not be empty!";
 
 "Total&AllTimeStat"     = "Total & all time stat";
-"Time"          = "Time";
+"Time"                  = "Time";
+
+"CannotSelectTask"      = "Can not select more than %d tasks!";

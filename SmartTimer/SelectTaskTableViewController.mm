@@ -8,10 +8,11 @@
 
 #import "SelectTaskTableViewController.h"
 #import "TimeChartViewController.h"
+#import "NSMessageBox.h"
 
 #include "PlanService.h"
 
-#define MAX_SELECTEDTASKS_COUNT 16
+#define MAX_SELECTEDTASKS_COUNT 7
 
 static NSPlan* editPlan = nil;
 
@@ -28,15 +29,23 @@ static NSPlan* editPlan = nil;
     self.allTasks = [NSMutableArray arrayWithObjects:nil];
     self.selectedTasks = [NSMutableArray arrayWithObjects:nil];
     
-    [self initTableViewData];
+    [self.allTasks removeAllObjects];
+    PlanService* pservice = Singleton<PlanService>::instance();
+    const Tasks* tasks = pservice->getTasks(editPlan.planId);
+    for(int i=0;i<tasks->count();i++)
+    {
+        const Task* task = tasks->at(i);
+        NSTask *nstask = [[NSTask alloc] initWithPlan:editPlan task:task];
+        
+        [self.allTasks addObject:nstask];
+    }
     
+    [self.tableView reloadData];
+    
+    [self.selectedTasks removeAllObjects];
     for (int i=0; i<MIN([self.allTasks count], MAX_SELECTEDTASKS_COUNT); i++) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        if(cell){
-            NSTask *currentTask = self.allTasks[i];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            [self.selectedTasks addObject:currentTask];
-        }
+        NSTask *currentTask = self.allTasks[i];
+        [self.selectedTasks addObject:currentTask];
     }
 }
 
@@ -74,6 +83,9 @@ static NSPlan* editPlan = nil;
     NSTask *currentTask = [self.allTasks objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if(cell) {
+        cell.accessoryType = [self.selectedTasks containsObject:currentTask] ?
+                                UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        
         UIView* view = cell.contentView;
         assert(view);
         NSArray* labels = view.subviews;
@@ -109,8 +121,16 @@ static NSPlan* editPlan = nil;
     if(cell) {
         NSTask *currentTask = [self.allTasks objectAtIndex:indexPath.row];
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            [self.selectedTasks addObject:currentTask];
+            if (self.selectedTasks.count >= MAX_SELECTEDTASKS_COUNT) {
+                // show the information.
+                [NSMessageBox show:NSLocalizedString(@"Error", nil)
+                       buttonTitle:NSLocalizedString(@"Ok", nil)
+                              info:[NSString stringWithFormat:NSLocalizedString(@"CannotSelectTask", nil), MAX_SELECTEDTASKS_COUNT]];
+            }
+            else{
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                [self.selectedTasks addObject:currentTask];
+            }
         }
         else {
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -118,40 +138,6 @@ static NSPlan* editPlan = nil;
         }
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-}
-
-- (void)initTableViewData {
-    [self.allTasks removeAllObjects];
-    
-    PlanService* pservice = Singleton<PlanService>::instance();
-    const Tasks* tasks = pservice->getTasks(editPlan.planId);
-    for(int i=0;i<tasks->count();i++)
-    {
-        const Task* task = tasks->at(i);
-        NSTask *nstask = [[NSTask alloc] initWithPlan:editPlan task:task];
-        
-        [self.allTasks addObject:nstask];
-    }
-    
-    [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self initTableViewData];
-    
-    [self.selectedTasks removeAllObjects];
-    
-    for (int i=0; i<[self.allTasks count]; i++) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        if(cell){
-            NSTask *currentTask = self.allTasks[i];
-            if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                [self.selectedTasks addObject:currentTask];
-            }
-        }
     }
 }
 

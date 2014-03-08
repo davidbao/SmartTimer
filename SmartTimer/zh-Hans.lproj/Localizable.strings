@@ -6,22 +6,24 @@
   Copyright (c) 2014年 TicktockLib. All rights reserved.
 */
 
-"yesterday"     = "昨天";
-"task"          = "任务";
-"Done"          = "完成";
-"Edit"          = "编辑";
-"Empty"         = "空";
+"yesterday"             = "昨天";
+"task"                  = "任务";
+"Done"                  = "完成";
+"Edit"                  = "编辑";
+"Empty"                 = "空";
 
-"Ok"            = "确定";
-"Error"         = "错误";
-"Information"   = "消息";
-"Success"       = "成功";
-"Failed"        = "失败";
-"SyncPlansInfo" = "校时%@；\n同步计划%@！";
-"SyncTasksInfo" = "校时%@；\n同步任务%@！";
+"Ok"                    = "确定";
+"Error"                 = "错误";
+"Information"           = "消息";
+"Success"               = "成功";
+"Failed"                = "失败";
+"SyncPlansInfo"         = "校时%@；\n同步计划%@！";
+"SyncTasksInfo"         = "校时%@；\n同步任务%@！";
 
-"Plan"          = "计划";
+"Plan"                  = "计划";
 "PlanNameCannotBeEmpty" = "计划的名字不能为空！";
 
 "Total&AllTimeStat"     = "累计/有效时间统计";
-"Time"          = "时间";
+"Time"                  = "时间";
+
+"CannotSelectTask"      = "不能选择多于%d个的任务！";

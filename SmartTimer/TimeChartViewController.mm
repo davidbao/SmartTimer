@@ -47,7 +47,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     self.maxYAxisTime = maxTime * 120 / 100;
     
     self.validTimeColor = [CPTColor colorWithComponentRed:130.f/225.f green:255.f/255.f blue:90.f/255.f alpha:1.f];
-    self.totalTimeColor = [CPTColor colorWithComponentRed:90.f/225.f green:130.f/255.f blue:255.f/255.f alpha:1.f];
+    self.totalTimeColor = [CPTColor colorWithComponentRed:110.f/225.f green:150.f/255.f blue:255.f/255.f alpha:1.f];
     self.themeName = kCPTPlainWhiteTheme;
 }
 
@@ -81,7 +81,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     graph.plotAreaFrame.paddingLeft   = 45.0;
     graph.plotAreaFrame.paddingRight  = 20;
     graph.plotAreaFrame.paddingTop    = version < 7.0 ? 20.0 : 98.0;
-    graph.plotAreaFrame.paddingBottom = version < 7.0 ? 20.0 : 98.0;
+    graph.plotAreaFrame.paddingBottom = version < 7.0 ? 50.0 : 98.0;
     
     // Graph title
     //    NSString *lineOne = NSLocalizedString(@"Total&AllTimeStat", nil);
@@ -123,7 +123,7 @@ static NSMutableArray* selectedTasks = [NSMutableArray arrayWithObjects:nil];
     // Add plot space for horizontal bar charts
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromInteger(self.maxYAxisTime)];
-    int xAxisLength =  selectedTasks.count + 1;
+    int xAxisLength =  selectedTasks.count > 0 ? selectedTasks.count + 1 : 0;
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0f) length:CPTDecimalFromFloat(xAxisLength)];
     
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)graph.axisSet;
