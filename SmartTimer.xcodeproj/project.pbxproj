@@ -42,6 +42,7 @@
 		629CD94518B4343D00D24686 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629CD92418B4343D00D24686 /* UIKit.framework */; };
 		629CD94D18B4343D00D24686 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 629CD94B18B4343D00D24686 /* InfoPlist.strings */; };
 		629CD94F18B4343D00D24686 /* SmartTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 629CD94E18B4343D00D24686 /* SmartTimerTests.m */; };
+		62AD8C2918CACDF30036893D /* TimeChartViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62AD8C2818CACDF30036893D /* TimeChartViewController.mm */; };
 		62BD439E18C58F700034A274 /* NSMessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BD439D18C58F700034A274 /* NSMessageBox.m */; };
 		62BD443F18C83F2C0034A274 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD443E18C83F2C0034A274 /* libCorePlot-CocoaTouch.a */; };
 		62BD444518C854D40034A274 /* TimeLineChartViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62BD444418C854D40034A274 /* TimeLineChartViewController.mm */; };
@@ -137,6 +138,8 @@
 		629CD94C18B4343D00D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		629CD94E18B4343D00D24686 /* SmartTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartTimerTests.m; sourceTree = "<group>"; };
 		629CD95C18B434F500D24686 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		62AD8C2718CACDF30036893D /* TimeChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeChartViewController.h; sourceTree = "<group>"; };
+		62AD8C2818CACDF30036893D /* TimeChartViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimeChartViewController.mm; sourceTree = "<group>"; };
 		62BD439C18C58F700034A274 /* NSMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMessageBox.h; sourceTree = "<group>"; };
 		62BD439D18C58F700034A274 /* NSMessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMessageBox.m; sourceTree = "<group>"; };
 		62BD43F018C83EA90034A274 /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 				6290520B18BDDC7500BACAA6 /* TaskViewController.mm */,
 				626A8FD218C1D34F00FFABF5 /* SearchViewController.h */,
 				626A8FD318C1D34F00FFABF5 /* SearchViewController.m */,
+				62AD8C2718CACDF30036893D /* TimeChartViewController.h */,
+				62AD8C2818CACDF30036893D /* TimeChartViewController.mm */,
 				62C9485118B9DFB9003BE1CB /* TimeBarChartViewController.h */,
 				62C9485218B9DFB9003BE1CB /* TimeBarChartViewController.mm */,
 				62BD444318C854D40034A274 /* TimeLineChartViewController.h */,
@@ -636,6 +641,7 @@
 				62991AF918B6415600050A04 /* Exception.cpp in Sources */,
 				629CD93A18B4343D00D24686 /* PlanViewController.mm in Sources */,
 				62C9485318B9DFB9003BE1CB /* TimeBarChartViewController.mm in Sources */,
+				62AD8C2918CACDF30036893D /* TimeChartViewController.mm in Sources */,
 				62991AEF18B63F3400050A04 /* AddPlanViewController.mm in Sources */,
 				6285E94F18B71DA200F3141A /* PlanService.cpp in Sources */,
 				627AEDAE18BC811300326136 /* NSTask.mm in Sources */,

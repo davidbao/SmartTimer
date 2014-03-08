@@ -7,8 +7,7 @@
 //
 
 #import "SelectTaskTableViewController.h"
-#import "TimeBarChartViewController.h"
-#import "TimeLineChartViewController.h"
+#import "TimeChartViewController.h"
 
 #include "PlanService.h"
 
@@ -158,8 +157,7 @@ static NSPlan* editPlan = nil;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"statTasksSegue"]) {
-        [TimeBarChartViewController setSelectedTasks:self.selectedTasks];
-        [TimeLineChartViewController setSelectedTasks:self.selectedTasks];
+        [TimeChartViewController setSelectedTasks:self.selectedTasks];
     }
 }
 

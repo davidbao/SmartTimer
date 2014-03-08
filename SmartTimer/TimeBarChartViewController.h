@@ -7,19 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CorePlot-CocoaTouch.h"
+#import "TimeChartViewController.h"
 
-@interface TimeBarChartViewController : UIViewController<CPTPlotDataSource>
-{
-    @private
-    CPTXYGraph *graph;
-    NSTimer *timer;
-}
-
-@property (readwrite, strong, nonatomic) NSTimer *timer;
-
--(void)timerFired;
-
-+ (void)setSelectedTasks:(NSMutableArray*) tasks;
+@interface TimeBarChartViewController : TimeChartViewController
 
 @end

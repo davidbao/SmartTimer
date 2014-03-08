@@ -7,14 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CorePlot-CocoaTouch.h"
+#import "TimeChartViewController.h"
 
-@interface TimeLineChartViewController : UIViewController<CPTPlotDataSource, CPTAxisDelegate>
-{
-    @private
-    CPTXYGraph *graph;
-}
-
-+ (void)setSelectedTasks:(NSMutableArray*) tasks;
+@interface TimeLineChartViewController : TimeChartViewController
 
 @end
